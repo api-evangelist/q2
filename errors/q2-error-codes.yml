@@ -1,0 +1,65 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.helix.q2.com/reference/common-error-codes
+format: helix-error-codes
+envelope:
+  field: errors
+  description: >-
+    Errors appear in the `errors` property of the API response, each with a
+    numeric `code`, a human-readable `message`, and an associated HTTP status
+    code. A `requestId` (a.k.a. "Incident Id") accompanies server errors for
+    support triage.
+code_ranges:
+- range: 1-50000
+  http: 500
+  meaning: '"Hard" errors within Helix itself; report with requestId to Helix support.'
+- range: 50001-50999
+  http: 401-505
+  meaning: Connectivity issue, software defect, malformed request, etc. (see common codes below).
+- range: 51000-57999
+  http: 500
+  meaning: Reserved for future use.
+- range: 58000-58999
+  http: 500
+  meaning: Reserved for third-party use; never issued by Helix.
+- range: 59000-59899
+  http: 400
+  meaning: Requested functionality is misconfigured, disabled, or unavailable due to business-contract limitations.
+- range: 59900-59999
+  http: 400
+  meaning: Invalid JSON payload (malformed body, wrong type, formatting problem).
+- range: 60000-2147483647
+  http: 400
+  meaning: Validation errors when processing a request (e.g. transferring a negative amount).
+codes:
+- {code: 50401, http: 401, message: User is not authorized, remediation: Verify API Key and Secret against the Helix Admin console; credentials may have expired.}
+- {code: 50403, http: 403, message: IP is not trusted, remediation: Ensure the request originates from a whitelisted IP; contact support@helix.q2.com to whitelist.}
+- {code: 50404, http: 404, message: The requested resource was not found, remediation: Route is invalid or unsupported in the version bound to your API Key.}
+- {code: 50405, http: 405, message: The requested HTTP method is not allowed, remediation: Use the HTTP method the route expects.}
+- {code: 50429, http: 429, message: Rate limit exceeded, remediation: Back off and retry; contact support to raise the limit if persistent.}
+- {code: 50500, http: 500, message: Internal Server Error, remediation: Share the requestId with support@helix.q2.com.}
+- {code: 50501, http: 501, message: Not Implemented, remediation: Verify the code calls a documented Helix route.}
+- {code: 50502, http: 502, message: Bad Gateway, remediation: Network connectivity or maintenance; investigate and contact support if persistent.}
+- {code: 50503, http: 503, message: Service Unavailable, remediation: Retry later.}
+- {code: 50504, http: 504, message: Gateway Timeout, remediation: Network connectivity or maintenance; contact support if persistent.}
+- {code: 50505, http: 505, message: HTTP Version Not Supported, remediation: Issue HTTP/1.1 requests.}
+- {code: 50902, http: 400, message: Program does not have a BIN mapped to it., remediation: Program is misconfigured; contact support.}
+- {code: 50904, http: 400, message: New PIN Encryption failed., remediation: Program is misconfigured; contact support.}
+- {code: 52998, http: 500, message: 'Internal Server Error. Incident Id : {0}', remediation: Contact support with the Incident Id.}
+- {code: 58150, http: 500, message: QualiFile service call error received, remediation: Message may be replaced by the actual QualiFile service error.}
+- {code: 59001, http: 400, message: 'No VerificationFundsAccount configured for program {0}', remediation: Program is misconfigured; contact support.}
+- {code: 59007, http: 400, message: 'Internal to Internal transfer is disabled for program {0}', remediation: Feature disabled for the program by contract.}
+- {code: 59009, http: 400, message: 'Program {0} does not have recurring contributions enabled', remediation: Feature disabled for the program by contract.}
+- {code: 59010, http: 400, message: 'Program {0} is not configured to require external account verification. Call /externalAccount/create instead', remediation: Use /externalAccount/create for this program.}
+- {code: 59011, http: 400, message: 'Program {0} is configured to require external account verification. Call /externalAccount/initiate instead', remediation: Use /externalAccount/initiate for this program.}
+- {code: 59020, http: 400, message: 'Program {0} does not have account type {1} enabled.', remediation: Account type not enabled for the program by contract.}
+- {code: 59103, http: 400, message: 'All card numbers are already allocated for Program {0}', remediation: Contact support to allocate more card numbers.}
+- {code: 59109, http: 400, message: Peer-to-peer transfers are not enabled for your program, remediation: Feature disabled for the program by contract.}
+- {code: 59900, http: 400, message: 'Could not convert {0} to {1} (JSON parse error).', remediation: Fix the JSON payload types/structure.}
+- {code: 59950, http: 400, message: Unexpected end when deserializing object., remediation: Payload is truncated or missing a closing brace.}
+- {code: 59952, http: 400, message: "Value for property '{0}' is not formatted as a valid ISO-8601 DateTime.", remediation: 'Use ISO-8601, e.g. 2015-01-31T22:43:21.123+00:00.'}
+- {code: 59953, http: 400, message: "Value for property '{0}' is not formatted as a valid boolean.", remediation: 'Use true or false.'}
+- {code: 59954, http: 400, message: "Value for property '{0}' is not formatted as a valid decimal (precision up to 2).", remediation: 'Use a decimal like 1234.56.'}
+- {code: 59956, http: 400, message: "Value for property '{0}' is not acceptable.", remediation: See the specifics returned in the message.}
+notes:
+- Full BIN/program-configuration error set (59002-59019, 59102) and JSON-parse set (59901-59958) follow the same shapes; the reference at the source URL is authoritative.

@@ -1,0 +1,40 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.helix.q2.com/reference/environment-differences
+environments:
+- name: sandbox
+  base_url: https://sandbox-api.helix.q2.com
+  purpose: Testing; distinct credentials, limits, and whitelisted IPs from production.
+- name: production
+  base_url: https://api.helix.q2.com
+  purpose: Live processing.
+separation:
+  credentials: Sandbox API Key/Secret differ from production; each environment is fully isolated.
+  ip_allowlist: Whitelisted IPs are per-environment (a sandbox IP does not work in production).
+magic_values:
+- context: External account routing number
+  value: '123456789'
+  effect: In sandbox, this "magic value" routingNumber sets the externalAccount name to "COREPRO SANDBOX BANK" for easy testing. Production requires a real routing number validated against Federal Reserve data.
+- context: External account trial deposits
+  value: '$0.18 and $0.28'
+  effect: In sandbox, micro-deposit trial amounts are hardcoded to 0.18 and 0.28 and can be verified immediately via /externalAccount/verify. Production uses two random amounts between 0.01 and 0.49.
+- context: ID verification / customer PII
+  value: program-provided fake customer data
+  effect: Sandbox accepts documented "fake" customer information provided at program registration; production requires real PII.
+- context: Tax ID
+  value: reused taxId allowed
+  effect: Multiple customers may share the same taxId in sandbox; production enforces uniqueness.
+simulation_endpoints:
+- {operation: cardmockadminfalconfraud, description: Simulate a Falcon fraud message.}
+- {operation: cardmockwithdrawalcardcash, description: Simulate an ATM cash withdrawal.}
+- {operation: cardmockwithdrawalpurchaseauthorize, description: Simulate a withdrawal (purchase) authorization.}
+- {operation: cardmockwithdrawalpurchasecomplete, description: Simulate a withdrawal (purchase) settlement.}
+- {operation: cardmockdeclinepurchaseauthorize, description: Simulate a declined purchase authorization.}
+- {operation: cardmockdepositpurchasereturn, description: Simulate a purchase return.}
+- {operation: cardmockdepositpurchasereturnreversal, description: Simulate a purchase return reversal.}
+behavior_differences:
+- Debit-card transactions are not supported in sandbox; supported in production.
+- Sandbox ACH deposits from external accounts auto-settle hourly and are available immediately; production follows the Transfer Timeline.
+- ACH files are not supported in sandbox.
+notes:
+- Never use these values in production. Card simulation endpoints exist only in the sandbox environment.

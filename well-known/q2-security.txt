@@ -1,0 +1,9 @@
+Contact: mailto:q2-software-vdp-ess@submit.bugcrowd.com
+Preferred-Languages: en
+Canonical: https://api.helix.q2.com/.well-known/security.txt
+
+# For disclosing vulnerabilities related to Q2 related products:
+Policy: https://www.q2.com/security-vulnerabilities-reporting
+
+Hiring: https://www.q2.com/careers
+Expires: 2027-09-16T02:36:41z

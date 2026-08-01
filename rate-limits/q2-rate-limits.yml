@@ -1,0 +1,21 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.helix.q2.com/reference/rate-limiting
+scope: per API Key
+rate_limits:
+- limit_count: 15
+  window: 1s
+  unit: requests
+  description: Default limit of 15 requests per second per API Key.
+signaling:
+  exceeded_status: 429
+  throttle_node: >-
+    When traffic reaches 80% of the limit (12 of 15) over the sample period,
+    responses begin to include a `throttle` node with information on how close
+    the key is to the limit.
+  block_behavior: >-
+    On exceeding the limit the API Key is blocked for the remainder of the
+    sample period; keys that continually hit the limit may be permanently
+    blocked (unblock fee may apply).
+notes:
+- Rate limits can be raised by contacting Helix support (additional fee may apply).

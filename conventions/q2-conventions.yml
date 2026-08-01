@@ -1,0 +1,41 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.helix.q2.com/reference
+authentication:
+  style: HTTP Basic (API Key as username, Secret as password), base64-encoded Authorization header.
+  transport_security: TLS required; server-to-server only (IP allowlisting; end-user devices unsupported).
+  ref: authentication/q2-authentication.yml
+content_types:
+  request: application/json
+  response: application/json
+  note: JSON only; XML is not supported.
+idempotency:
+  supported: false
+  note: Helix does not document an idempotency-key header or contract. Retries must be reconciled by the caller (e.g. via tag lookups and transaction status).
+pagination:
+  style: resource-specific list endpoints with date-range constraints
+  examples:
+  - Stop-pay list (accountstoppaylist) is bounded to a maximum 30-day date range.
+  - Closed accounts may drop from accountlist after a period no shorter than 32 days.
+  note: Many list operations accept filters/tags rather than a uniform cursor/offset scheme.
+tagging:
+  concept: Most objects (account, customer, card, externalAccount, transaction) support a client-assigned `tag` for idempotent-style lookups and cross-referencing to your own system.
+  getbytag_operations: [accountgetbytag, cardgetbytag, customergetbytag, externalaccountgetbytag, transactiongetbytag]
+  uniqueness: In production, tag uniqueness is enforced for customers in Active/Initiated/Manual Review/Verified statuses; sandbox does not enforce it.
+request_tracing:
+  request_id: Server errors return a `requestId` (a.k.a. "Incident Id") for support triage.
+versioning:
+  style: API-key-bound (no version path segment)
+  ref: lifecycle/q2-lifecycle.yml
+error_envelope:
+  field: errors
+  shape: array of {code (numeric), message, HTTP status}
+  ref: errors/q2-error-codes.yml
+rate_limit_signaling:
+  default: 15 requests/second per API Key
+  exceeded_status: 429
+  soft_signal: A `throttle` node appears in responses once 80% of the limit is reached.
+  ref: rate-limits/q2-rate-limits.yml
+events:
+  channel: Real-time Events Bus plus SFTP event-notification files.
+  ref: asyncapi/q2-events-webhooks.yml

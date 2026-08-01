@@ -1,23 +1,141 @@
 aid: q2
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/q2.png
 name: Q2
-description: Q2 is a company surfaced as a portfolio company of battery-ventures, gv and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Q2 Holdings is a financial services software company that provides digital
+  banking, lending, and embedded finance solutions to banks, credit unions, and
+  fintechs. Its embedded finance platform, Helix by Q2 (formerly CorePro /
+  Cambr), exposes a REST API that lets developers incorporate real,
+  FDIC-insured savings and checking accounts, cards, transfers, and ACH into
+  their own applications. The Helix API covers account, customer, card,
+  external-account, transfer, transaction, statement, and program management,
+  with a real-time Events Bus, SFTP batch files, and an administrative web
+  application. Q2 serves over 1,000 financial institutions and 10M+ digital
+  banking end users.
 url: https://raw.githubusercontent.com/api-evangelist/q2/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - battery-ventures
 - gv
-x-tier: stub
+x-tier: profiled
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Financial Services
+- Banking
+- Embedded Finance
+- Banking as a Service
+- FinTech
+- Digital Banking
+- Cards
+- Payments
+- ACH
+- FDIC
+apis:
+- name: Helix by Q2 API
+  description: >-
+    The Helix by Q2 REST API lets developers incorporate real FDIC-insured
+    savings and/or checking accounts into their applications, including
+    accounts, customers (individual and business), cards, card controls,
+    external accounts, transfers, ACH, wires, transactions, statements, fees,
+    and programs. Authentication is HTTP Basic (API Key + Secret). A real-time
+    Events Bus delivers account, card, check, and fraud events. JSON only.
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Banking
+  - Embedded Finance
+  - Accounts
+  - Cards
+  - ACH
+  - Transfers
+  properties:
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: MCPServer
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+common:
+- type: DeveloperPortal
+  url: https://helix.q2.com
+- type: Documentation
+  url: https://docs.helix.q2.com
+- type: APIReference
+  url: https://docs.helix.q2.com/reference
+- type: GettingStarted
+  url: https://docs.helix.q2.com/reference/quickstart
+- type: Support
+  url: https://helix.q2.com/contact
+- type: Blog
+  url: https://www.q2.com/blog
+- type: StatusPage
+  url: https://status.helix.q2.com
+- type: PrivacyPolicy
+  url: https://www.q2.com/privacy-policy
+- type: Security
+  url: https://www.q2.com/security-vulnerabilities-reporting
+- type: Authentication
+  url: authentication/q2-authentication.yml
+- type: WellKnown
+  url: well-known/q2-well-known.yml
+- type: SecurityTxt
+  url: well-known/q2-security.txt
+- type: VulnerabilityDisclosure
+  url: security/q2-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/q2-domain-security.yml
+- type: Webhooks
+  url: asyncapi/q2-events-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: MCPServer
+  url: mcp/q2-mcp.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1

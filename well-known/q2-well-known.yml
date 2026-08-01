@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: searched
+source: live /.well-known/ probes of Helix + Q2 hosts
+hosts:
+- host: https://api.helix.q2.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: q2-security.txt
+  - path: /.well-known/openid-configuration
+    status: 401
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+- host: https://www.q2.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: identical policy; canonical points to https://security.q2.com/.well-known/security.txt
+- host: https://docs.helix.q2.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /openapi.json
+    status: 404
+    note: no downloadable OpenAPI published; docs expose an llms.txt index instead

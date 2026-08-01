@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: derived
+source: https://docs.helix.q2.com/reference
+standards:
+- id: http-basic-auth
+  conforms: true
+  evidence: Authentication is RFC 7617 HTTP Basic (API Key + Secret).
+- id: oauth2
+  conforms: false
+  evidence: No OAuth2 flows; key/secret Basic auth only.
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a Helix-native numeric `errors[]` envelope, not application/problem+json.
+- id: json-only
+  conforms: true
+  evidence: All requests and responses are JSON; XML explicitly unsupported.
+- id: rfc8594-sunset
+  conforms: false
+  evidence: No Sunset/Deprecation header policy published; versioning is API-key-bound.
+- id: fdic-insured-accounts
+  conforms: true
+  evidence: Accounts opened via Helix are real FDIC-insured savings/checking accounts held at partner banks.
+- id: nacha-ach
+  conforms: true
+  evidence: ACH origination via NACHA is a documented program capability (transfer/create, transferachoriginationcreate).
+- id: visa-dps-card-processing
+  conforms: true
+  evidence: Card processing, Falcon fraud, and risk factors are surfaced via Visa DPS integration payloads.
+notes:
+- No public certification/compliance program page (SOC 2 / ISO 27001 / PCI DSS) was found for the Helix API surface, so no `Compliance` pointer is emitted. Compliance posture is governed under program/bank contracts.

@@ -1,0 +1,52 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.helix.q2.com/docs/objects-overview
+entities:
+- name: customer
+  description: An individual or business account holder; root of the KYC/onboarding graph.
+  relationships:
+  - {kind: has_many, target: account, via: customerId}
+  - {kind: has_many, target: externalAccount, via: customerId}
+  - {kind: has_many, target: customerBeneficiary, via: customerId}
+  - {kind: has_many, target: customerDocument, via: customerId}
+  - {kind: has_many, target: customerRelationship, via: customerId}
+- name: account
+  description: A Helix-held, FDIC-insured savings or checking account.
+  relationships:
+  - {kind: belongs_to, target: customer, via: customerId}
+  - {kind: belongs_to, target: program, via: productId}
+  - {kind: has_many, target: card, via: accountId}
+  - {kind: has_many, target: transaction, via: accountId}
+  - {kind: has_many, target: accountLimit, via: accountId}
+  - {kind: has_many, target: stopPay, via: accountId}
+  - {kind: has_many, target: accountBeneficiary, via: accountId}
+- name: card
+  description: A physical or digital debit card bound to one or more accounts.
+  relationships:
+  - {kind: belongs_to, target: customer, via: customerId}
+  - {kind: has_many, target: account, via: accountId}
+  - {kind: has_many, target: cardControl, via: cardId}
+  - {kind: has_many, target: cardLimit, via: cardId}
+  - {kind: has_many, target: digitalWalletToken, via: cardId}
+- name: externalAccount
+  description: A linked account at an outside institution, used for ACH funding/withdrawal.
+  relationships:
+  - {kind: belongs_to, target: customer, via: customerId}
+  - {kind: has_many, target: transfer, via: externalAccountId}
+- name: transfer
+  description: Movement of funds (internal, ACH, or wire) between accounts.
+  relationships:
+  - {kind: has_one, target: transferResponse, via: transferId}
+  - {kind: has_many, target: transaction, via: transferId}
+- name: transaction
+  description: A ledger entry on an account (deposit, withdrawal, fee, interest).
+  relationships:
+  - {kind: belongs_to, target: account, via: accountId}
+- name: program
+  description: The bank/product configuration that governs accounts, fees, BINs, and clearing accounts.
+  relationships:
+  - {kind: has_many, target: account, via: productId}
+  - {kind: has_many, target: fee, via: programId}
+id_conventions:
+  tag: Client-assigned `tag` on most objects enables getByTag retrieval and cross-referencing.
+render: null

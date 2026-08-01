@@ -1,0 +1,23 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.helix.q2.com/reference/versioning
+versioning:
+  scheme: api-key-bound
+  docs: https://docs.helix.q2.com/reference/versioning
+  description: >-
+    The API version is determined by the API Key (routes do not include a
+    version segment). The Helix Admin site displays the API Key for each
+    version currently available.
+compatibility_policy: >-
+  Within a given version, JSON elements may be added at any time, but elements
+  will not be removed, renamed, or have their casing changed. Consumers must
+  tolerate additive changes.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No formal RFC 8594 Sunset/Deprecation header policy is published; version transitions are managed per API Key via the Helix Admin site.
+sla:
+  url: null
+  note: Uptime/SLA governed by program contract; not publicly published.
+status_page: https://status.helix.q2.com
+deprecated_operations: []

@@ -1,0 +1,422 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: https://docs.helix.q2.com/reference
+note: >-
+  No official hosted MCP server was found for Helix by Q2. This is a candidate
+  tool list derived one-to-one from the documented Helix REST API operations;
+  each tool maps to a real reference operation slug. Helix docs expose an
+  llms.txt index (https://docs.helix.q2.com/llms.txt) for agent consumption.
+server:
+  name: q2-helix
+  transport: http
+  url: null
+tools:
+- name: accountcreate
+  description: Create an account
+  source_operation: https://docs.helix.q2.com/reference/accountcreate
+- name: accountget
+  description: Get an account
+  source_operation: https://docs.helix.q2.com/reference/accountget
+- name: accountgetbytag
+  description: Get an account via tag
+  source_operation: https://docs.helix.q2.com/reference/accountgetbytag
+- name: accountlist
+  description: List accounts
+  source_operation: https://docs.helix.q2.com/reference/accountlist
+- name: accountupdate
+  description: Update an account
+  source_operation: https://docs.helix.q2.com/reference/accountupdate
+- name: accountlock
+  description: Lock an account
+  source_operation: https://docs.helix.q2.com/reference/accountlock
+- name: accountunlock
+  description: Unlock an account
+  source_operation: https://docs.helix.q2.com/reference/accountunlock
+- name: accountclose
+  description: Close an account
+  source_operation: https://docs.helix.q2.com/reference/accountclose
+- name: accountaddentitlement
+  description: Add an entitlement
+  source_operation: https://docs.helix.q2.com/reference/accountaddentitlement
+- name: accountlistentitlements
+  description: List Entitlements
+  source_operation: https://docs.helix.q2.com/reference/accountlistentitlements
+- name: accounteditentitlement
+  description: Edit an entitlement
+  source_operation: https://docs.helix.q2.com/reference/accounteditentitlement
+- name: accountremoveentitlement
+  description: Remove an entitlement
+  source_operation: https://docs.helix.q2.com/reference/accountremoveentitlement
+- name: accountplacehold
+  description: Place a hold
+  source_operation: https://docs.helix.q2.com/reference/accountplacehold
+- name: accountreleasehold
+  description: Release a hold
+  source_operation: https://docs.helix.q2.com/reference/accountreleasehold
+- name: accountlimitset
+  description: Set account limit(s)
+  source_operation: https://docs.helix.q2.com/reference/accountlimitset
+- name: accountlimitlist
+  description: List account limits
+  source_operation: https://docs.helix.q2.com/reference/accountlimitlist
+- name: accountlimitdelete
+  description: Delete account limit(s)
+  source_operation: https://docs.helix.q2.com/reference/accountlimitdelete
+- name: accountstoppaycreatecheckstoppay
+  description: Create check stop pay
+  source_operation: https://docs.helix.q2.com/reference/accountstoppaycreatecheckstoppay
+- name: accountstoppaylist
+  description: List stop pays
+  source_operation: https://docs.helix.q2.com/reference/accountstoppaylist
+- name: accountstoppayexpire
+  description: Expire a stop pay
+  source_operation: https://docs.helix.q2.com/reference/accountstoppayexpire
+- name: accountbeneficiaryadd
+  description: Add account beneficiary
+  source_operation: https://docs.helix.q2.com/reference/accountbeneficiaryadd
+- name: accountbeneficiaryedit
+  description: Edit account beneficiary
+  source_operation: https://docs.helix.q2.com/reference/accountbeneficiaryedit
+- name: accountbeneficiaryget
+  description: Get an account beneficiary
+  source_operation: https://docs.helix.q2.com/reference/accountbeneficiaryget
+- name: accountbeneficiarylist
+  description: List account beneficiaries
+  source_operation: https://docs.helix.q2.com/reference/accountbeneficiarylist
+- name: accountbeneficiaryremove
+  description: Remove account beneficiary
+  source_operation: https://docs.helix.q2.com/reference/accountbeneficiaryremove
+- name: accountbeneficiaryreplace
+  description: Replace account beneficiary collection
+  source_operation: https://docs.helix.q2.com/reference/accountbeneficiaryreplace
+- name: bankdocumentlist
+  description: List bank documents
+  source_operation: https://docs.helix.q2.com/reference/bankdocumentlist
+- name: bankdocumentdownload
+  description: Download a bank document
+  source_operation: https://docs.helix.q2.com/reference/bankdocumentdownload
+- name: cardget
+  description: Get a card
+  source_operation: https://docs.helix.q2.com/reference/cardget
+- name: cardupdate
+  description: Update a card
+  source_operation: https://docs.helix.q2.com/reference/cardupdate
+- name: cardaddaccount
+  description: Add an account to a card
+  source_operation: https://docs.helix.q2.com/reference/cardaddaccount
+- name: cardreprioritizeaccount
+  description: Reprioritize an account on a card
+  source_operation: https://docs.helix.q2.com/reference/cardreprioritizeaccount
+- name: cardremoveaccount
+  description: Remove an account from a card
+  source_operation: https://docs.helix.q2.com/reference/cardremoveaccount
+- name: cardcreatedigital
+  description: Create a digital card
+  source_operation: https://docs.helix.q2.com/reference/cardcreatedigital
+- name: cardorderphysical
+  description: Order a physical card
+  source_operation: https://docs.helix.q2.com/reference/cardorderphysical
+- name: cardlock
+  description: Lock a card
+  source_operation: https://docs.helix.q2.com/reference/cardlock
+- name: cardinitiate
+  description: Initiate a card
+  source_operation: https://docs.helix.q2.com/reference/cardinitiate
+- name: cardverify
+  description: Verify a card
+  source_operation: https://docs.helix.q2.com/reference/cardverify
+- name: cardgetbytag
+  description: Get a card via tag
+  source_operation: https://docs.helix.q2.com/reference/cardgetbytag
+- name: cardlist
+  description: List cards
+  source_operation: https://docs.helix.q2.com/reference/cardlist
+- name: cardunlock
+  description: Unlock a card
+  source_operation: https://docs.helix.q2.com/reference/cardunlock
+- name: cardhotlist
+  description: Hotlist (permanently lock) a card
+  source_operation: https://docs.helix.q2.com/reference/cardhotlist
+- name: cardresetpin
+  description: Reset a card pin
+  source_operation: https://docs.helix.q2.com/reference/cardresetpin
+- name: cardrenewaloverride
+  description: Renewal override
+  source_operation: https://docs.helix.q2.com/reference/cardrenewaloverride
+- name: cardreissue
+  description: Reissue a card
+  source_operation: https://docs.helix.q2.com/reference/cardreissue
+- name: cardarchive
+  description: Archive a card
+  source_operation: https://docs.helix.q2.com/reference/cardarchive
+- name: cardverifybycvv
+  description: Verify a card by CVV
+  source_operation: https://docs.helix.q2.com/reference/cardverifybycvv
+- name: cardfraudtextalertget
+  description: Get fraud text enrollment status
+  source_operation: https://docs.helix.q2.com/reference/cardfraudtextalertget
+- name: cardfraudtextalertoptout
+  description: Opt out of fraud texts
+  source_operation: https://docs.helix.q2.com/reference/cardfraudtextalertoptout
+- name: cardlimitget
+  description: Get card limits
+  source_operation: https://docs.helix.q2.com/reference/cardlimitget
+- name: cardlimittemporaryoverride
+  description: Create a temporary card limit
+  source_operation: https://docs.helix.q2.com/reference/cardlimittemporaryoverride
+- name: cardlimitoverride
+  description: Override default card limits
+  source_operation: https://docs.helix.q2.com/reference/cardlimitoverride
+- name: cardlimitreset
+  description: Reset card limits
+  source_operation: https://docs.helix.q2.com/reference/cardlimitreset
+- name: cardmockadminfalconfraud
+  description: Simulate Falcon Fraud Message in sandbox environment
+  source_operation: https://docs.helix.q2.com/reference/cardmockadminfalconfraud
+- name: cardmockwithdrawalcardcash
+  description: Simulate ATM withdrawal in sandbox environment
+  source_operation: https://docs.helix.q2.com/reference/cardmockwithdrawalcardcash
+- name: cardmockwithdrawalpurchaseauthorize
+  description: Simulate withdrawal authorization in sandbox environment
+  source_operation: https://docs.helix.q2.com/reference/cardmockwithdrawalpurchaseauthorize
+- name: cardmockwithdrawalpurchasecomplete
+  description: Simulate withdrawal settlement in sandbox environment
+  source_operation: https://docs.helix.q2.com/reference/cardmockwithdrawalpurchasecomplete
+- name: cardmockdeclinepurchaseauthorize
+  description: Simulate declined purchase authorization in sandbox environment
+  source_operation: https://docs.helix.q2.com/reference/cardmockdeclinepurchaseauthorize
+- name: cardmockdepositpurchasereturn
+  description: Simulate purchase return in sandbox environment
+  source_operation: https://docs.helix.q2.com/reference/cardmockdepositpurchasereturn
+- name: cardmockdepositpurchasereturnreversal
+  description: Simulate purchase return reversal in sandbox environment
+  source_operation: https://docs.helix.q2.com/reference/cardmockdepositpurchasereturnreversal
+- name: cardprovisioncarddetail
+  description: Get VDE provisioning details
+  source_operation: https://docs.helix.q2.com/reference/cardprovisioncarddetail
+- name: cardprovisionapplepay
+  description: Provision to Apple Pay
+  source_operation: https://docs.helix.q2.com/reference/cardprovisionapplepay
+- name: cardprovisiongooglepay
+  description: Provision to Google Pay
+  source_operation: https://docs.helix.q2.com/reference/cardprovisiongooglepay
+- name: cardriskfactorget
+  description: Get card risk factors
+  source_operation: https://docs.helix.q2.com/reference/cardriskfactorget
+- name: cardriskfactorset
+  description: Set card risk factors
+  source_operation: https://docs.helix.q2.com/reference/cardriskfactorset
+- name: cardcontrolcreate
+  description: Create a card control
+  source_operation: https://docs.helix.q2.com/reference/cardcontrolcreate
+- name: cardcontrolget
+  description: Get a card control
+  source_operation: https://docs.helix.q2.com/reference/cardcontrolget
+- name: cardcontrolgetbytag
+  description: Get a card control by tag
+  source_operation: https://docs.helix.q2.com/reference/cardcontrolgetbytag
+- name: cardcontrolarchive
+  description: Archive a card control
+  source_operation: https://docs.helix.q2.com/reference/cardcontrolarchive
+- name: cardcontrolarchivebytag
+  description: Archive a card control by tag
+  source_operation: https://docs.helix.q2.com/reference/cardcontrolarchivebytag
+- name: customercreate
+  description: Create a customer
+  source_operation: https://docs.helix.q2.com/reference/customercreate
+- name: customercreatebusiness
+  description: Create a business customer
+  source_operation: https://docs.helix.q2.com/reference/customercreatebusiness
+- name: customercreatebusinessapplication
+  description: Create business application
+  source_operation: https://docs.helix.q2.com/reference/customercreatebusinessapplication
+- name: customerget
+  description: Get a customer
+  source_operation: https://docs.helix.q2.com/reference/customerget
+- name: customergetbyemail
+  description: Get a customer via emailAddress
+  source_operation: https://docs.helix.q2.com/reference/customergetbyemail
+- name: customergetbytag
+  description: Get a customer via tag
+  source_operation: https://docs.helix.q2.com/reference/customergetbytag
+- name: customerlist
+  description: List customers
+  source_operation: https://docs.helix.q2.com/reference/customerlist
+- name: customersearch
+  description: Search for customers
+  source_operation: https://docs.helix.q2.com/reference/customersearch
+- name: customerupdate
+  description: Update a customer
+  source_operation: https://docs.helix.q2.com/reference/customerupdate
+- name: customerupdateaddress
+  description: Update a customer address
+  source_operation: https://docs.helix.q2.com/reference/customerupdateaddress
+- name: customersetlastcontact
+  description: Set last contact
+  source_operation: https://docs.helix.q2.com/reference/customersetlastcontact
+- name: customergeneratetoken
+  description: Generate a customer token
+  source_operation: https://docs.helix.q2.com/reference/customergeneratetoken
+- name: customernote
+  description: Make a customer note
+  source_operation: https://docs.helix.q2.com/reference/customernote
+- name: customernoteslist
+  description: List customer notes
+  source_operation: https://docs.helix.q2.com/reference/customernoteslist
+- name: customerarchive
+  description: Archive a customer
+  source_operation: https://docs.helix.q2.com/reference/customerarchive
+- name: customeranswerlist
+  description: List a customer's due diligence responses
+  source_operation: https://docs.helix.q2.com/reference/customeranswerlist
+- name: customeranswerpost
+  description: Submit a customer's due diligence answers
+  source_operation: https://docs.helix.q2.com/reference/customeranswerpost
+- name: customersecurityanswerslist
+  description: Retrieves the list of security answers for a customer in a specified language
+  source_operation: https://docs.helix.q2.com/reference/customersecurityanswerslist
+- name: customerbeneficiarycreate
+  description: Create a customer beneficiary
+  source_operation: https://docs.helix.q2.com/reference/customerbeneficiarycreate
+- name: customerbeneficiaryget
+  description: Get a customer beneficiary
+  source_operation: https://docs.helix.q2.com/reference/customerbeneficiaryget
+- name: customerbeneficiarylist
+  description: List customer beneficiaries
+  source_operation: https://docs.helix.q2.com/reference/customerbeneficiarylist
+- name: customerbeneficiaryupdate
+  description: Update a customer beneficiary
+  source_operation: https://docs.helix.q2.com/reference/customerbeneficiaryupdate
+- name: customerbeneficiarydeactivate
+  description: Deactivate a customer beneficiary
+  source_operation: https://docs.helix.q2.com/reference/customerbeneficiarydeactivate
+- name: customerbeneficiaryaccountassignmentlist
+  description: List account assignments for a customer beneficiary
+  source_operation: https://docs.helix.q2.com/reference/customerbeneficiaryaccountassignmentlist
+- name: customerdocumentget
+  description: Get a customer document
+  source_operation: https://docs.helix.q2.com/reference/customerdocumentget
+- name: customerdocumentlist
+  description: List customer documents
+  source_operation: https://docs.helix.q2.com/reference/customerdocumentlist
+- name: customerdocumentupdatestatus
+  description: Update customer document status
+  source_operation: https://docs.helix.q2.com/reference/customerdocumentupdatestatus
+- name: customerdocumentupload
+  description: Upload a customer document
+  source_operation: https://docs.helix.q2.com/reference/customerdocumentupload
+- name: customerrelationshipcreate
+  description: Create customer relationship
+  source_operation: https://docs.helix.q2.com/reference/customerrelationshipcreate
+- name: customerrelationshiplist
+  description: List customer relationships
+  source_operation: https://docs.helix.q2.com/reference/customerrelationshiplist
+- name: customerrelationshipupdate
+  description: Update customer relationship
+  source_operation: https://docs.helix.q2.com/reference/customerrelationshipupdate
+- name: customerrelationshipupdateprimarycontact
+  description: Update primary contact
+  source_operation: https://docs.helix.q2.com/reference/customerrelationshipupdateprimarycontact
+- name: customerrelationshiparchive
+  description: Archive customer relationship
+  source_operation: https://docs.helix.q2.com/reference/customerrelationshiparchive
+- name: externalaccountcreate
+  description: Create an external account
+  source_operation: https://docs.helix.q2.com/reference/externalaccountcreate
+- name: externalaccountget
+  description: Get an external account
+  source_operation: https://docs.helix.q2.com/reference/externalaccountget
+- name: externalaccountgetbytag
+  description: Get an external account via tag
+  source_operation: https://docs.helix.q2.com/reference/externalaccountgetbytag
+- name: externalaccountlist
+  description: List external accounts
+  source_operation: https://docs.helix.q2.com/reference/externalaccountlist
+- name: externalaccountinitiate
+  description: Initiate an external account
+  source_operation: https://docs.helix.q2.com/reference/externalaccountinitiate
+- name: externalaccountresendverification
+  description: Resend verification deposits
+  source_operation: https://docs.helix.q2.com/reference/externalaccountresendverification
+- name: externalaccountverify
+  description: Verify an external account
+  source_operation: https://docs.helix.q2.com/reference/externalaccountverify
+- name: externalaccountupdate
+  description: Update an external account
+  source_operation: https://docs.helix.q2.com/reference/externalaccountupdate
+- name: externalaccountlock
+  description: Lock an external account
+  source_operation: https://docs.helix.q2.com/reference/externalaccountlock
+- name: externalaccountunlock
+  description: Unlock an external account
+  source_operation: https://docs.helix.q2.com/reference/externalaccountunlock
+- name: externalaccountarchive
+  description: Archive an external account
+  source_operation: https://docs.helix.q2.com/reference/externalaccountarchive
+- name: externalaccountdocumentupload
+  description: Upload an external account document
+  source_operation: https://docs.helix.q2.com/reference/externalaccountdocumentupload
+- name: feeconfiglist
+  description: Get fees
+  source_operation: https://docs.helix.q2.com/reference/feeconfiglist
+- name: feeget
+  description: Get a fee record by FeeToApplyId
+  source_operation: https://docs.helix.q2.com/reference/feeget
+- name: feegetbycustomertag
+  description: Get a fee record by customer fee tag
+  source_operation: https://docs.helix.q2.com/reference/feegetbycustomertag
+- name: programget
+  description: Get program details
+  source_operation: https://docs.helix.q2.com/reference/programget
+- name: programlistaccountholds
+  description: List account holds
+  source_operation: https://docs.helix.q2.com/reference/programlistaccountholds
+- name: programlistindustryclassificationcodes
+  description: List industry classification codes
+  source_operation: https://docs.helix.q2.com/reference/programlistindustryclassificationcodes
+- name: programquestionslist
+  description: Get customer due diligence questions
+  source_operation: https://docs.helix.q2.com/reference/programquestionslist
+- name: statementget
+  description: Get a statement
+  source_operation: https://docs.helix.q2.com/reference/statementget
+- name: statementlist
+  description: List statements
+  source_operation: https://docs.helix.q2.com/reference/statementlist
+- name: statementsearch
+  description: Search for statements
+  source_operation: https://docs.helix.q2.com/reference/statementsearch
+- name: statementdownload
+  description: Download a statement
+  source_operation: https://docs.helix.q2.com/reference/statementdownload
+- name: transactionget
+  description: Get transactions
+  source_operation: https://docs.helix.q2.com/reference/transactionget
+- name: transactiongetbytag
+  description: Get a transaction(s) via tag
+  source_operation: https://docs.helix.q2.com/reference/transactiongetbytag
+- name: transactionlist
+  description: List transactions
+  source_operation: https://docs.helix.q2.com/reference/transactionlist
+- name: transactionsetavailabledate
+  description: Set transaction available date
+  source_operation: https://docs.helix.q2.com/reference/transactionsetavailabledate
+- name: transactionsetstatus
+  description: Set transaction status
+  source_operation: https://docs.helix.q2.com/reference/transactionsetstatus
+- name: transactioncreatefee
+  description: Create a fee for a specified customer account
+  source_operation: https://docs.helix.q2.com/reference/transactioncreatefee
+- name: transactionwireget
+  description: Get wire transaction details
+  source_operation: https://docs.helix.q2.com/reference/transactionwireget
+- name: transfercreate
+  description: Create a transfer
+  source_operation: https://docs.helix.q2.com/reference/transfercreate
+- name: transferachoriginationcreate
+  description: Create an ACH-originated debit or credit transaction
+  source_operation: https://docs.helix.q2.com/reference/transferachoriginationcreate
+- name: transfervoid
+  description: Void a transfer
+  source_operation: https://docs.helix.q2.com/reference/transfervoid

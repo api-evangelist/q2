@@ -1,0 +1,24 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.helix.q2.com/reference/authentication
+docs: https://docs.helix.q2.com/reference/authentication
+summary:
+  types: [http]
+  http_schemes: [basic]
+  oauth2_flows: []
+  api_key_in: []
+schemes:
+- name: BasicAuth
+  type: http
+  scheme: basic
+  description: >-
+    HTTP Basic Authentication via the Authorization header. The API Key is the
+    Basic-auth username; the Secret is the Basic-auth password. The pair is
+    combined and base64-encoded (e.g. Authorization: Basic base64(apiKey:secret)).
+  credentials:
+    username: API Key
+    password: Secret
+  provisioning: API Key and Secret are issued via the Helix Admin site or by a Helix representative; sandbox and production credentials are distinct.
+notes:
+- IP allowlisting is enforced in addition to Basic auth; requests must originate from a whitelisted (middleware/server) IP. End-user devices are not supported.
+- Versioning is bound to the API Key (routes do not carry a version segment).

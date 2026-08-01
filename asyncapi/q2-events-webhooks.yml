@@ -1,0 +1,56 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.helix.q2.com/docs/realtime-events-overview
+spec_type: Webhooks
+surface: Real-time Events Bus (event messaging) plus SFTP event-notification files
+transport:
+  primary: Events Bus real-time event messaging
+  batch: SFTP event-notification files (event-notification-file, card-event-notification-file, statement-event-notification-file)
+delivery: Events carry a common payload envelope (see docs/common-payload) plus an event-type-specific payload body.
+event_families:
+- family: customer-account
+  events:
+  - {type: customer-account-deposit, payload: docs/customer-account-deposit-payload}
+  - {type: customer-account-withdrawal, payload: docs/customer-account-withdrawal-payload}
+  - {type: customer-account-transfer, payload: docs/customer-account-transfer-payload}
+  - {type: account-modified, payload: docs/account-modified-payload}
+  - {type: account-dormancy, payload: docs/account-dormancy-payload}
+  - {type: bank-hold, payload: docs/bank-hold-payload}
+  - {type: deposit-availability, payload: docs/deposit-availability-payload}
+  - {type: age-of-majority-reached, payload: docs/age-of-majority-reached-payload}
+- family: card
+  events:
+  - {type: card-modified, payload: docs/card-modified-payload}
+  - {type: debit-card-deposit, payload: docs/debit-card-deposit-payload}
+  - {type: debit-card-deposit-reversal, payload: docs/debit-card-deposit-reversal-payload}
+  - {type: debit-card-withdrawal, payload: docs/debit-card-withdrawal-payload}
+  - {type: debit-card-withdrawal-authorization, payload: docs/debit-card-withdrawal-authorization-payload}
+  - {type: debit-card-declined, payload: docs/debit-card-declined-payload}
+  - {type: debit-card-transfer, payload: docs/debit-card-transfer-payload}
+  - {type: digital-wallet-token, payload: docs/digital-wallet-token-payload}
+- family: check
+  events:
+  - {type: check-deposit, payload: docs/check-deposit-payload}
+  - {type: check-deposit-authorization, payload: docs/check-deposit-authorization-payload}
+  - {type: check-deposit-reversal, payload: docs/check-deposit-reversal-payload}
+  - {type: check-withdrawal, payload: docs/check-withdrawal-payload}
+  - {type: check-return, payload: docs/check-return-payload}
+- family: transaction
+  events:
+  - {type: transaction-modified, payload: docs/transaction-modified-payload}
+  - {type: notification-of-change, payload: docs/notification-of-change-payload}
+  - {type: fee-transactions, payload: docs/fee-transactions-payload}
+- family: risk-and-fraud
+  events:
+  - {type: falcon-message, payload: docs/falcon-message-payload}
+  - {type: visa-dps-fraud-text-alerts, payload: docs/visa-dps-fraud-text-alerts-payload}
+  - {type: visa-dps-risk-factor, payload: docs/visa-dps-risk-factor-payload}
+  - {type: in-auth, payload: docs/in-auth-payload}
+- family: onboarding
+  events:
+  - {type: manual-review-document-requested, payload: docs/manual-review-document-requested-payload}
+  - {type: modified-customer-contact-information, payload: docs/modified-customer-contact-information-payload}
+  - {type: modified-customer-address, payload: docs/modified-customer-address-payload}
+notes:
+- No AsyncAPI document is published by Helix; this catalog is derived from the documented event-types and payload references (docs/event-types, docs/payload-types).
+- Event-type reference index; docs/common-payload documents the shared envelope fields present on every event.
