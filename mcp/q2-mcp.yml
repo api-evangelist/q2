@@ -2,11 +2,9 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: https://docs.helix.q2.com/reference
-note: >-
-  No official hosted MCP server was found for Helix by Q2. This is a candidate
-  tool list derived one-to-one from the documented Helix REST API operations;
-  each tool maps to a real reference operation slug. Helix docs expose an
-  llms.txt index (https://docs.helix.q2.com/llms.txt) for agent consumption.
+note: No official hosted MCP server was found for Helix by Q2. This is a candidate tool list derived one-to-one
+  from the documented Helix REST API operations; each tool maps to a real reference operation slug. Helix
+  docs expose an llms.txt index (https://docs.helix.q2.com/llms.txt) for agent consumption.
 server:
   name: q2-helix
   transport: http
@@ -420,3 +418,9 @@ tools:
 - name: transfervoid
   description: Void a transfer
   source_operation: https://docs.helix.q2.com/reference/transfervoid
+deployment:
+  mode: none
+  verified: derived
+  tools: 136
+  checked: '2026-08-12'
+  source: catalog MCP census
