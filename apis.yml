@@ -37,6 +37,18 @@ created: '2026-07-17'
 modified: '2026-07-20'
 tags:
 - Company
+- Financial-Services
+- Banking
+- Embedded Finance
+- Banking as a Service
+- Fintech
+- Digital Banking
+- Cards
+- Payments
+- ACH
+- FDIC
+tags_raw:
+- Company
 - Financial Services
 - Banking
 - Embedded Finance
@@ -59,6 +71,13 @@ apis:
   humanURL: https://docs.helix.q2.com
   baseURL: https://api.helix.q2.com
   tags:
+  - Banking
+  - Embedded Finance
+  - Account
+  - Cards
+  - ACH
+  - Transfers
+  tags_raw:
   - Banking
   - Embedded Finance
   - Accounts
