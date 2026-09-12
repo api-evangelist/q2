@@ -129,6 +129,8 @@ apis:
   - type: LLMsTxt
     url: llms/q2-llms.txt
 common:
+- type: Website
+  url: https://www.q2.com/
 - type: DeveloperPortal
   url: https://helix.q2.com
 - type: Documentation
