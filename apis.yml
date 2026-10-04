@@ -51,7 +51,7 @@ created: '2026-07-17'
 modified: '2026-07-20'
 tags:
 - Company
-- Financial-Services
+- Financial Services
 - Banking
 - Embedded Finance
 - Banking as a Service
@@ -73,6 +73,7 @@ tags_raw:
 - Payments
 - ACH
 - FDIC
+- Financial-Services
 apis:
 - name: Helix by Q2 API
   description: >-
