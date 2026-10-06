@@ -48,7 +48,7 @@ x-tier: profiled
 x-tier-reason: portfolio-lead
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-10-06'
 tags:
 - Company
 - Financial Services
@@ -130,6 +130,8 @@ apis:
   - type: LLMsTxt
     url: llms/q2-llms.txt
 common:
+- url: https://www.q2.com/blog/rss.xml
+  type: BlogRSS
 - type: Website
   url: https://www.q2.com/
 - type: DeveloperPortal
