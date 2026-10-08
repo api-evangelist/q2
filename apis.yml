@@ -130,6 +130,8 @@ apis:
   - type: LLMsTxt
     url: llms/q2-llms.txt
 common:
+- type: RateLimits
+  url: rate-limits/q2-rate-limits.yml
 - url: https://www.q2.com/blog/rss.xml
   type: BlogRSS
 - type: Website
