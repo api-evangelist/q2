@@ -1,0 +1,48 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/q2-helix-api-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: null
+coverage:
+  operations: 137
+  statuses_declared: 5
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad Request
+  operations: 130
+  media_types:
+  - application/json
+  schema: null
+- status: 401
+  title: Unauthorized
+  description: Unauthorized
+  operations: 130
+  media_types:
+  - application/json
+  schema: null
+- status: 404
+  title: Not Found
+  description: Not Found
+  operations: 130
+  media_types:
+  - application/json
+  schema: null
+- status: 405
+  title: Method Not Allowed
+  description: HTTP Method Not Allowed
+  operations: 130
+  media_types:
+  - application/json
+  schema: null
+- status: 429
+  title: Too Many Requests
+  description: Rate Limit Exceeded
+  operations: 130
+  media_types:
+  - application/json
+  schema: null

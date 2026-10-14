@@ -1,0 +1,313 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/q2/main/json-schema/q2-transaction-object200-response-schema.json",
+  "title": "TransactionObject200Response",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/q2-helix-api-openapi.yml#/components/schemas/TransactionObject200Response",
+  "allOf": [
+    {
+      "$ref": "#/$defs/0"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "accountId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "amount": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "availableDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "cardId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "cardMerchantInfo": {
+              "type": "object",
+              "properties": {
+                "merchantCity": {
+                  "type": "string",
+                  "maxLength": 13
+                },
+                "merchantCountryCode": {
+                  "type": "string",
+                  "maxLength": 2
+                },
+                "merchantGroupcode": {
+                  "type": "string",
+                  "maxLength": 6
+                },
+                "merchantId": {
+                  "type": "string",
+                  "maxLength": 15
+                },
+                "merchantLocation": {
+                  "type": "string",
+                  "maxLength": 23
+                },
+                "merchantStateCode": {
+                  "type": "string",
+                  "maxLength": 2
+                },
+                "merchantZipCode": {
+                  "type": "string",
+                  "maxLength": 9
+                }
+              }
+            },
+            "check": {
+              "type": "object",
+              "properties": {
+                "checkAmount": {
+                  "type": "number",
+                  "format": "decimal"
+                },
+                "checkImages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "downloadUrl": {
+                        "type": "string"
+                      },
+                      "imageType": {
+                        "type": "string",
+                        "enum": [
+                          "CheckFront",
+                          "CheckBack",
+                          "ReturnCheckFront",
+                          "ReturnCheckBack"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "checkNumber": {
+                  "$ref": "#/$defs/transactionId"
+                },
+                "holdCode": {
+                  "type": "string"
+                },
+                "holdCodeDescription": {
+                  "type": "string"
+                },
+                "payerAccountNumberMasked": {
+                  "type": "string"
+                },
+                "payerInstitutionDescription": {
+                  "type": "string"
+                },
+                "payerRoutingNumber": {
+                  "type": "string"
+                },
+                "returnReason": {
+                  "type": "string"
+                },
+                "returnReasonCode": {
+                  "type": "string"
+                }
+              }
+            },
+            "createdDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "customerId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "customField1": {
+              "type": "string"
+            },
+            "depositAvailability": {
+              "type": "object",
+              "properties": {
+                "availabilityAmounts": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "availableDate": {
+                        "$ref": "#/$defs/lastContactDate"
+                      },
+                      "effectiveAvailableDate": {
+                        "$ref": "#/$defs/lastContactDate"
+                      },
+                      "isReleased": {
+                        "type": "boolean"
+                      },
+                      "overrideAvailableDate": {
+                        "$ref": "#/$defs/lastContactDate"
+                      },
+                      "releaseAmount": {
+                        "type": "number",
+                        "format": "decimal"
+                      },
+                      "releasedDate": {
+                        "$ref": "#/$defs/lastContactDate"
+                      },
+                      "remainingAmount": {
+                        "type": "number",
+                        "format": "decimal"
+                      }
+                    }
+                  }
+                },
+                "availabilityCode": {
+                  "type": "string"
+                },
+                "totalReleasedAmount": {
+                  "type": "number",
+                  "format": "decimal"
+                },
+                "totalRemainingAmount": {
+                  "type": "number",
+                  "format": "decimal"
+                }
+              }
+            },
+            "description": {
+              "type": "string"
+            },
+            "feeCode": {
+              "type": "string",
+              "enum": [
+                "ACH",
+                "DAF",
+                "IAF",
+                "ICF",
+                "NSF",
+                "RGD",
+                "RTN"
+              ]
+            },
+            "feeDescription": {
+              "type": "string"
+            },
+            "friendlyDescription": {
+              "type": "string"
+            },
+            "institutionName": {
+              "type": "string"
+            },
+            "isCredit": {
+              "type": "boolean"
+            },
+            "isEarlyDirectDeposit": {
+              "type": "boolean"
+            },
+            "isSameDaySettle": {
+              "type": "boolean"
+            },
+            "masterId": {
+              "$ref": "#/$defs/transactionId"
+            },
+            "nachaDescription": {
+              "type": "string",
+              "deprecated": true
+            },
+            "nachaInfo": {
+              "type": "object",
+              "properties": {
+                "companyDiscretionaryData": {
+                  "type": "string"
+                },
+                "companyEntryDescription": {
+                  "type": "string"
+                },
+                "companyIdentification": {
+                  "type": "string"
+                },
+                "companyName": {
+                  "type": "string"
+                },
+                "isEarlyDeposit": {
+                  "type": "boolean"
+                },
+                "nachaSettledDate": {
+                  "$ref": "#/$defs/lastContactDate"
+                },
+                "standardEntryClassCode": {
+                  "type": "string"
+                }
+              }
+            },
+            "purposeCode": {
+              "$ref": "#/$defs/PurposeCode"
+            },
+            "requestingCustomerId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "returnCode": {
+              "type": "string"
+            },
+            "runningAccountBalance": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "settledDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "statementDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "Initiated",
+                "Pending",
+                "Settled",
+                "Voided"
+              ]
+            },
+            "subType": {
+              "type": "string"
+            },
+            "subTypeCode": {
+              "type": "string"
+            },
+            "tag": {
+              "$ref": "#/$defs/TagProperty"
+            },
+            "transactionCount": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "transactionId": {
+              "$ref": "#/$defs/transactionId"
+            },
+            "type": {
+              "type": "string"
+            },
+            "typeCode": {
+              "type": "string"
+            },
+            "voidedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "HelixId": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1
+    },
+    "PurposeCode": {
+      "type": "string",
+      "maxLength": 10,
+      "pattern": "^[0-9][A-Z][a-z]$"
+    },
+    "TagProperty": {
+      "type": "string",
+      "maxLength": 50
+    }
+  }
+}

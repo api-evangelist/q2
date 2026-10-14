@@ -1,0 +1,251 @@
+{
+  "@context": {
+    "@vocab": "https://q2.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "q2": "https://q2.com/schema#",
+    "RecurringContributionType": "q2:RecurringContributionType",
+    "CloseReason": "q2:CloseReason",
+    "AccountLockReasonTypeCode": "q2:AccountLockReasonTypeCode",
+    "DistributionType": "q2:DistributionType",
+    "CultureProperty": "q2:CultureProperty",
+    "CardClassification": "q2:CardClassification",
+    "AddressItem": "q2:AddressItem",
+    "addressLine1": {
+      "@id": "q2:addressLine1",
+      "@type": "@id"
+    },
+    "addressLine2": {
+      "@id": "q2:addressLine2",
+      "@type": "@id"
+    },
+    "addressLine3": {
+      "@id": "q2:addressLine3",
+      "@type": "@id"
+    },
+    "addressLine4": {
+      "@id": "q2:addressLine4",
+      "@type": "@id"
+    },
+    "addressType": {
+      "@id": "q2:addressType",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "q2:city",
+      "@type": "@id"
+    },
+    "country": {
+      "@id": "q2:country",
+      "@type": "@id"
+    },
+    "isActive": {
+      "@id": "q2:isActive",
+      "@type": "xsd:boolean"
+    },
+    "postalCode": {
+      "@id": "q2:postalCode",
+      "@type": "@id"
+    },
+    "state": {
+      "@id": "q2:state",
+      "@type": "@id"
+    },
+    "CardControlRuleItem": "q2:CardControlRuleItem",
+    "domestic": {
+      "@id": "q2:domestic",
+      "@type": "xsd:boolean"
+    },
+    "entryMethod": {
+      "@id": "q2:entryMethod",
+      "@container": "@list"
+    },
+    "international": {
+      "@id": "q2:international",
+      "@type": "xsd:boolean"
+    },
+    "limit": {
+      "@id": "q2:limit",
+      "@type": "xsd:decimal"
+    },
+    "mccs": {
+      "@id": "q2:mccs",
+      "@container": "@list"
+    },
+    "merchantGroups": {
+      "@id": "q2:merchantGroups",
+      "@container": "@list"
+    },
+    "source": {
+      "@id": "q2:source",
+      "@type": "xsd:string"
+    },
+    "tag": {
+      "@id": "q2:tag",
+      "@type": "@id"
+    },
+    "usStates": {
+      "@id": "q2:usStates",
+      "@container": "@list"
+    },
+    "ForeignDocumentType": "q2:ForeignDocumentType",
+    "GenderProperty": "q2:GenderProperty",
+    "PhoneItem": "q2:PhoneItem",
+    "number": {
+      "@id": "q2:number",
+      "@type": "xsd:string"
+    },
+    "phoneType": {
+      "@id": "q2:phoneType",
+      "@type": "xsd:string"
+    },
+    "ResidencyStatusType": "q2:ResidencyStatusType",
+    "TaxIdType": "q2:TaxIdType",
+    "LastContactType": "q2:LastContactType",
+    "ExemptFromBeneficialOwnershipReasonType": "q2:ExemptFromBeneficialOwnershipReasonType",
+    "ExternalAccountAccessType": "q2:ExternalAccountAccessType",
+    "BeneficiaryType": "q2:BeneficiaryType",
+    "CustomerBeneficiaryAccountAssignment": "q2:CustomerBeneficiaryAccountAssignment",
+    "accountId": {
+      "@id": "q2:accountId",
+      "@type": "xsd:integer"
+    },
+    "accountLegalName1": {
+      "@id": "q2:accountLegalName1",
+      "@type": "xsd:string"
+    },
+    "accountLegalName2": {
+      "@id": "q2:accountLegalName2",
+      "@type": "xsd:string"
+    },
+    "accountName": {
+      "@id": "q2:accountName",
+      "@type": "xsd:string"
+    },
+    "accountNumberMasked": {
+      "@id": "q2:accountNumberMasked",
+      "@type": "xsd:string"
+    },
+    "accountType": {
+      "@id": "q2:accountType",
+      "@type": "xsd:string"
+    },
+    "beneficiaryPosition": {
+      "@id": "q2:beneficiaryPosition",
+      "@type": "xsd:integer"
+    },
+    "distributionDescription": {
+      "@id": "q2:distributionDescription",
+      "@type": "xsd:string"
+    },
+    "distributionPercentage": {
+      "@id": "q2:distributionPercentage",
+      "@type": "xsd:integer"
+    },
+    "distributionType": {
+      "@id": "q2:distributionType",
+      "@type": "xsd:string"
+    },
+    "effectiveDate": {
+      "@id": "q2:effectiveDate",
+      "@type": "xsd:dateTime"
+    },
+    "CustomerBeneficiaryAccountAssignmentList": "q2:CustomerBeneficiaryAccountAssignmentList",
+    "customerId": {
+      "@id": "q2:customerId",
+      "@type": "xsd:integer"
+    },
+    "customerBeneficiaryId": {
+      "@id": "q2:customerBeneficiaryId",
+      "@type": "xsd:integer"
+    },
+    "accountAssignments": {
+      "@id": "q2:accountAssignments",
+      "@container": "@list"
+    },
+    "CustomerDocumentUploadRequest": "q2:CustomerDocumentUploadRequest",
+    "customField1": {
+      "@id": "q2:customField1",
+      "@type": "xsd:string"
+    },
+    "customField2": {
+      "@id": "q2:customField2",
+      "@type": "xsd:string"
+    },
+    "customField3": {
+      "@id": "q2:customField3",
+      "@type": "xsd:string"
+    },
+    "customField4": {
+      "@id": "q2:customField4",
+      "@type": "xsd:string"
+    },
+    "customField5": {
+      "@id": "q2:customField5",
+      "@type": "xsd:string"
+    },
+    "documentContent": {
+      "@id": "q2:documentContent",
+      "@type": "xsd:string"
+    },
+    "documentName": {
+      "@id": "q2:documentName",
+      "@type": "xsd:string"
+    },
+    "documentType": {
+      "@id": "q2:documentType",
+      "@type": "xsd:string"
+    },
+    "reasonType": {
+      "@id": "q2:reasonType",
+      "@type": "xsd:string"
+    },
+    "RelationshipType": "q2:RelationshipType",
+    "ExternalAccountCreateRequest": "q2:ExternalAccountCreateRequest",
+    "routingNumber": {
+      "@id": "q2:routingNumber",
+      "@type": "xsd:string"
+    },
+    "accountNumber": {
+      "@id": "q2:accountNumber",
+      "@type": "xsd:string"
+    },
+    "firstName": {
+      "@id": "q2:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "q2:lastName",
+      "@type": "xsd:string"
+    },
+    "businessName": {
+      "@id": "q2:businessName",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "q2:type",
+      "@type": "@id"
+    },
+    "name": {
+      "@id": "q2:name",
+      "@type": "xsd:string"
+    },
+    "nickName": {
+      "@id": "q2:nickName",
+      "@type": "xsd:string"
+    },
+    "requestingCustomerId": {
+      "@id": "q2:requestingCustomerId"
+    },
+    "HoldStatusType": "q2:HoldStatusType",
+    "StatementType": "q2:StatementType"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Q2 API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Q2's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-14) from openapi/q2-helix-api-openapi.yml.",
+  "dcterms:created": "2026-10-14",
+  "dcterms:source": [
+    "openapi/q2-helix-api-openapi.yml"
+  ]
+}

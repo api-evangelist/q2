@@ -1,0 +1,378 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/q2/main/json-schema/q2-account-object200-response-schema.json",
+  "title": "AccountObject200Response",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/q2-helix-api-openapi.yml#/components/schemas/AccountObject200Response",
+  "allOf": [
+    {
+      "$ref": "#/$defs/0"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "accessTypeCode": {
+              "type": "string",
+              "enum": [
+                "FULL",
+                "AUTHSIGNER",
+                "RDONLY",
+                "NONE"
+              ]
+            },
+            "accountBalance": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "accountId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "accountMinimumBalance": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "accountNumber": {
+              "type": "string"
+            },
+            "accountNumberMasked": {
+              "type": "string"
+            },
+            "availableBalance": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "balanceLastModifiedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "category": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "closedAmount": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "closedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "closedReason": {
+              "$ref": "#/$defs/CloseReason"
+            },
+            "closedReasonNotes": {
+              "$ref": "#/$defs/CloseReasonNotes"
+            },
+            "createdDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "customField1": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "customField2": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "customField3": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "customField4": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "customField5": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "customerId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "customerPriority": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "externalProgramTag": {
+              "type": "string"
+            },
+            "firstDepositDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "globalAccountAccessEnabled": {
+              "type": "boolean"
+            },
+            "interestTransferFkId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "isCloseable": {
+              "type": "boolean"
+            },
+            "isJointAccount": {
+              "type": "boolean"
+            },
+            "isLocked": {
+              "type": "boolean"
+            },
+            "isPrimary": {
+              "type": "boolean"
+            },
+            "isPrimaryCustomer": {
+              "type": "boolean"
+            },
+            "lastModifiedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "legalName1": {
+              "$ref": "#/$defs/LegalName"
+            },
+            "legalName2": {
+              "$ref": "#/$defs/LegalName"
+            },
+            "lockReasonTypeCode": {
+              "$ref": "#/$defs/AccountLockReasonTypeCode"
+            },
+            "lockTypeCode": {
+              "$ref": "#/$defs/lockTypeCode"
+            },
+            "accountLockClassificationCode": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 10,
+              "description": "Program-configured classification code associated with the account lock."
+            },
+            "accountLockClassificationCodeDescription": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Human-readable description of the accountLockClassificationCode."
+            },
+            "maturityTypeCode": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "pendingBalance": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "primaryCustomerId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "productId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "recurringContributionAmount": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "recurringContributionEndDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "recurringContributionFromExternalAccountId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "recurringContributionNextDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "recurringContributionStartDate": {
+              "$ref": "#/$defs/DateTimeProperty"
+            },
+            "recurringContributionType": {
+              "$ref": "#/$defs/RecurringContributionType"
+            },
+            "regDWithdrawalCount": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            },
+            "routingNumber": {
+              "type": "string"
+            },
+            "routingNumberMasked": {
+              "type": "string"
+            },
+            "sourceLinks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "deprecated": true,
+                "properties": {
+                  "creditSetting": {
+                    "type": "number",
+                    "format": "decimal"
+                  },
+                  "customerId": {
+                    "$ref": "#/$defs/HelixId"
+                  },
+                  "debitSetting": {
+                    "type": "number",
+                    "format": "decimal"
+                  },
+                  "isCreditAutoTransferEnabled": {
+                    "type": "boolean"
+                  },
+                  "isDebitAutoTransferEnabled": {
+                    "type": "boolean"
+                  },
+                  "linkOptionTypeCode": {
+                    "type": "string",
+                    "enum": [
+                      "OVRPRTAMT",
+                      "OVRPRTMLT",
+                      "OVRSECPCT",
+                      "OVRSECFIX"
+                    ],
+                    "description": "- `OVRPRTAMT`: Auto-transfer exact amount of withdrawal\n- `OVRPRTMLT`: Auto-transfer to the nearest multiple of `debitSetting` to cover withdrawal amount\n- `OVRSECPCT`: Allow lending up to `debitSetting` percentage of security account funds\n- `OVRSECFIX`: Allow lending up to fixed amount of `debitSetting`\n"
+                  },
+                  "linkTypeCode": {
+                    "type": "string",
+                    "enum": [
+                      "OVRPRT",
+                      "OVRSEC"
+                    ],
+                    "description": "- `OVRPRT`: Overdraft protention\n- `OVRSEC`: Overdraft security\n"
+                  },
+                  "sourceAccountId": {
+                    "$ref": "#/$defs/HelixId"
+                  },
+                  "targetAccountId": {
+                    "$ref": "#/$defs/HelixId"
+                  }
+                }
+              },
+              "deprecated": true
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "Open",
+                "Closed",
+                "PendingOpen",
+                "PendingClosed"
+              ]
+            },
+            "subCategory": {
+              "type": "string"
+            },
+            "tag": {
+              "$ref": "#/$defs/TagProperty"
+            },
+            "targetAmount": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "targetDate": {
+              "$ref": "#/$defs/DateTimeProperty"
+            },
+            "targetLinks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/items"
+              },
+              "deprecated": true
+            },
+            "targetMetDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "targetMetPercent": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "totalCustomers": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "Checking",
+                "Savings",
+                "ForBenefitOf",
+                "Prepaid",
+                "Time Deposit",
+                "Business Checking",
+                "Business Savings"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "AccountLockReasonTypeCode": {
+      "type": "string",
+      "enum": [
+        "UNK",
+        "FRD",
+        "ADM",
+        "TMP",
+        "FRZ",
+        "SUS",
+        "CO",
+        "RTN",
+        "REC",
+        "DED",
+        "DOR"
+      ],
+      "description": "- `UNK`: Unknown\n- `FRD`: Fraud investigation\n- `ADM`: Administrative\n- `TMP`: Temporary\n- `FRZ`: Freeze\n- `SUS`: Suspected fraud\n- `CO`: Credits only\n- `RTN`: Return risk\n- `REC`: Recovery\n- `DED`: Deceased\n- `DOR`: Dormant\n"
+    },
+    "CloseReason": {
+      "type": "string",
+      "enum": [
+        "Fraud",
+        "Never funded",
+        "BSA reasons",
+        "Relationship ended",
+        "Deceased",
+        "Other",
+        "Consolidating Bank Accounts",
+        "re-CIP",
+        "Risk-Related",
+        "Member Requested",
+        "Negative Balance (Reopen Eligible)",
+        "Negative Balance (Reopen Ineligible)",
+        "ID Theft",
+        "Account Take Over",
+        "Dormant"
+      ],
+      "description": "The following values are not enabled by default and must be enabled by Q2: `Consolidating Bank Accounts`, `re-CIP`, `Risk-Related`, `Member Requested`, `Negative Balance (Reopen Eligible)`, `Negative Balance (Reopen Ineligible)`, `ID Theft`, `Account Take Over`, `Dormant`\n"
+    },
+    "CloseReasonNotes": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Required if `closeReason` is `Other`"
+    },
+    "DateTimeProperty": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "HelixId": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1
+    },
+    "LegalName": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "RecurringContributionType": {
+      "type": "string",
+      "enum": [
+        "None",
+        "BiWeekly",
+        "Monthly"
+      ]
+    },
+    "TagProperty": {
+      "type": "string",
+      "maxLength": 50
+    }
+  }
+}

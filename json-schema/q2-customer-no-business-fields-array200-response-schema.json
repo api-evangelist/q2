@@ -1,0 +1,402 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/q2/main/json-schema/q2-customer-no-business-fields-array200-response-schema.json",
+  "title": "CustomerNoBusinessFieldsArray200Response",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/q2-helix-api-openapi.yml#/components/schemas/CustomerNoBusinessFieldsArray200Response",
+  "allOf": [
+    {
+      "$ref": "#/$defs/0"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accessTypeCode": {
+                "type": "string",
+                "enum": [
+                  "FULL",
+                  "ACCT",
+                  "CARD",
+                  "FDRY"
+                ]
+              },
+              "accounts": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "$ref": "#/$defs/data"
+                }
+              },
+              "addresses": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "$ref": "#/$defs/AddressItem"
+                }
+              },
+              "birthDate": {
+                "$ref": "#/$defs/DateTimeProperty"
+              },
+              "cards": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "$ref": "#/$defs/data"
+                }
+              },
+              "customerCount": {
+                "$ref": "#/$defs/HelixId"
+              },
+              "createdDate": {
+                "$ref": "#/$defs/lastContactDate"
+              },
+              "culture": {
+                "$ref": "#/$defs/CultureProperty"
+              },
+              "customField1": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "customField2": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "customField3": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "customField4": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "customField5": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "customerId": {
+                "$ref": "#/$defs/HelixId"
+              },
+              "deceasedDate": {
+                "$ref": "#/$defs/lastContactDate"
+              },
+              "documentsAcceptedDate": {
+                "$ref": "#/$defs/lastContactDate"
+              },
+              "driversLicenseExpireDate": {
+                "$ref": "#/$defs/DateTimeProperty"
+              },
+              "driversLicenseIssueDate": {
+                "$ref": "#/$defs/DateTimeProperty"
+              },
+              "driversLicenseNumber": {
+                "$ref": "#/$defs/DriversLicenseNumber"
+              },
+              "driversLicenseNumberMasked": {
+                "type": "string"
+              },
+              "driversLicenseState": {
+                "$ref": "#/$defs/FormationState"
+              },
+              "emailAddress": {
+                "$ref": "#/$defs/EmailAddress"
+              },
+              "externalAccounts": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "$ref": "#/$defs/data"
+                }
+              },
+              "firstName": {
+                "$ref": "#/$defs/FirstName"
+              },
+              "fraudStatus": {
+                "$ref": "#/$defs/status"
+              },
+              "gender": {
+                "$ref": "#/$defs/GenderProperty"
+              },
+              "idStatus": {
+                "$ref": "#/$defs/status"
+              },
+              "iqStatus": {
+                "$ref": "#/$defs/status"
+              },
+              "isActive": {
+                "type": "boolean",
+                "deprecated": true
+              },
+              "isDocumentsAccepted": {
+                "type": "boolean"
+              },
+              "isLocked": {
+                "type": "boolean"
+              },
+              "isOptedInToBankCommunication": {
+                "type": "boolean"
+              },
+              "isRelianceAgreement": {
+                "type": "boolean"
+              },
+              "isSubjectToBackupWithholding": {
+                "type": "boolean"
+              },
+              "kycStatus": {
+                "$ref": "#/$defs/status"
+              },
+              "lastActivityDate": {
+                "$ref": "#/$defs/lastContactDate"
+              },
+              "lastModifiedDate": {
+                "$ref": "#/$defs/lastContactDate"
+              },
+              "lastName": {
+                "$ref": "#/$defs/CustomerLastName"
+              },
+              "lockedDate": {
+                "$ref": "#/$defs/lastContactDate"
+              },
+              "lockedReason": {
+                "type": "string"
+              },
+              "middleName": {
+                "$ref": "#/$defs/FirstName"
+              },
+              "ofacStatus": {
+                "$ref": "#/$defs/status"
+              },
+              "passportCountry": {
+                "type": "string"
+              },
+              "passportExpireDate": {
+                "$ref": "#/$defs/lastContactDate"
+              },
+              "passportIssueDate": {
+                "$ref": "#/$defs/lastContactDate"
+              },
+              "passportNumber": {
+                "$ref": "#/$defs/PassportNumber"
+              },
+              "passportNumberMasked": {
+                "type": "string"
+              },
+              "phones": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "$ref": "#/$defs/PhoneItem"
+                }
+              },
+              "qualiFileStatus": {
+                "type": "string",
+                "deprecated": true
+              },
+              "residencyStatusType": {
+                "$ref": "#/$defs/ResidencyStatusType"
+              },
+              "status": {
+                "$ref": "#/$defs/status"
+              },
+              "suffix": {
+                "type": "string"
+              },
+              "tag": {
+                "type": "string"
+              },
+              "taxId": {
+                "$ref": "#/$defs/TaxId"
+              },
+              "taxIdMasked": {
+                "type": "string"
+              },
+              "taxIdType": {
+                "$ref": "#/$defs/TaxIdType"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "AddressItem": {
+      "type": "object",
+      "required": [
+        "addressLine1",
+        "addressType",
+        "city",
+        "country",
+        "postalCode",
+        "state"
+      ],
+      "properties": {
+        "addressLine1": {
+          "$ref": "#/$defs/AddressLine"
+        },
+        "addressLine2": {
+          "$ref": "#/$defs/AddressLine"
+        },
+        "addressLine3": {
+          "$ref": "#/$defs/AddressLine"
+        },
+        "addressLine4": {
+          "$ref": "#/$defs/AddressLine"
+        },
+        "addressType": {
+          "type": "string",
+          "enum": [
+            "Individual",
+            "Mailing",
+            "PrimaryBusiness",
+            "Business",
+            "Registered",
+            "TaxFormMailing"
+          ]
+        },
+        "city": {
+          "$ref": "#/$defs/CityProperty"
+        },
+        "country": {
+          "$ref": "#/$defs/CountryProperty"
+        },
+        "isActive": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "postalCode": {
+          "$ref": "#/$defs/PostalCode"
+        },
+        "state": {
+          "$ref": "#/$defs/FormationState"
+        }
+      }
+    },
+    "AddressLine": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "CityProperty": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "CountryProperty": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "CultureProperty": {
+      "type": "string",
+      "enum": [
+        "en-US",
+        "es-US"
+      ],
+      "description": "Accepted values vary by program:\n  - `en-US`: English\n  - `es-US`: Spanish\n"
+    },
+    "CustomerLastName": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "DateTimeProperty": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "DriversLicenseNumber": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "EmailAddress": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "FirstName": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "FormationState": {
+      "type": "string",
+      "maxLength": 2
+    },
+    "GenderProperty": {
+      "type": "string",
+      "enum": [
+        "M",
+        "F",
+        "U"
+      ]
+    },
+    "HelixId": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1
+    },
+    "PassportNumber": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "PhoneItem": {
+      "type": "object",
+      "required": [
+        "number",
+        "phoneType"
+      ],
+      "properties": {
+        "isActive": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "number": {
+          "type": "string"
+        },
+        "phoneType": {
+          "type": "string",
+          "enum": [
+            "Home",
+            "Mobile",
+            "Office"
+          ]
+        }
+      }
+    },
+    "PostalCode": {
+      "type": "string",
+      "maxLength": 9
+    },
+    "ResidencyStatusType": {
+      "type": "string",
+      "enum": [
+        "UsCitizen",
+        "ResidentAlien",
+        "NonResidentAlien"
+      ]
+    },
+    "TaxId": {
+      "type": "string",
+      "maxLength": 30,
+      "description": "No formatting (no dashes, spaces, etc)."
+    },
+    "TaxIdType": {
+      "type": "string",
+      "enum": [
+        "SSN",
+        "EIN",
+        "ITIN"
+      ]
+    }
+  }
+}

@@ -1,0 +1,626 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/q2/main/json-schema/q2-customer-object200-response-schema.json",
+  "title": "CustomerObject200Response",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/q2-helix-api-openapi.yml#/components/schemas/CustomerObject200Response",
+  "allOf": [
+    {
+      "$ref": "#/$defs/0"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "accessTypeCode": {
+              "allOf": [
+                {
+                  "deprecated": true
+                },
+                {
+                  "$ref": "#/$defs/accessTypeCode"
+                }
+              ]
+            },
+            "accounts": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "$ref": "#/$defs/data"
+              },
+              "description": "An array of <a href=\"https://docs.helix.q2.com/docs/account\">account</a> objects owned by the customer"
+            },
+            "addresses": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "$ref": "#/$defs/AddressItem"
+              }
+            },
+            "attestationDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "attesterName": {
+              "type": "string",
+              "maxLength": 50
+            },
+            "attesterTitle": {
+              "type": "string",
+              "maxLength": 50,
+              "description": "Title of the person attesting to the business' information"
+            },
+            "birthDate": {
+              "allOf": [
+                {
+                  "description": "Format: yyyy-MM-ddT00:00:00.000+00:00\nExample: `1976-07-04T00:00:00.000+00:00`\n"
+                },
+                {
+                  "$ref": "#/$defs/DateTimeProperty"
+                }
+              ]
+            },
+            "businessDescription": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "businessLegalName": {
+              "type": "string",
+              "maxLength": 300
+            },
+            "businessNameOnCard": {
+              "type": "string",
+              "maxLength": 26
+            },
+            "businessWebsite": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "cards": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "$ref": "#/$defs/data"
+              }
+            },
+            "customerCount": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "createdDate": {
+              "allOf": [
+                {
+                  "description": "Date the customer was created. **Note: a customer may have been created but is not available for use, depending on the `isLocked` or `status` properties.**\n"
+                },
+                {
+                  "$ref": "#/$defs/lastContactDate"
+                }
+              ]
+            },
+            "culture": {
+              "$ref": "#/$defs/CultureProperty"
+            },
+            "customField1": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "customField2": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "customField3": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "customField4": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "customField5": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "customerId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "doingBusinessAs": {
+              "type": "string",
+              "maxLength": 200
+            },
+            "deceasedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "documentsAcceptedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "driversLicenseExpireDate": {
+              "$ref": "#/$defs/DateTimeProperty"
+            },
+            "driversLicenseIssueDate": {
+              "$ref": "#/$defs/DateTimeProperty"
+            },
+            "driversLicenseNumber": {
+              "type": "string"
+            },
+            "driversLicenseNumberMasked": {
+              "type": "string"
+            },
+            "driversLicenseState": {
+              "$ref": "#/$defs/FormationState"
+            },
+            "emailAddress": {
+              "type": "string"
+            },
+            "exemptFromBeneficialOwnershipReasonType": {
+              "$ref": "#/$defs/ExemptFromBeneficialOwnershipReasonType"
+            },
+            "externalAccounts": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "$ref": "#/$defs/data"
+              }
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "foreignDocumentCountryCode": {
+              "type": "string",
+              "maxLength": 3
+            },
+            "foreignDocumentExpirationDate": {
+              "$ref": "#/$defs/DateTimeProperty"
+            },
+            "foreignDocumentNumber": {
+              "type": "string",
+              "maxLength": 30
+            },
+            "foreignDocumentNumberMasked": {
+              "type": "string"
+            },
+            "foreignDocumentType": {
+              "$ref": "#/$defs/ForeignDocumentType"
+            },
+            "formationDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "formationState": {
+              "$ref": "#/$defs/FormationState"
+            },
+            "fraudStatus": {
+              "type": "string",
+              "description": "Customer's status in regards to the 'fraud' customer verification module.\n",
+              "enum": [
+                "",
+                "Verified",
+                "Denied",
+                "Automated Review",
+                "Manual Review",
+                "Resubmit"
+              ]
+            },
+            "gender": {
+              "$ref": "#/$defs/GenderProperty"
+            },
+            "idStatus": {
+              "$ref": "#/$defs/status"
+            },
+            "industryClassificationCodeId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "iqStatus": {
+              "type": "string",
+              "enum": [
+                "",
+                "Verified",
+                "Denied",
+                "Automated Review",
+                "Manual Review",
+                "Resubmit"
+              ]
+            },
+            "isActive": {
+              "type": "boolean",
+              "description": "Use `status` instead.",
+              "deprecated": true
+            },
+            "isBusiness": {
+              "type": "boolean"
+            },
+            "isDocumentsAccepted": {
+              "type": "boolean"
+            },
+            "isExemptFromBeneficialOwnership": {
+              "type": "boolean"
+            },
+            "isLocked": {
+              "type": "boolean"
+            },
+            "isMinor": {
+              "type": "boolean"
+            },
+            "isOptedInToBankCommunication": {
+              "type": "boolean"
+            },
+            "isRelianceAgreement": {
+              "type": "boolean"
+            },
+            "isSubjectToBackupWithholding": {
+              "type": "boolean"
+            },
+            "isTaxExempt": {
+              "type": "boolean"
+            },
+            "kybStatus": {
+              "type": "string",
+              "enum": [
+                "Initiated",
+                "Manual Review",
+                "Verified",
+                "Denied",
+                "Expired",
+                "Deceased",
+                "Archived",
+                "Automated Review"
+              ]
+            },
+            "kybStatusDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "kycStatus": {
+              "type": "string",
+              "enum": [
+                "",
+                "Verified",
+                "Denied",
+                "Automated Review",
+                "Manual Review",
+                "Resubmit"
+              ]
+            },
+            "lastContactDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "lastContactType": {
+              "$ref": "#/$defs/LastContactType"
+            },
+            "lastModifiedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "legalEntityType": {
+              "type": "string",
+              "enum": [
+                "Individual",
+                "SingleMemberLLC",
+                "SCorporation",
+                "CCorporation",
+                "SoleProprietorship",
+                "NonProfit",
+                "Association",
+                "Partnership",
+                "LimitedLiabilityCompany",
+                "LimitedLiabilityPartnership",
+                "RevocableTrust",
+                "IrrevocableTrust",
+                "FinancialInstitutionOther",
+                "Estate",
+                "Trust",
+                "Church",
+                "Conservator",
+                "Guardianship",
+                "Government",
+                "Cooperative",
+                "BCorporation",
+                "TottenTrustPOD",
+                "LimitedPartnership",
+                "GeneralPartnership",
+                "GovernmentDepartment",
+                "GovernmentAgency",
+                "GovernmentAuthority",
+                "GovernmentNonCommercialNonUSDepartmentOrAgency",
+                "GovernmentOther",
+                "RegulatedFinancialInstitution",
+                "RegulatedBankLoanHoldingsCompany",
+                "RegulatedSavingsAndLoanHoldingCompany",
+                "ForeignFinancialInstitutionRegulatorKeepsUBOInfo"
+              ]
+            },
+            "lockedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "lockedReason": {
+              "type": "string"
+            },
+            "middleName": {
+              "type": "string"
+            },
+            "ofacStatus": {
+              "type": "string",
+              "enum": [
+                "",
+                "Verified",
+                "Denied",
+                "Automated Review",
+                "Manual Review",
+                "Resubmit"
+              ]
+            },
+            "passportCountry": {
+              "type": "string"
+            },
+            "passportExpireDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "passportIssueDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "passportNumber": {
+              "type": "string"
+            },
+            "passportNumberMasked": {
+              "type": "string"
+            },
+            "phones": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "$ref": "#/$defs/PhoneItem"
+              }
+            },
+            "preferredName": {
+              "type": "string",
+              "maxLength": 21
+            },
+            "qualiFileStatus": {
+              "type": "string",
+              "deprecated": true
+            },
+            "residencyStatusType": {
+              "$ref": "#/$defs/ResidencyStatusType"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "Active",
+                "Initiated",
+                "Manual Review",
+                "Verified",
+                "Denied",
+                "Expired",
+                "Archived",
+                "Deceased",
+                "Automated Review",
+                "Resubmit"
+              ]
+            },
+            "suffix": {
+              "type": "string"
+            },
+            "tag": {
+              "type": "string"
+            },
+            "taxId": {
+              "$ref": "#/$defs/TaxId"
+            },
+            "taxIdMasked": {
+              "type": "string"
+            },
+            "taxIdType": {
+              "$ref": "#/$defs/TaxIdType"
+            },
+            "usePreferredNameOnCard": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "AddressItem": {
+      "type": "object",
+      "required": [
+        "addressLine1",
+        "addressType",
+        "city",
+        "country",
+        "postalCode",
+        "state"
+      ],
+      "properties": {
+        "addressLine1": {
+          "$ref": "#/$defs/AddressLine"
+        },
+        "addressLine2": {
+          "$ref": "#/$defs/AddressLine"
+        },
+        "addressLine3": {
+          "$ref": "#/$defs/AddressLine"
+        },
+        "addressLine4": {
+          "$ref": "#/$defs/AddressLine"
+        },
+        "addressType": {
+          "type": "string",
+          "enum": [
+            "Individual",
+            "Mailing",
+            "PrimaryBusiness",
+            "Business",
+            "Registered",
+            "TaxFormMailing"
+          ]
+        },
+        "city": {
+          "$ref": "#/$defs/CityProperty"
+        },
+        "country": {
+          "$ref": "#/$defs/CountryProperty"
+        },
+        "isActive": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "postalCode": {
+          "$ref": "#/$defs/PostalCode"
+        },
+        "state": {
+          "$ref": "#/$defs/FormationState"
+        }
+      }
+    },
+    "AddressLine": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "CityProperty": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "CountryProperty": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "CultureProperty": {
+      "type": "string",
+      "enum": [
+        "en-US",
+        "es-US"
+      ],
+      "description": "Accepted values vary by program:\n  - `en-US`: English\n  - `es-US`: Spanish\n"
+    },
+    "DateTimeProperty": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ExemptFromBeneficialOwnershipReasonType": {
+      "type": "string",
+      "enum": [
+        "UsStockExchangeTradedEntity",
+        "CharityOrNonProfitEntity",
+        "PublicAccountingFirmRegisteredUnderSection102",
+        "UsStateRegulatedBank",
+        "UsRegulatedInsuranceCompany",
+        "UsRegulatedFinancialInstitution",
+        "UsFederalGovernmentAgency",
+        "UsStateGovernmentAgency",
+        "UsLocalGovernmentAgency",
+        "NonUsGovernmentAgency",
+        "BankHoldingCompany",
+        "SavingsAndLoanHoldingCompany",
+        "FinancialMarketUtility",
+        "NonUsEntityOpeningAPrivateBankingAccount",
+        "ForeignFinancialInstitution",
+        "ClassOfSecuritiesIssuer",
+        "SecCurrentRegisteredFirm",
+        "CommodityFuturesTradingCommissionRegisteredEntity",
+        "ExcludedPooledInvestmentVehicle",
+        "NonExcludedPooledInvestmentVehicle",
+        "UsStockExchangeMajorityEquityEntity"
+      ]
+    },
+    "ForeignDocumentType": {
+      "type": "string",
+      "enum": [
+        "DriversLicense",
+        "ConsularIdCard",
+        "Passport",
+        "PermanentResidentCard",
+        "EmploymentAuthorizationCard",
+        "VoterRegistrationCard",
+        "IdentificationCard"
+      ]
+    },
+    "FormationState": {
+      "type": "string",
+      "maxLength": 2
+    },
+    "GenderProperty": {
+      "type": "string",
+      "enum": [
+        "M",
+        "F",
+        "U"
+      ]
+    },
+    "HelixId": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1
+    },
+    "LastContactType": {
+      "type": "string",
+      "enum": [
+        "Log In",
+        "Phone",
+        "Email",
+        "Chat"
+      ]
+    },
+    "PhoneItem": {
+      "type": "object",
+      "required": [
+        "number",
+        "phoneType"
+      ],
+      "properties": {
+        "isActive": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "number": {
+          "type": "string"
+        },
+        "phoneType": {
+          "type": "string",
+          "enum": [
+            "Home",
+            "Mobile",
+            "Office"
+          ]
+        }
+      }
+    },
+    "PostalCode": {
+      "type": "string",
+      "maxLength": 9
+    },
+    "ResidencyStatusType": {
+      "type": "string",
+      "enum": [
+        "UsCitizen",
+        "ResidentAlien",
+        "NonResidentAlien"
+      ]
+    },
+    "TaxId": {
+      "type": "string",
+      "maxLength": 30,
+      "description": "No formatting (no dashes, spaces, etc)."
+    },
+    "TaxIdType": {
+      "type": "string",
+      "enum": [
+        "SSN",
+        "EIN",
+        "ITIN"
+      ]
+    }
+  }
+}

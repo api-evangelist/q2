@@ -1,6 +1,7 @@
 generated: '2026-07-20'
 method: searched
 source: https://docs.helix.q2.com/reference/rate-limiting
+name: Q2 API Rate Limits
 scope: per API Key
 rate_limits:
 - limit_count: 15

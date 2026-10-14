@@ -1,4 +1,5 @@
 aid: q2
+
 deliveryModel:
   model: unknown
   open_source: false
@@ -10,6 +11,7 @@ deliveryModel:
   - none
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: unknown
   onboarding: unknown
@@ -25,30 +27,37 @@ accessModel:
   - sandbox
   generated: '2026-09-03'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/q2.png
+
 name: Q2
-description: >-
-  Q2 Holdings is a financial services software company that provides digital
-  banking, lending, and embedded finance solutions to banks, credit unions, and
-  fintechs. Its embedded finance platform, Helix by Q2 (formerly CorePro /
-  Cambr), exposes a REST API that lets developers incorporate real,
-  FDIC-insured savings and checking accounts, cards, transfers, and ACH into
-  their own applications. The Helix API covers account, customer, card,
-  external-account, transfer, transaction, statement, and program management,
-  with a real-time Events Bus, SFTP batch files, and an administrative web
-  application. Q2 serves over 1,000 financial institutions and 10M+ digital
-  banking end users.
+
+description: Q2 Holdings is a financial services software company that provides digital banking, lending, and embedded finance solutions to banks,
+  credit unions, and fintechs. Its embedded finance platform, Helix by Q2 (formerly CorePro / Cambr), exposes a REST API that lets developers
+  incorporate real, FDIC-insured savings and checking accounts, cards, transfers, and ACH into their own applications. The Helix API covers account,
+  customer, card, external-account, transfer, transaction, statement, and program management, with a real-time Events Bus, SFTP batch files, and
+  an administrative web application. Q2 serves over 1,000 financial institutions and 10M+ digital banking end users.
+
 url: https://raw.githubusercontent.com/api-evangelist/q2/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: vc-portfolio
+
 x-backed-by:
 - battery-ventures
 - gv
+
 x-tier: profiled
+
 x-tier-reason: portfolio-lead
+
 specificationVersion: '0.23'
+
 created: '2026-07-17'
+
 modified: '2026-10-06'
+
 tags:
 - Company
 - Financial Services
@@ -61,6 +70,7 @@ tags:
 - Payments
 - ACH
 - FDIC
+
 tags_raw:
 - Company
 - Financial Services
@@ -74,62 +84,30 @@ tags_raw:
 - ACH
 - FDIC
 - Financial-Services
-apis:
-- name: Helix by Q2 API
-  description: >-
-    The Helix by Q2 REST API lets developers incorporate real FDIC-insured
-    savings and/or checking accounts into their applications, including
-    accounts, customers (individual and business), cards, card controls,
-    external accounts, transfers, ACH, wires, transactions, statements, fees,
-    and programs. Authentication is HTTP Basic (API Key + Secret). A real-time
-    Events Bus delivers account, card, check, and fraud events. JSON only.
-  humanURL: https://docs.helix.q2.com
-  baseURL: https://api.helix.q2.com
-  tags:
-  - Banking
-  - Embedded Finance
-  - Account
-  - Cards
-  - ACH
-  - Transfers
-  tags_raw:
-  - Banking
-  - Embedded Finance
-  - Accounts
-  - Cards
-  - ACH
-  - Transfers
-  properties:
-  - type: Documentation
-    url: https://docs.helix.q2.com
-  - type: APIReference
-    url: https://docs.helix.q2.com/reference
-  - type: Quickstart
-    url: https://docs.helix.q2.com/reference/quickstart
-  - type: Authentication
-    url: authentication/q2-authentication.yml
-  - type: RateLimits
-    url: rate-limits/q2-rate-limits.yml
-  - type: ErrorCatalog
-    url: errors/q2-error-codes.yml
-  - type: Sandbox
-    url: sandbox/q2-sandbox.yml
-  - type: Conventions
-    url: conventions/q2-conventions.yml
-  - type: Lifecycle
-    url: lifecycle/q2-lifecycle.yml
-  - type: DataModel
-    url: data-model/q2-data-model.yml
-  - type: Conformance
-    url: conformance/q2-conformance.yml
-  - type: Webhooks
-    url: asyncapi/q2-events-webhooks.yml
-  - type: X-MCPServerCandidate
-    url: mcp/q2-mcp.yml
-    note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
-  - type: LLMsTxt
-    url: llms/q2-llms.txt
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
+
 common:
+- type: AgenticAccess
+  url: agentic-access/q2-agentic-access.yml
+- type: Spectral
+  url: rules/q2-rules.yml
+- type: JSONLD
+  url: json-ld/q2-context.jsonld
+- type: Vocabulary
+  url: vocabulary/q2-vocabulary.yml
+- type: ErrorCatalog
+  url: errors/q2-problem-types.yml
+- type: Hosts
+  url: hosts/q2-hosts.yml
+- type: Vendors
+  url: vendors/q2-vendors.yml
+- type: Newsroom
+  url: https://www.q2.com/company/news
 - type: RateLimits
   url: rate-limits/q2-rate-limits.yml
 - url: https://www.q2.com/blog/rss.xml
@@ -170,14 +148,88 @@ common:
   url: skills/_index.yml
 - type: X-MCPServerCandidate
   url: mcp/q2-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-- FN: APIs.json
-  email: info@apis.io
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published
+    API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting
+    the artifact-type surfaces with a server that does not exist.'
+
+apis:
+- name: Helix by Q2 API
+  description: The Helix by Q2 REST API lets developers incorporate real FDIC-insured savings and/or checking accounts into their applications,
+    including accounts, customers (individual and business), cards, card controls, external accounts, transfers, ACH, wires, transactions, statements,
+    fees, and programs. Authentication is HTTP Basic (API Key + Secret). A real-time Events Bus delivers account, card, check, and fraud events.
+    JSON only.
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Banking
+  - Embedded Finance
+  - Account
+  - Cards
+  - ACH
+  - Transfers
+  tags_raw:
+  - Banking
+  - Embedded Finance
+  - Accounts
+  - Cards
+  - ACH
+  - Transfers
+  properties:
+  - url: openapi/q2-helix-api-openapi.yml
+    type: OpenAPI
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+    note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published
+      API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting
+      the artifact-type surfaces with a server that does not exist.'
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+  aid: q2:helix-by-q2-api
+
 x-enrichment:
   date: '2026-07-20'
   status: enriched
   artifacts_added: 16
   pass: local-v1
+
+x-readme-harvest:
+  date: '2026-10-14'
+  ops: 137
+  tool: harvest-readme-openapi.py
+  portal: https://docs.helix.q2.com

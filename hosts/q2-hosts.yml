@@ -1,0 +1,70 @@
+generated: '2026-10-14'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 5
+  own: 5
+  other_domain: 0
+  platform: 0
+  roles:
+  - api
+  - docs
+  - portal
+  - status
+  - website
+hosts:
+- host: api.helix.q2.com
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: q2.com
+  role: api
+  relation: own
+- host: docs.helix.q2.com
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - Documentation
+  - APIReference
+  - GettingStarted
+  serves:
+  - docs
+  registrable_domain: q2.com
+  role: docs
+  relation: own
+- host: helix.q2.com
+  found_by:
+  - pointer
+  types:
+  - DeveloperPortal
+  - Support
+  serves: []
+  registrable_domain: q2.com
+  role: portal
+  relation: own
+- host: status.helix.q2.com
+  found_by:
+  - pointer
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: q2.com
+  role: status
+  relation: own
+- host: www.q2.com
+  found_by:
+  - pointer
+  types:
+  - BlogRSS
+  - Website
+  - Blog
+  - PrivacyPolicy
+  - Security
+  serves: []
+  registrable_domain: q2.com
+  role: website
+  relation: own

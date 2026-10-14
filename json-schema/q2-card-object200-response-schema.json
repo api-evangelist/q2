@@ -1,0 +1,392 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/q2/main/json-schema/q2-card-object200-response-schema.json",
+  "title": "CardObject200Response",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/q2-helix-api-openapi.yml#/components/schemas/CardObject200Response",
+  "allOf": [
+    {
+      "$ref": "#/$defs/0"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "accounts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "accountBalance": {
+                    "type": "number",
+                    "format": "decimal"
+                  },
+                  "accountId": {
+                    "$ref": "#/$defs/HelixId"
+                  },
+                  "accountNumberMasked": {
+                    "type": "string"
+                  },
+                  "availableBalance": {
+                    "type": "number",
+                    "format": "decimal"
+                  },
+                  "balanceLastModifiedDate": {
+                    "$ref": "#/$defs/lastContactDate"
+                  },
+                  "cardPriority": {
+                    "$ref": "#/$defs/CardPriority"
+                  },
+                  "customerId": {
+                    "$ref": "#/$defs/HelixId"
+                  },
+                  "lastModifiedDate": {
+                    "$ref": "#/$defs/lastContactDate"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "pendingBalance": {
+                    "type": "number",
+                    "format": "decimal"
+                  },
+                  "status": {
+                    "$ref": "#/$defs/status"
+                  },
+                  "tag": {
+                    "$ref": "#/$defs/TagProperty"
+                  },
+                  "type": {
+                    "$ref": "#/$defs/type"
+                  }
+                }
+              }
+            },
+            "archivedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "binId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "cardCarrierMessage": {
+              "type": "string",
+              "description": "Identifier used uniquely by various card production facilities for mapping card configurations.\n"
+            },
+            "cardDesignIdentificationNumber": {
+              "type": "string",
+              "description": "Identifier used uniquely by various card production facilities for mapping card configurations.\n"
+            },
+            "cardHolderCustomerId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "cardId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "cardNumberMasked": {
+              "type": "string"
+            },
+            "cardVendorUniqueData": {
+              "type": "string",
+              "description": "Identifier used uniquely by various card production facilities for mapping card configurations.\n"
+            },
+            "createdDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "customerId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "deniedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "digitalWalletTokens": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "device": {
+                    "type": "object",
+                    "properties": {
+                      "deviceId": {
+                        "type": "string"
+                      },
+                      "deviceIpAddress": {
+                        "type": "string"
+                      },
+                      "deviceLanguageCode": {
+                        "type": "string"
+                      },
+                      "deviceLocation": {
+                        "type": "string"
+                      },
+                      "deviceName": {
+                        "type": "string"
+                      },
+                      "deviceNumber": {
+                        "type": "string"
+                      },
+                      "deviceType": {
+                        "type": "string",
+                        "enum": [
+                          "Card",
+                          "MobilePhone",
+                          "Tablet",
+                          "Watch",
+                          "MobileDevice",
+                          "FashionAccessory",
+                          "HomeAppliance",
+                          "KeyFob",
+                          "MediaOrGamingDevice",
+                          "MobileDeviceAccessory",
+                          "PCOrLaptop",
+                          "Vehicle",
+                          "UnknownOther"
+                        ]
+                      }
+                    }
+                  },
+                  "isDeviceProvisioned": {
+                    "type": "boolean"
+                  },
+                  "panReferenceId": {
+                    "type": "string"
+                  },
+                  "token": {
+                    "type": "string"
+                  },
+                  "tokenReferenceId": {
+                    "type": "string"
+                  },
+                  "tokenRequestorId": {
+                    "type": "string",
+                    "enum": [
+                      "40010030273",
+                      "40010075001",
+                      "40010043095",
+                      "40010075338"
+                    ]
+                  },
+                  "tokenRequestorName": {
+                    "type": "string",
+                    "enum": [
+                      "ApplePay",
+                      "GooglePay",
+                      "SamsungPay",
+                      "VisaCheckout"
+                    ]
+                  },
+                  "tokenStatus": {
+                    "type": "string",
+                    "enum": [
+                      "ActiveForPayment",
+                      "Initiated",
+                      "SuspendedTemporarily",
+                      "DeactivatedPermanently"
+                    ]
+                  },
+                  "tokenType": {
+                    "type": "string",
+                    "enum": [
+                      "Card on file",
+                      "Secure element",
+                      "Cloud based payment/HCE",
+                      "E-Commerce Enabler"
+                    ]
+                  },
+                  "walletInformation": {
+                    "type": "object",
+                    "properties": {
+                      "panSource": {
+                        "type": "string",
+                        "enum": [
+                          "KeyEntered",
+                          "OnFile",
+                          "MobileBankingApp"
+                        ]
+                      },
+                      "walletAccountId": {
+                        "type": "string"
+                      },
+                      "walletEmailAddressHashed": {
+                        "type": "string"
+                      },
+                      "walletProviderDeviceScore": {
+                        "type": "string"
+                      },
+                      "walletProviderReasonCodes": {
+                        "type": "string"
+                      },
+                      "walletProviderRiskAssessmentType": {
+                        "type": "string",
+                        "enum": [
+                          "Approved",
+                          "ApprovedConditionally",
+                          "NotApproved"
+                        ]
+                      },
+                      "walletProviderRiskAssessmentVersion": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "expireMonth": {
+              "$ref": "#/$defs/MonthProperty"
+            },
+            "expireYear": {
+              "$ref": "#/$defs/YearProperty"
+            },
+            "expiredDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "isDigitalOnly": {
+              "type": "boolean"
+            },
+            "isDualIssuanceSinglePAN": {
+              "type": "boolean"
+            },
+            "isPINSet": {
+              "type": "boolean"
+            },
+            "lastModifiedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "lockReasonTypeCode": {
+              "type": "string",
+              "enum": [
+                "UNK",
+                "STL",
+                "LST",
+                "FRD",
+                "DMG",
+                "ADM",
+                "TMP",
+                "PIN"
+              ]
+            },
+            "lockTypeCode": {
+              "type": "string",
+              "enum": [
+                "UNL",
+                "CST",
+                "SYS"
+              ]
+            },
+            "middleName": {
+              "type": "string"
+            },
+            "nameOnCard": {
+              "type": "string"
+            },
+            "nickName": {
+              "type": "string"
+            },
+            "photoImageId": {
+              "type": "string",
+              "description": "Identifier used uniquely by various card production facilities for mapping card configurations.\n"
+            },
+            "preferredName": {
+              "type": "string"
+            },
+            "primaryAccountId": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "qualifierCode": {
+              "$ref": "#/$defs/CardQualifierCode"
+            },
+            "reissuedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "renewalOverride": {
+              "$ref": "#/$defs/RenewalOverride"
+            },
+            "renewalOverrideReason": {
+              "type": "string"
+            },
+            "requestedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "Initiated",
+                "Pending",
+                "PendingVerification",
+                "Verified",
+                "Denied",
+                "Expired",
+                "Archived",
+                "Reissued",
+                "Hotlisted",
+                "ReissuedPendingVerification",
+                "AutoReissuedPendingVerification"
+              ]
+            },
+            "tag": {
+              "$ref": "#/$defs/TagProperty"
+            },
+            "typeCode": {
+              "type": "string",
+              "enum": [
+                "DBT"
+              ]
+            },
+            "vendorTypeCode": {
+              "$ref": "#/$defs/CardVendorTypeCode"
+            },
+            "verifiedDate": {
+              "$ref": "#/$defs/lastContactDate"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "CardPriority": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "CardQualifierCode": {
+      "type": "string"
+    },
+    "CardVendorTypeCode": {
+      "type": "string"
+    },
+    "HelixId": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1
+    },
+    "MonthProperty": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 12
+    },
+    "RenewalOverride": {
+      "type": "string"
+    },
+    "TagProperty": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "YearProperty": {
+      "type": "integer",
+      "minimum": 1900,
+      "maximum": 9999
+    }
+  }
+}

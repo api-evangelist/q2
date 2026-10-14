@@ -1,0 +1,346 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/q2/main/json-schema/q2-program-get200-response-schema.json",
+  "title": "ProgramGet200Response",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/q2-helix-api-openapi.yml#/components/schemas/ProgramGet200Response",
+  "allOf": [
+    {
+      "$ref": "#/$defs/0"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "accounts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "accountBalance": {
+                    "type": "number",
+                    "format": "decimal"
+                  },
+                  "accountId": {
+                    "$ref": "#/$defs/HelixId"
+                  },
+                  "accountNumber": {
+                    "type": "string"
+                  },
+                  "accountNumberMasked": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "isActive": {
+                    "type": "boolean"
+                  },
+                  "programAccountId": {
+                    "$ref": "#/$defs/HelixId"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "bank": {
+              "type": "object",
+              "properties": {
+                "maintenanceEndDate": {
+                  "$ref": "#/$defs/lastContactDate"
+                },
+                "maintenanceStartDate": {
+                  "$ref": "#/$defs/lastContactDate"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "timeZone": {
+                  "type": "string"
+                },
+                "webUrl": {
+                  "type": "string"
+                }
+              }
+            },
+            "bins": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "bankIdentificationNumber": {
+                    "type": "string"
+                  },
+                  "binId": {
+                    "$ref": "#/$defs/HelixId"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "checkingProducts": {
+              "type": "object",
+              "deprecated": true
+            },
+            "decimalCount": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "externalAccounts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "accountNumber": {
+                    "type": "string"
+                  },
+                  "accountNumberMasked": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "externalAccountId": {
+                    "$ref": "#/$defs/HelixId"
+                  },
+                  "isActive": {
+                    "type": "boolean"
+                  },
+                  "nachaName": {
+                    "type": "string"
+                  },
+                  "programExternalAccountId": {
+                    "$ref": "#/$defs/HelixId"
+                  },
+                  "routingNumber": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "filledDate": {
+              "$ref": "#/$defs/lastContactDate"
+            },
+            "isDebitRewardsEnabled": {
+              "type": "boolean"
+            },
+            "isInterestEnabled": {
+              "type": "boolean"
+            },
+            "isInternalToInternalTransferEnabled": {
+              "type": "boolean"
+            },
+            "isRecurringContributionEnabled": {
+              "type": "boolean"
+            },
+            "name": {
+              "type": "string"
+            },
+            "perProgramDailyDepositLimit": {
+              "$ref": "#/$defs/perUserDailyDepositLimit"
+            },
+            "perProgramDailyWithdrawLimit": {
+              "$ref": "#/$defs/perUserDailyDepositLimit"
+            },
+            "perTransactionDepositLimit": {
+              "$ref": "#/$defs/perUserDailyDepositLimit"
+            },
+            "perTransactionWithdrawLimit": {
+              "$ref": "#/$defs/perUserDailyDepositLimit"
+            },
+            "perUserAccountCountMax": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "perUserDailyDepositLimit": {
+              "type": "object",
+              "properties": {
+                "maximumAmount": {
+                  "type": "number",
+                  "format": "decimal"
+                },
+                "minimumAmount": {
+                  "type": "number",
+                  "format": "decimal"
+                }
+              }
+            },
+            "perUserDailyWithdrawLimit": {
+              "$ref": "#/$defs/perUserDailyDepositLimit"
+            },
+            "perUserExternalAccountCountMax": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "perUserMonthlyDepositLimit": {
+              "$ref": "#/$defs/perUserDailyDepositLimit"
+            },
+            "perUserMonthlyWithdrawLimit": {
+              "$ref": "#/$defs/perUserDailyDepositLimit"
+            },
+            "perUserTotalAccountBalanceMax": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "prepaidProducts": {
+              "type": "object",
+              "deprecated": true
+            },
+            "products": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "balanceLimit": {
+                    "$ref": "#/$defs/perUserDailyDepositLimit"
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "Prepaid",
+                      "Savings",
+                      "Checking",
+                      "Time Deposit",
+                      "Ecode"
+                    ]
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "interestRates": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "apr": {
+                          "type": "number",
+                          "format": "decimal"
+                        },
+                        "apy": {
+                          "type": "number",
+                          "format": "decimal"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "effectiveDate": {
+                          "$ref": "#/$defs/lastContactDate"
+                        },
+                        "expireDate": {
+                          "$ref": "#/$defs/lastContactDate"
+                        },
+                        "maximumAmount": {
+                          "type": "number",
+                          "format": "decimal"
+                        },
+                        "minimumAmount": {
+                          "type": "number",
+                          "format": "decimal"
+                        },
+                        "productId": {
+                          "$ref": "#/$defs/HelixId"
+                        },
+                        "rateEffectiveDate": {
+                          "$ref": "#/$defs/lastContactDate"
+                        },
+                        "rateExpireDate": {
+                          "$ref": "#/$defs/lastContactDate"
+                        },
+                        "tier": {
+                          "$ref": "#/$defs/HelixId"
+                        }
+                      }
+                    }
+                  },
+                  "isExternalWithdrawEnabled": {
+                    "type": "boolean"
+                  },
+                  "isInterestEnabled": {
+                    "type": "boolean"
+                  },
+                  "isRecurringContributionEnabled": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "perMonthRegDTransactionCountMaximum": {
+                    "$ref": "#/$defs/HelixId"
+                  },
+                  "perMonthRegDTransactionCountWithoutFee": {
+                    "$ref": "#/$defs/HelixId"
+                  },
+                  "perTransactionDepositLimit": {
+                    "$ref": "#/$defs/perUserDailyDepositLimit"
+                  },
+                  "perTransactionWithdrawLimit": {
+                    "$ref": "#/$defs/perUserDailyDepositLimit"
+                  },
+                  "productId": {
+                    "$ref": "#/$defs/HelixId"
+                  },
+                  "type": {
+                    "$ref": "#/$defs/type"
+                  }
+                }
+              }
+            },
+            "publicKeyAlgorithms": {
+              "type": "string"
+            },
+            "regDFeeAmount": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "regDMonthlyTransactionWithdrawCountMax": {
+              "$ref": "#/$defs/HelixId"
+            },
+            "savingsProducts": {
+              "type": "object",
+              "deprecated": true
+            },
+            "timeZone": {
+              "type": "string"
+            },
+            "validAccountTypes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/type"
+              }
+            },
+            "validProductTypes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/type"
+              }
+            },
+            "verificationType": {
+              "type": "string"
+            },
+            "website": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "HelixId": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1
+    }
+  }
+}

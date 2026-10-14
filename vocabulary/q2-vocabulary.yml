@@ -1,0 +1,291 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/q2-helix-api-openapi.yml
+vocabulary:
+  name: Q2 Domain Vocabulary
+  description: 'Terms declared by Q2''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions. Derived,
+    not authored.'
+  version: '2026-10-14'
+  terms:
+  - term: Account
+    definition: Endpoints for the account object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Card
+    definition: Endpoints for the card object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Account - Entitlement
+    definition: Endpoints related to account entitlements
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Account - Hold
+    definition: Endpoints related to account holds
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Account - Limit
+    definition: Endpoints related to account limits
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Account - Stop Pay
+    definition: Endpoints related to account stop payments
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Account Beneficiary
+    definition: Endpoints for the accountBeneficiary object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Bank Document
+    definition: Endpoints for the bankDocument object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Card - Fraud Text Alert
+    definition: Endpoints related to fraud text alerts
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Card - Limit
+    definition: Endpoints related to card limits
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Card - Mock
+    definition: Endpoints related to simulating card workflows
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Card - Provision
+    definition: Endpoints related to card provisioning
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Card - Risk Factor
+    definition: Endpoints related to card risk factors
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Card Control
+    definition: Endpoints for the cardControl object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Customer
+    definition: Endpoints for the customer object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Customer - Due Diligence
+    definition: Endpoints related to customer due diligence
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Customer Beneficiary
+    definition: Endpoints for the customerBeneficiary object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Customer Document
+    definition: Endpoints for the customerDocument object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Customer Relationship
+    definition: Endpoints for the customerRelationship object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: External Account
+    definition: Endpoints for the externalAccount object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: External Account Document
+    definition: Endpoints for the externalAccountDocument object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Fee
+    definition: Endpoints for the fee object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Program
+    definition: Endpoints for the program object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Statement
+    definition: Endpoints for the statement object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Transaction
+    definition: Endpoints for the transaction object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Transfer
+    definition: Endpoints for the transfer object
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Transaction - Wire
+    definition: Endpoints related to wire transactions
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: Transfer - Wire
+    definition: Endpoints related to wire transfer objects
+    tags:
+    - Resource Group
+    source: openapi/q2-helix-api-openapi.yml
+  - term: RecurringContributionType
+    definition: 'Enumeration declared by the contract with values: None, BiWeekly, Monthly.'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/RecurringContributionType
+  - term: CloseReason
+    definition: 'The following values are not enabled by default and must be enabled by Q2: `Consolidating Bank Accounts`, `re-CIP`, `Risk-Related`,
+      `Member Requested`, `Negative Balance (Reopen Eligible)`, `Negative Balance (Reopen Ineligible)`, `ID Theft`, `Account Take Over`, `Dormant`'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/CloseReason
+  - term: CloseReasonNotes
+    definition: Required if `closeReason` is `Other`
+    tags:
+    - Object
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/CloseReasonNotes
+  - term: AccountLockReasonTypeCode
+    definition: '- `UNK`: Unknown - `FRD`: Fraud investigation - `ADM`: Administrative - `TMP`: Temporary - `FRZ`: Freeze - `SUS`: Suspected fraud
+      - `CO`: Credits only - `RTN`: Return risk - `REC`: Recovery - `DED`: Deceased - `DOR`: Dormant'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/AccountLockReasonTypeCode
+  - term: DistributionType
+    definition: 'The method used to distribute the account balance to this beneficiary. Accepted values: Percentage, DescriptionOnly'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/DistributionType
+  - term: CultureProperty
+    definition: 'Accepted values vary by program: - `en-US`: English - `es-US`: Spanish'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/CultureProperty
+  - term: CardClassification
+    definition: 'Enumeration declared by the contract with values: highrisk, lowrisk, businesscard.'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/CardClassification
+  - term: AddressItem
+    definition: 'Object declared by the contract with fields: addressLine1, addressLine2, addressLine3, addressLine4, addressType, city, country,
+      isActive, postalCode, state.'
+    tags:
+    - Object
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/AddressItem
+  - term: CardControlRuleItem
+    definition: 'Object declared by the contract with fields: domestic, entryMethod, international, limit, mccs, merchantGroups, source, tag,
+      usStates.'
+    tags:
+    - Object
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/CardControlRuleItem
+  - term: ForeignDocumentType
+    definition: 'Enumeration declared by the contract with values: DriversLicense, ConsularIdCard, Passport, PermanentResidentCard, EmploymentAuthorizationCard,
+      VoterRegistrationCard, IdentificationCard.'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/ForeignDocumentType
+  - term: GenderProperty
+    definition: 'Enumeration declared by the contract with values: M, F, U.'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/GenderProperty
+  - term: PhoneItem
+    definition: 'Object declared by the contract with fields: isActive, number, phoneType.'
+    tags:
+    - Object
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/PhoneItem
+  - term: ResidencyStatusType
+    definition: 'Enumeration declared by the contract with values: UsCitizen, ResidentAlien, NonResidentAlien.'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/ResidencyStatusType
+  - term: TaxId
+    definition: No formatting (no dashes, spaces, etc).
+    tags:
+    - Object
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/TaxId
+  - term: TaxIdType
+    definition: 'Enumeration declared by the contract with values: SSN, EIN, ITIN.'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/TaxIdType
+  - term: LastContactType
+    definition: 'Enumeration declared by the contract with values: Log In, Phone, Email, Chat.'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/LastContactType
+  - term: ExemptFromBeneficialOwnershipReasonType
+    definition: 'Enumeration declared by the contract with values: UsStockExchangeTradedEntity, CharityOrNonProfitEntity, PublicAccountingFirmRegisteredUnderSection102,
+      UsStateRegulatedBank, UsRegulatedInsuranceCompany, UsRegulatedFinancialInstitution, UsFederalGovernmentAgency, UsStateGovernmentAgency,
+      UsLocalGovernmentAgency, NonUsGovernmentAgency, BankHoldingCompany, SavingsAndLoanHoldingCompany. (9 more)'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/ExemptFromBeneficialOwnershipReasonType
+  - term: ExternalAccountAccessType
+    definition: 'Enumeration declared by the contract with values: FULL, RDLY, ACH, NONE.'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/ExternalAccountAccessType
+  - term: BeneficiaryType
+    definition: 'The type of beneficiary. Accepted values: Individual, Trust, Estate, Charity, NonProfit, Other'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/BeneficiaryType
+  - term: CustomerBeneficiaryAccountAssignment
+    definition: 'Object declared by the contract with fields: accountId, accountLegalName1, accountLegalName2, accountName, accountNumberMasked,
+      accountType, beneficiaryPosition, distributionDescription, distributionPercentage, distributionType, effectiveDate, isActive.'
+    tags:
+    - Object
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/CustomerBeneficiaryAccountAssignment
+  - term: CustomerBeneficiaryAccountAssignmentList
+    definition: 'Object declared by the contract with fields: customerId, customerBeneficiaryId, accountAssignments.'
+    tags:
+    - Object
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/CustomerBeneficiaryAccountAssignmentList
+  - term: CustomerDocumentUploadRequest
+    definition: 'Object declared by the contract with fields: customerId, customField1, customField2, customField3, customField4, customField5,
+      documentContent, documentName, documentType, reasonType, tag.'
+    tags:
+    - Object
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/CustomerDocumentUploadRequest
+  - term: RelationshipType
+    definition: 'Enumeration declared by the contract with values: Signer, Owner, NonTransactional, BeneficialOwner, Trustee, SuccessorTrustee,
+      Guardian, Conservator, Executor, Agent, PowerOfAttorney, Custodian. (2 more)'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/RelationshipType
+  - term: ExternalAccountCreateRequest
+    definition: 'Object declared by the contract with fields: customerId, routingNumber, accountNumber, firstName, lastName, businessName, type,
+      name, nickName, tag, customField1, customField2. (4 more)'
+    tags:
+    - Object
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/ExternalAccountCreateRequest
+  - term: HoldStatusType
+    definition: 'Enumeration declared by the contract with values: Active, Expired, Cancelled, ExpiredCancelled.'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/HoldStatusType
+  - term: StatementType
+    definition: 'Enumeration declared by the contract with values: Monthly, Tax1099INT, Quarterly, Tax1099MISC.'
+    tags:
+    - Enumeration
+    source: openapi/q2-helix-api-openapi.yml#/components/schemas/StatementType
