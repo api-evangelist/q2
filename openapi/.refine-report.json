@@ -1,0 +1,50 @@
+{
+  "provider": "q2",
+  "sources": [
+    "q2-helix-api-openapi.yml"
+  ],
+  "outputs": [
+    "q2-account-api-openapi.yml",
+    "q2-account-entitlement-api-openapi.yml",
+    "q2-account-hold-api-openapi.yml",
+    "q2-account-limit-api-openapi.yml",
+    "q2-account-stop-pay-api-openapi.yml",
+    "q2-account-beneficiary-api-openapi.yml",
+    "q2-bank-document-api-openapi.yml",
+    "q2-card-api-openapi.yml",
+    "q2-card-fraud-text-alert-api-openapi.yml",
+    "q2-card-limit-api-openapi.yml",
+    "q2-card-mock-api-openapi.yml",
+    "q2-card-provision-api-openapi.yml",
+    "q2-card-risk-factor-api-openapi.yml",
+    "q2-card-control-api-openapi.yml",
+    "q2-customer-api-openapi.yml",
+    "q2-customer-due-diligence-api-openapi.yml",
+    "q2-customer-beneficiary-api-openapi.yml",
+    "q2-customer-document-api-openapi.yml",
+    "q2-customer-relationship-api-openapi.yml",
+    "q2-external-account-api-openapi.yml",
+    "q2-external-account-document-api-openapi.yml",
+    "q2-fee-api-openapi.yml",
+    "q2-program-api-openapi.yml",
+    "q2-statement-api-openapi.yml",
+    "q2-transaction-api-openapi.yml",
+    "q2-transaction-wire-api-openapi.yml",
+    "q2-transfer-api-openapi.yml",
+    "q2-transfer-wire-api-openapi.yml"
+  ],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
+  "errors": [],
+  "warnings": [
+    "q2-helix-api-openapi.yml: previously refined output kept for 137 operation(s) no archived document covers (e.g. /account/addEntitlement post, /account/close post, /account/create post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "q2-helix-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: q2-helix-api-openapi.yml",
+    "apis.yml register: written (+28 apis, 28 total)"
+  ],
+  "skipped": []
+}

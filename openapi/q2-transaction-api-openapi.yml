@@ -1,0 +1,809 @@
+openapi: 3.2.0
+info:
+  title: Helix Transaction API
+  version: 3.0.0
+  description: Helix Public API (no customer KYC/IDV). **This spec covers all of Helix 3.x and is subject to change at any time.**
+servers:
+- url: https://sandbox-api.helix.q2.com
+  description: Sandbox server
+- url: https://api.helix.q2.com
+  description: Production server
+security:
+- basicAuth: []
+tags:
+- name: Transaction
+  description: Endpoints for the transaction object
+paths:
+  /transaction/createFee:
+    post:
+      tags:
+      - Transaction
+      summary: Create a fee for a specified customer account
+      description: Create a fee for the given `customerId` and `accountId`. Results in a new transaction retrievable via the /transaction/* endpoints.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/transactioncreateFee
+      operationId: /transaction/createFee
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - accountId
+              - customerId
+              - feeAmount
+              - feeTypeId
+              properties:
+                accountId:
+                  $ref: '#/components/schemas/HelixId'
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                feeAmount:
+                  $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+                feeTypeId:
+                  $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+      responses:
+        '200':
+          description: An <a href="https://docs.helix.q2.com/reference/response-format" target="_blank">envelope</a> whose data node is a <a href="https://docs.helix.q2.com/docs/fee-result" target="_blank">feeResult</a> object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionFeeResult200Response'
+        '400':
+          $ref: '#/paths/~1card~1lock/post/responses/400'
+        '401':
+          $ref: '#/paths/~1card~1lock/post/responses/401'
+        '404':
+          $ref: '#/paths/~1card~1lock/post/responses/404'
+        '405':
+          $ref: '#/paths/~1card~1lock/post/responses/405'
+        '429':
+          $ref: '#/paths/~1card~1lock/post/responses/429'
+  /transaction/get/{customerId}/{transactionId}:
+    get:
+      tags:
+      - Transaction
+      summary: Get transactions
+      description: Retrieve all transactions related to the given `customerId` and `transactionId`. Results are ordered by `settledDate` descending.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/transactionget
+      operationId: transactionGet
+      parameters:
+      - $ref: '#/components/parameters/CustomerIdPath'
+      - name: transactionId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+      - name: retrieveCardMerchantDetails
+        in: query
+        required: false
+        description: Obtain additional card merchant details for card transactions.  **Note:** Use of this parameter may impact endpoint response time and is not subject to standard helix API SLAs and data may be subject to a six (6) month data retention policy.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: An array of <a href="https://docs.helix.q2.com/docs/transaction" target="_blank">transaction</a> objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionArray200Response'
+        '400':
+          $ref: '#/paths/~1card~1lock/post/responses/400'
+        '401':
+          $ref: '#/paths/~1card~1lock/post/responses/401'
+        '404':
+          $ref: '#/paths/~1card~1lock/post/responses/404'
+        '405':
+          $ref: '#/paths/~1card~1lock/post/responses/405'
+        '429':
+          $ref: '#/paths/~1card~1lock/post/responses/429'
+  /transaction/getByTag/{customerId}/{tag}:
+    get:
+      tags:
+      - Transaction
+      summary: Get a transaction(s) via tag
+      description: Retrieve all transactions related to the given `customerId` and `tag`. Results are ordered by `settledDate` descending.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/transactiongetbytag
+      operationId: transactionGetByTag
+      parameters:
+      - $ref: '#/components/parameters/CustomerIdPath'
+      - $ref: '#/components/parameters/TagPath'
+      responses:
+        '200':
+          description: An array of <a href="https://docs.helix.q2.com/docs/transaction" target="_blank">transaction</a> objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionArray200Response'
+        '400':
+          $ref: '#/paths/~1card~1lock/post/responses/400'
+        '401':
+          $ref: '#/paths/~1card~1lock/post/responses/401'
+        '404':
+          $ref: '#/paths/~1card~1lock/post/responses/404'
+        '405':
+          $ref: '#/paths/~1card~1lock/post/responses/405'
+        '429':
+          $ref: '#/paths/~1card~1lock/post/responses/429'
+  /transaction/list/{customerId}/{accountId}/{beginDate}/{endDate}:
+    get:
+      tags:
+      - Transaction
+      summary: List transactions
+      description: Retrieve all transactions restricted by the given parameters. Results are ordered by `createdDate` descending.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/transactionlist
+      operationId: transactionList
+      parameters:
+      - $ref: '#/components/parameters/CustomerIdPath'
+      - $ref: '#/components/parameters/AccountIdPath'
+      - $ref: '#/components/parameters/PageNumber'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/RetrieveCardMerchantDetails'
+      - name: beginDate
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date
+        description: Format is YYYY-MM-DD.
+      - name: endDate
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date
+        description: Format is YYYY-MM-DD
+      - name: requestingCustomerIds
+        in: query
+        required: false
+        description: 'A comma separated list of one or more customerIds who initiated transactions. Only applicable to business accounts. Example: 1234567,3456789'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An array of <a href="https://docs.helix.q2.com/docs/transaction" target="_blank">transaction</a> objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionArray200Response'
+        '400':
+          $ref: '#/paths/~1card~1lock/post/responses/400'
+        '401':
+          $ref: '#/paths/~1card~1lock/post/responses/401'
+        '404':
+          $ref: '#/paths/~1card~1lock/post/responses/404'
+        '405':
+          $ref: '#/paths/~1card~1lock/post/responses/405'
+        '429':
+          $ref: '#/paths/~1card~1lock/post/responses/429'
+  /transaction/setAvailableDate:
+    post:
+      tags:
+      - Transaction
+      summary: Set transaction available date
+      description: Modify the `availableDate` for an ACH transaction forward or backward within the configurable maximum allowed hold days from transaction creation. The new `availableDate` is set to midnight on the provided date in the bank's timezone. Maximum allowed hold days represents business days.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/transactionsetavailabledate
+      operationId: transactionSetAvailableDate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customerId
+              - transactionId
+              - availableDate
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                transactionId:
+                  $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+                availableDate:
+                  type: string
+                  format: date
+                  description: Format is YYYY-MM-DD
+      responses:
+        '200':
+          description: An <a href="https://docs.helix.q2.com/reference/response-format" target="_blank">envelope</a> whose data node is a <a href="https://docs.helix.q2.com/docs/transaction" target="_blank">transaction</a> object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionObject200Response'
+        '400':
+          $ref: '#/paths/~1card~1lock/post/responses/400'
+        '401':
+          $ref: '#/paths/~1card~1lock/post/responses/401'
+        '404':
+          $ref: '#/paths/~1card~1lock/post/responses/404'
+        '405':
+          $ref: '#/paths/~1card~1lock/post/responses/405'
+        '429':
+          $ref: '#/paths/~1card~1lock/post/responses/429'
+  /transaction/setStatus:
+    post:
+      tags:
+      - Transaction
+      summary: Set transaction status
+      description: Modify the `status` for an outbound ACH transaction made via /transfer/create.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/transactionsetstatus
+      operationId: transactionSetStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customerId
+              - transactionId
+              - status
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                transactionId:
+                  $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+                status:
+                  type: string
+                  enum:
+                  - delayed
+                  - initiated
+                  - voided
+      responses:
+        '200':
+          description: An <a href="https://docs.helix.q2.com/reference/response-format" target="_blank">envelope</a> whose data node is a <a href="https://docs.helix.q2.com/docs/transaction" target="_blank">transaction</a> object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionObject200Response'
+        '400':
+          $ref: '#/paths/~1card~1lock/post/responses/400'
+        '401':
+          $ref: '#/paths/~1card~1lock/post/responses/401'
+        '404':
+          $ref: '#/paths/~1card~1lock/post/responses/404'
+        '405':
+          $ref: '#/paths/~1card~1lock/post/responses/405'
+        '429':
+          $ref: '#/paths/~1card~1lock/post/responses/429'
+components:
+  parameters:
+    PageSize:
+      name: pageSize
+      in: query
+      required: false
+      description: How many results to return on each page. Maximum is 200.
+      schema:
+        type: integer
+        default: 200
+        minimum: 0
+        maximum: 200
+    TagPath:
+      name: tag
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/TagProperty'
+    CustomerIdPath:
+      name: customerId
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/HelixId'
+    RetrieveCardMerchantDetails:
+      name: retrieveCardMerchantDetails
+      in: query
+      required: false
+      description: Obtain additional card merchant details for card transactions. Only applicable when the transaction is a card transaction.
+      schema:
+        type: boolean
+        default: false
+    PageNumber:
+      name: pageNumber
+      in: query
+      required: false
+      description: Which page of the results to return. Use 0 to get the first page.
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+        maximum: 200
+    AccountIdPath:
+      name: accountId
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/HelixId'
+  schemas:
+    TransactionObject200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              accountId:
+                $ref: '#/components/schemas/HelixId'
+              amount:
+                type: number
+                format: decimal
+              availableDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              cardId:
+                $ref: '#/components/schemas/HelixId'
+              cardMerchantInfo:
+                type: object
+                properties:
+                  merchantCity:
+                    type: string
+                    maxLength: 13
+                  merchantCountryCode:
+                    type: string
+                    maxLength: 2
+                  merchantGroupcode:
+                    type: string
+                    maxLength: 6
+                  merchantId:
+                    type: string
+                    maxLength: 15
+                  merchantLocation:
+                    type: string
+                    maxLength: 23
+                  merchantStateCode:
+                    type: string
+                    maxLength: 2
+                  merchantZipCode:
+                    type: string
+                    maxLength: 9
+              check:
+                type: object
+                properties:
+                  checkAmount:
+                    type: number
+                    format: decimal
+                  checkImages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        downloadUrl:
+                          type: string
+                        imageType:
+                          type: string
+                          enum:
+                          - CheckFront
+                          - CheckBack
+                          - ReturnCheckFront
+                          - ReturnCheckBack
+                  checkNumber:
+                    $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+                  holdCode:
+                    type: string
+                  holdCodeDescription:
+                    type: string
+                  payerAccountNumberMasked:
+                    type: string
+                  payerInstitutionDescription:
+                    type: string
+                  payerRoutingNumber:
+                    type: string
+                  returnReason:
+                    type: string
+                  returnReasonCode:
+                    type: string
+              createdDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              customerId:
+                $ref: '#/components/schemas/HelixId'
+              customField1:
+                type: string
+              depositAvailability:
+                type: object
+                properties:
+                  availabilityAmounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        availableDate:
+                          $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                        effectiveAvailableDate:
+                          $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                        isReleased:
+                          type: boolean
+                        overrideAvailableDate:
+                          $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                        releaseAmount:
+                          type: number
+                          format: decimal
+                        releasedDate:
+                          $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                        remainingAmount:
+                          type: number
+                          format: decimal
+                  availabilityCode:
+                    type: string
+                  totalReleasedAmount:
+                    type: number
+                    format: decimal
+                  totalRemainingAmount:
+                    type: number
+                    format: decimal
+              description:
+                type: string
+              feeCode:
+                type: string
+                enum:
+                - ACH
+                - DAF
+                - IAF
+                - ICF
+                - NSF
+                - RGD
+                - RTN
+              feeDescription:
+                type: string
+              friendlyDescription:
+                type: string
+              institutionName:
+                type: string
+              isCredit:
+                type: boolean
+              isEarlyDirectDeposit:
+                type: boolean
+              isSameDaySettle:
+                type: boolean
+              masterId:
+                $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+              nachaDescription:
+                type: string
+                deprecated: true
+              nachaInfo:
+                type: object
+                properties:
+                  companyDiscretionaryData:
+                    type: string
+                  companyEntryDescription:
+                    type: string
+                  companyIdentification:
+                    type: string
+                  companyName:
+                    type: string
+                  isEarlyDeposit:
+                    type: boolean
+                  nachaSettledDate:
+                    $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                  standardEntryClassCode:
+                    type: string
+              purposeCode:
+                $ref: '#/components/schemas/PurposeCode'
+              requestingCustomerId:
+                $ref: '#/components/schemas/HelixId'
+              returnCode:
+                type: string
+              runningAccountBalance:
+                type: number
+                format: decimal
+              settledDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              statementDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              status:
+                type: string
+                enum:
+                - Initiated
+                - Pending
+                - Settled
+                - Voided
+              subType:
+                type: string
+              subTypeCode:
+                type: string
+              tag:
+                $ref: '#/components/schemas/TagProperty'
+              transactionCount:
+                $ref: '#/components/schemas/HelixId'
+              transactionId:
+                $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+              type:
+                type: string
+              typeCode:
+                type: string
+              voidedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+    CardArray200Response:
+      allOf:
+      - type: object
+        properties:
+          errors:
+            type: array
+            items: {}
+            example: []
+          requestId:
+            type: string
+            example: 1249a3bf-aca1-40dd-9fba-2a3193550c39
+          status:
+            type: integer
+            enum:
+            - 200
+          throttle:
+            type: object
+            properties:
+              periodEndsAt:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              periodLengthInSeconds:
+                $ref: '#/components/schemas/HelixId'
+              periodRequestLimit:
+                $ref: '#/components/schemas/HelixId'
+              requestsRemainingInPeriod:
+                $ref: '#/components/schemas/HelixId'
+              warningThreshold:
+                type: number
+                format: decimal
+                example: 0.2
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/CardObject200Response/allOf/1/properties/data'
+    TransactionArray200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/TransactionObject200Response/allOf/1/properties/data'
+    CustomerSetLastContact200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              type: object
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                dormancyStatus:
+                  type: string
+                  enum:
+                  - Active
+                  - Inactive
+                  - Dormant
+                lastContactDate:
+                  type: string
+                  format: date-time
+                  example: '2021-01-07T19:00:59.761-06:00'
+                lastContactType:
+                  $ref: '#/components/schemas/LastContactType'
+    TagProperty:
+      type: string
+      maxLength: 50
+    HelixId:
+      type: integer
+      format: int32
+      minimum: 1
+    AccountClose200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              customerId:
+                $ref: '#/components/schemas/HelixId'
+              accountId:
+                $ref: '#/components/schemas/HelixId'
+              closeToAccountId:
+                $ref: '#/components/schemas/HelixId'
+              transactionId:
+                type: integer
+                format: int64
+                minimum: 1
+              transactionTag:
+                $ref: '#/components/schemas/TagProperty'
+              closingBalanceAmount:
+                type: number
+                format: decimal
+              interestPaidAmount:
+                type: number
+                format: decimal
+              totalClosingAmount:
+                type: number
+                format: decimal
+              isClosedToExternalAccount:
+                type: boolean
+    PurposeCode:
+      type: string
+      maxLength: 10
+      pattern: ^[0-9][A-Z][a-z]$
+    TransactionFeeResult200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              feeAmount:
+                type: number
+                format: decimal
+              feeToApplyId:
+                $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+              feeType:
+                type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+x-samples-languages:
+- curl
+- node
+- python
+- csharp
+- ruby
+- go
+- java
+- kotlin
+- php
+x-provenance:
+  method: searched
+  source: https://docs.helix.q2.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.helix.q2.com/reference/accountaddentitlement.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryadd.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryedit.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryget.md
+  - https://docs.helix.q2.com/reference/accountbeneficiarylist.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryremove.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryreplace.md
+  - https://docs.helix.q2.com/reference/accountclose.md
+  - https://docs.helix.q2.com/reference/accountcreate.md
+  - https://docs.helix.q2.com/reference/accounteditentitlement.md
+  - https://docs.helix.q2.com/reference/accountget.md
+  - https://docs.helix.q2.com/reference/accountgetbytag.md
+  - https://docs.helix.q2.com/reference/accountlimitdelete.md
+  - https://docs.helix.q2.com/reference/accountlimitlist.md
+  - https://docs.helix.q2.com/reference/accountlimitset.md
+  - https://docs.helix.q2.com/reference/accountlist.md
+  - https://docs.helix.q2.com/reference/accountlistentitlements.md
+  - https://docs.helix.q2.com/reference/accountlock.md
+  - https://docs.helix.q2.com/reference/accountplacehold.md
+  - https://docs.helix.q2.com/reference/accountreleasehold.md
+  - https://docs.helix.q2.com/reference/accountremoveentitlement.md
+  - https://docs.helix.q2.com/reference/accountstoppaycreatecheckstoppay.md
+  - https://docs.helix.q2.com/reference/accountstoppayexpire.md
+  - https://docs.helix.q2.com/reference/accountstoppaylist.md
+  - https://docs.helix.q2.com/reference/accountunlock.md
+  - https://docs.helix.q2.com/reference/accountupdate.md
+  - https://docs.helix.q2.com/reference/bankdocumentdownload.md
+  - https://docs.helix.q2.com/reference/bankdocumentlist.md
+  - https://docs.helix.q2.com/reference/cardaddaccount.md
+  - https://docs.helix.q2.com/reference/cardarchive.md
+  - https://docs.helix.q2.com/reference/cardcontrolarchive.md
+  - https://docs.helix.q2.com/reference/cardcontrolarchivebytag.md
+  - https://docs.helix.q2.com/reference/cardcontrolcreate.md
+  - https://docs.helix.q2.com/reference/cardcontrolget.md
+  - https://docs.helix.q2.com/reference/cardcontrolgetbytag.md
+  - https://docs.helix.q2.com/reference/cardcreatedigital.md
+  - https://docs.helix.q2.com/reference/cardfraudtextalertget.md
+  - https://docs.helix.q2.com/reference/cardfraudtextalertoptout.md
+  - https://docs.helix.q2.com/reference/cardget.md
+  - https://docs.helix.q2.com/reference/cardgetbytag.md
+  - https://docs.helix.q2.com/reference/cardhotlist.md
+  - https://docs.helix.q2.com/reference/cardinitiate.md
+  - https://docs.helix.q2.com/reference/cardlimitget.md
+  - https://docs.helix.q2.com/reference/cardlimitoverride.md
+  - https://docs.helix.q2.com/reference/cardlimitreset.md
+  - https://docs.helix.q2.com/reference/cardlimittemporaryoverride.md
+  - https://docs.helix.q2.com/reference/cardlist.md
+  - https://docs.helix.q2.com/reference/cardlock.md
+  - https://docs.helix.q2.com/reference/cardmockadminfalconfraud.md
+  - https://docs.helix.q2.com/reference/cardmockdeclinepurchaseauthorize.md
+  - https://docs.helix.q2.com/reference/cardmockdepositpurchasereturn.md
+  - https://docs.helix.q2.com/reference/cardmockdepositpurchasereturnreversal.md
+  - https://docs.helix.q2.com/reference/cardmockwithdrawalcardcash.md
+  - https://docs.helix.q2.com/reference/cardmockwithdrawalpurchaseauthorize.md
+  - https://docs.helix.q2.com/reference/cardmockwithdrawalpurchasecomplete.md
+  - https://docs.helix.q2.com/reference/cardorderphysical.md
+  - https://docs.helix.q2.com/reference/cardprovisionapplepay.md
+  - https://docs.helix.q2.com/reference/cardprovisioncarddetail.md
+  - https://docs.helix.q2.com/reference/cardprovisiongooglepay.md
+  - https://docs.helix.q2.com/reference/cardreissue.md
+  - https://docs.helix.q2.com/reference/cardremoveaccount.md
+  - https://docs.helix.q2.com/reference/cardrenewaloverride.md
+  - https://docs.helix.q2.com/reference/cardreprioritizeaccount.md
+  - https://docs.helix.q2.com/reference/cardresetpin.md
+  - https://docs.helix.q2.com/reference/cardriskfactorget.md
+  - https://docs.helix.q2.com/reference/cardriskfactorset.md
+  - https://docs.helix.q2.com/reference/cardunlock.md
+  - https://docs.helix.q2.com/reference/cardupdate.md
+  - https://docs.helix.q2.com/reference/cardverify.md
+  - https://docs.helix.q2.com/reference/cardverifybycvv.md
+  - https://docs.helix.q2.com/reference/customeranswerlist.md
+  - https://docs.helix.q2.com/reference/customeranswerpost.md
+  - https://docs.helix.q2.com/reference/customerarchive.md
+  - https://docs.helix.q2.com/reference/customerbeneficiaryaccountassignmentlist.md
+  - https://docs.helix.q2.com/reference/customerbeneficiarycreate.md
+  - https://docs.helix.q2.com/reference/customerbeneficiarydeactivate.md
+  - https://docs.helix.q2.com/reference/customerbeneficiaryget.md
+  - https://docs.helix.q2.com/reference/customerbeneficiarylist.md
+  - https://docs.helix.q2.com/reference/customerbeneficiaryupdate.md
+  - https://docs.helix.q2.com/reference/customercreate.md
+  - https://docs.helix.q2.com/reference/customercreatebusiness.md
+  - https://docs.helix.q2.com/reference/customercreatebusinessapplication.md
+  - https://docs.helix.q2.com/reference/customerdocumentget.md
+  - https://docs.helix.q2.com/reference/customerdocumentlist.md
+  - https://docs.helix.q2.com/reference/customerdocumentupdatestatus.md
+  - https://docs.helix.q2.com/reference/customerdocumentupload.md
+  - https://docs.helix.q2.com/reference/customergeneratetoken.md
+  - https://docs.helix.q2.com/reference/customerget.md
+  - https://docs.helix.q2.com/reference/customergetbyemail.md
+  - https://docs.helix.q2.com/reference/customergetbytag.md
+  - https://docs.helix.q2.com/reference/customerlist.md
+  - https://docs.helix.q2.com/reference/customernote.md
+  - https://docs.helix.q2.com/reference/customernoteslist.md
+  - https://docs.helix.q2.com/reference/customerrelationshiparchive.md
+  - https://docs.helix.q2.com/reference/customerrelationshipcreate.md
+  - https://docs.helix.q2.com/reference/customerrelationshiplist.md
+  - https://docs.helix.q2.com/reference/customerrelationshipupdate.md
+  - https://docs.helix.q2.com/reference/customerrelationshipupdateprimarycontact.md
+  - https://docs.helix.q2.com/reference/customersearch.md
+  - https://docs.helix.q2.com/reference/customersecurityanswerslist.md
+  - https://docs.helix.q2.com/reference/customersetlastcontact.md
+  - https://docs.helix.q2.com/reference/customerupdate.md
+  - https://docs.helix.q2.com/reference/customerupdateaddress-2.md
+  - https://docs.helix.q2.com/reference/externalaccountarchive.md
+  - https://docs.helix.q2.com/reference/externalaccountcreate.md
+  - https://docs.helix.q2.com/reference/externalaccountdocumentupload.md
+  - https://docs.helix.q2.com/reference/externalaccountget.md
+  - https://docs.helix.q2.com/reference/externalaccountgetbytag.md
+  - https://docs.helix.q2.com/reference/externalaccountinitiate.md
+  - https://docs.helix.q2.com/reference/externalaccountlist.md
+  - https://docs.helix.q2.com/reference/externalaccountlock.md
+  - https://docs.helix.q2.com/reference/externalaccountresendverification.md
+  - https://docs.helix.q2.com/reference/externalaccountunlock.md
+  - https://docs.helix.q2.com/reference/externalaccountupdate.md
+  - https://docs.helix.q2.com/reference/externalaccountverify.md
+  - https://docs.helix.q2.com/reference/feeconfiglist.md
+  - https://docs.helix.q2.com/reference/feeget.md
+  - https://docs.helix.q2.com/reference/feegetbycustomertag.md
+  - https://docs.helix.q2.com/reference/programget.md
+  - https://docs.helix.q2.com/reference/programlistaccountholds.md
+  - https://docs.helix.q2.com/reference/programlistindustryclassificationcodes.md
+  - https://docs.helix.q2.com/reference/programquestionslist.md
+  - https://docs.helix.q2.com/reference/statementdownload.md
+  - https://docs.helix.q2.com/reference/statementget.md
+  - https://docs.helix.q2.com/reference/statementlist.md
+  - https://docs.helix.q2.com/reference/statementsearch.md
+  - https://docs.helix.q2.com/reference/transactioncreatefee.md
+  - https://docs.helix.q2.com/reference/transactionget.md
+  - https://docs.helix.q2.com/reference/transactiongetbytag.md
+  - https://docs.helix.q2.com/reference/transactionlist.md
+  - https://docs.helix.q2.com/reference/transactionsetavailabledate.md
+  - https://docs.helix.q2.com/reference/transactionsetstatus.md
+  - https://docs.helix.q2.com/reference/transactionwireget.md
+  - https://docs.helix.q2.com/reference/transferachoriginationcreate.md
+  - https://docs.helix.q2.com/reference/transfercreate.md
+  - https://docs.helix.q2.com/reference/transfervoid.md
+  - https://docs.helix.q2.com/reference/transferwirecreate-2.md
+  merge:
+    pages: 137
+    deduped: 1427
+    conflicts_kept_first: 0

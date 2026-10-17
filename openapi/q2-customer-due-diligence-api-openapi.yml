@@ -1,0 +1,1736 @@
+openapi: 3.2.0
+info:
+  title: Helix Customer - Due Diligence API
+  version: 3.0.0
+  description: Helix Public API (no customer KYC/IDV). **This spec covers all of Helix 3.x and is subject to change at any time.**
+servers:
+- url: https://sandbox-api.helix.q2.com
+  description: Sandbox server
+- url: https://api.helix.q2.com
+  description: Production server
+security:
+- basicAuth: []
+tags:
+- name: Customer - Due Diligence
+  description: Endpoints related to customer due diligence
+paths:
+  /customer/answerList/{customerId}:
+    get:
+      tags:
+      - Customer - Due Diligence
+      summary: List a customer's due diligence responses
+      description: Retrieve all due diligence answers for the given `customerId`.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/customer/answerlist
+      operationId: customer/answerList
+      parameters:
+      - $ref: '#/components/parameters/CustomerIdPath'
+      responses:
+        '200':
+          description: An array of <a href="https://docs.helix.q2.com/docs/due-diligence-category" target="_blank">dueDiligenceCategory</a> objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAnswerList200Response'
+        '400':
+          $ref: '#/paths/~1card~1lock/post/responses/400'
+        '401':
+          $ref: '#/paths/~1card~1lock/post/responses/401'
+        '404':
+          $ref: '#/paths/~1card~1lock/post/responses/404'
+        '405':
+          $ref: '#/paths/~1card~1lock/post/responses/405'
+        '429':
+          $ref: '#/paths/~1card~1lock/post/responses/429'
+  /customer/answerPost:
+    post:
+      tags:
+      - Customer - Due Diligence
+      summary: Submit a customer's due diligence answers
+      description: Create or update due diligence answers for the given `customerId`.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/customeranswerpost
+      operationId: customerAnswerPost
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customerId
+              - answers
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                answers:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - questionId
+                    properties:
+                      answeredDate:
+                        $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                      questionId:
+                        $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+                      questionAnswer:
+                        format: string
+                        maxLength: 255
+                      selectedChoices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            choiceId:
+                              allOf:
+                              - description: Required if `choiceName` not present
+                              - $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+                            choiceName:
+                              type: string
+                              description: Required if `choiceId` not present
+                  description: An array of <a href="https://docs.helix.q2.com/docs/due-diligence-answer" target="_blank">dueDiligenceAnswer</a> objects
+      responses:
+        '200':
+          description: A 200 status with no `data` property present
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardArray200Response/allOf/0'
+        '400':
+          $ref: '#/paths/~1card~1lock/post/responses/400'
+        '401':
+          $ref: '#/paths/~1card~1lock/post/responses/401'
+        '404':
+          $ref: '#/paths/~1card~1lock/post/responses/404'
+        '405':
+          $ref: '#/paths/~1card~1lock/post/responses/405'
+        '429':
+          $ref: '#/paths/~1card~1lock/post/responses/429'
+  /customer/securityanswerslist:
+    post:
+      tags:
+      - Customer - Due Diligence
+      summary: Retrieves the list of security answers for a customer in a specified language
+      description: See customerSecurityAnswerInfo object definition for parameter details.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/customersecurityanswerslist
+      operationId: customersecurityanswerslist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customerId
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                culture:
+                  $ref: '#/components/schemas/CultureProperty'
+      responses:
+        '200':
+          description: An array of <a href="https://https://docs.helix.q2.com/docs/customer-security-answer" target="_blank">customerSecurityAnswerInfo</a> objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerObject200Response'
+        '400':
+          $ref: '#/paths/~1card~1lock/post/responses/400'
+        '401':
+          $ref: '#/paths/~1card~1lock/post/responses/401'
+        '404':
+          $ref: '#/paths/~1card~1lock/post/responses/404'
+        '405':
+          $ref: '#/paths/~1card~1lock/post/responses/405'
+        '429':
+          $ref: '#/paths/~1card~1lock/post/responses/429'
+components:
+  schemas:
+    CustomerAnswerList200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              type: object
+              properties:
+                categoryId:
+                  $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+                categoryName:
+                  type: string
+                  maxLength: 100
+                categoryDescription:
+                  type: string
+                  maxLength: 255
+                followUpQuestions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CustomerAnswerList200Response/allOf/1/properties/data/items/properties/questions/items'
+                questions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      questionId:
+                        $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+                      questionName:
+                        type: string
+                        maxLength: 100
+                      questionDescription:
+                        type: string
+                        maxLength: 255
+                      answerType:
+                        type: string
+                        maxLength: 50
+                        enum:
+                        - Single-Select
+                        - Multi-Select
+                        - Text
+                      choices:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            answeredDate:
+                              $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                            choiceId:
+                              $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+                            choiceName:
+                              type: string
+                              maxLength: 100
+                            choiceDescription:
+                              type: string
+                              maxLength: 255
+                            followUpQuestionIds:
+                              type: array
+                              items:
+                                $ref: '#/components/schemas/HelixId'
+    LegalName:
+      type: string
+      maxLength: 100
+    ExemptFromBeneficialOwnershipReasonType:
+      type: string
+      enum:
+      - UsStockExchangeTradedEntity
+      - CharityOrNonProfitEntity
+      - PublicAccountingFirmRegisteredUnderSection102
+      - UsStateRegulatedBank
+      - UsRegulatedInsuranceCompany
+      - UsRegulatedFinancialInstitution
+      - UsFederalGovernmentAgency
+      - UsStateGovernmentAgency
+      - UsLocalGovernmentAgency
+      - NonUsGovernmentAgency
+      - BankHoldingCompany
+      - SavingsAndLoanHoldingCompany
+      - FinancialMarketUtility
+      - NonUsEntityOpeningAPrivateBankingAccount
+      - ForeignFinancialInstitution
+      - ClassOfSecuritiesIssuer
+      - SecCurrentRegisteredFirm
+      - CommodityFuturesTradingCommissionRegisteredEntity
+      - ExcludedPooledInvestmentVehicle
+      - NonExcludedPooledInvestmentVehicle
+      - UsStockExchangeMajorityEquityEntity
+    CityProperty:
+      type: string
+      maxLength: 50
+    CardObject200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              accounts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    accountBalance:
+                      type: number
+                      format: decimal
+                    accountId:
+                      $ref: '#/components/schemas/HelixId'
+                    accountNumberMasked:
+                      type: string
+                    availableBalance:
+                      type: number
+                      format: decimal
+                    balanceLastModifiedDate:
+                      $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                    cardPriority:
+                      $ref: '#/components/schemas/CardPriority'
+                    customerId:
+                      $ref: '#/components/schemas/HelixId'
+                    lastModifiedDate:
+                      $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                    name:
+                      type: string
+                    pendingBalance:
+                      type: number
+                      format: decimal
+                    status:
+                      $ref: '#/components/schemas/AccountObject200Response/allOf/1/properties/data/properties/status'
+                    tag:
+                      $ref: '#/components/schemas/TagProperty'
+                    type:
+                      $ref: '#/components/schemas/AccountObject200Response/allOf/1/properties/data/properties/type'
+              archivedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              binId:
+                $ref: '#/components/schemas/HelixId'
+              cardCarrierMessage:
+                type: string
+                description: 'Identifier used uniquely by various card production facilities for mapping card configurations.
+
+                  '
+              cardDesignIdentificationNumber:
+                type: string
+                description: 'Identifier used uniquely by various card production facilities for mapping card configurations.
+
+                  '
+              cardHolderCustomerId:
+                $ref: '#/components/schemas/HelixId'
+              cardId:
+                $ref: '#/components/schemas/HelixId'
+              cardNumberMasked:
+                type: string
+              cardVendorUniqueData:
+                type: string
+                description: 'Identifier used uniquely by various card production facilities for mapping card configurations.
+
+                  '
+              createdDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              customerId:
+                $ref: '#/components/schemas/HelixId'
+              deniedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              digitalWalletTokens:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    device:
+                      type: object
+                      properties:
+                        deviceId:
+                          type: string
+                        deviceIpAddress:
+                          type: string
+                        deviceLanguageCode:
+                          type: string
+                        deviceLocation:
+                          type: string
+                        deviceName:
+                          type: string
+                        deviceNumber:
+                          type: string
+                        deviceType:
+                          type: string
+                          enum:
+                          - Card
+                          - MobilePhone
+                          - Tablet
+                          - Watch
+                          - MobileDevice
+                          - FashionAccessory
+                          - HomeAppliance
+                          - KeyFob
+                          - MediaOrGamingDevice
+                          - MobileDeviceAccessory
+                          - PCOrLaptop
+                          - Vehicle
+                          - UnknownOther
+                    isDeviceProvisioned:
+                      type: boolean
+                    panReferenceId:
+                      type: string
+                    token:
+                      type: string
+                    tokenReferenceId:
+                      type: string
+                    tokenRequestorId:
+                      type: string
+                      enum:
+                      - '40010030273'
+                      - '40010075001'
+                      - '40010043095'
+                      - '40010075338'
+                    tokenRequestorName:
+                      type: string
+                      enum:
+                      - ApplePay
+                      - GooglePay
+                      - SamsungPay
+                      - VisaCheckout
+                    tokenStatus:
+                      type: string
+                      enum:
+                      - ActiveForPayment
+                      - Initiated
+                      - SuspendedTemporarily
+                      - DeactivatedPermanently
+                    tokenType:
+                      type: string
+                      enum:
+                      - Card on file
+                      - Secure element
+                      - Cloud based payment/HCE
+                      - E-Commerce Enabler
+                    walletInformation:
+                      type: object
+                      properties:
+                        panSource:
+                          type: string
+                          enum:
+                          - KeyEntered
+                          - OnFile
+                          - MobileBankingApp
+                        walletAccountId:
+                          type: string
+                        walletEmailAddressHashed:
+                          type: string
+                        walletProviderDeviceScore:
+                          type: string
+                        walletProviderReasonCodes:
+                          type: string
+                        walletProviderRiskAssessmentType:
+                          type: string
+                          enum:
+                          - Approved
+                          - ApprovedConditionally
+                          - NotApproved
+                        walletProviderRiskAssessmentVersion:
+                          type: string
+              expireMonth:
+                $ref: '#/components/schemas/MonthProperty'
+              expireYear:
+                $ref: '#/components/schemas/YearProperty'
+              expiredDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              firstName:
+                type: string
+              isDigitalOnly:
+                type: boolean
+              isDualIssuanceSinglePAN:
+                type: boolean
+              isPINSet:
+                type: boolean
+              lastModifiedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              lastName:
+                type: string
+              lockReasonTypeCode:
+                type: string
+                enum:
+                - UNK
+                - STL
+                - LST
+                - FRD
+                - DMG
+                - ADM
+                - TMP
+                - PIN
+              lockTypeCode:
+                type: string
+                enum:
+                - UNL
+                - CST
+                - SYS
+              middleName:
+                type: string
+              nameOnCard:
+                type: string
+              nickName:
+                type: string
+              photoImageId:
+                type: string
+                description: 'Identifier used uniquely by various card production facilities for mapping card configurations.
+
+                  '
+              preferredName:
+                type: string
+              primaryAccountId:
+                $ref: '#/components/schemas/HelixId'
+              qualifierCode:
+                $ref: '#/components/schemas/CardQualifierCode'
+              reissuedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              renewalOverride:
+                $ref: '#/components/schemas/RenewalOverride'
+              renewalOverrideReason:
+                type: string
+              requestedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              status:
+                type: string
+                enum:
+                - Initiated
+                - Pending
+                - PendingVerification
+                - Verified
+                - Denied
+                - Expired
+                - Archived
+                - Reissued
+                - Hotlisted
+                - ReissuedPendingVerification
+                - AutoReissuedPendingVerification
+              tag:
+                $ref: '#/components/schemas/TagProperty'
+              typeCode:
+                type: string
+                enum:
+                - DBT
+              vendorTypeCode:
+                $ref: '#/components/schemas/CardVendorTypeCode'
+              verifiedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+    ExternalAccountObject200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              accountNumber:
+                type: string
+              accountNumberMasked:
+                type: string
+              businessName:
+                type: string
+                maxLength: 100
+              customField1:
+                type: string
+                maxLength: 50
+              customField2:
+                type: string
+                maxLength: 50
+              customField3:
+                type: string
+                maxLength: 50
+              customField4:
+                type: string
+                maxLength: 50
+              customField5:
+                type: string
+                maxLength: 50
+              customerId:
+                $ref: '#/components/schemas/HelixId'
+              externalAccountId:
+                $ref: '#/components/schemas/HelixId'
+              firstName:
+                type: string
+                maxLength: 50
+              isActive:
+                type: boolean
+                deprecated: true
+              isLocked:
+                type: boolean
+              lastModifiedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              lastName:
+                type: string
+                maxLength: 50
+              lockedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              lockedReason:
+                type: string
+              name:
+                type: string
+              nickName:
+                type: string
+              nocCode:
+                type: string
+              routingNumber:
+                type: string
+              routingNumberMasked:
+                type: string
+              status:
+                type: string
+                enum:
+                - Unverified
+                - VerifyLocked
+                - Verified
+                - Denied
+                - Expired
+                - Archived
+              statusDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              tag:
+                $ref: '#/components/schemas/TagProperty'
+              type:
+                type: string
+                enum:
+                - Checking
+                - Savings
+                - Business Checking
+                - Business Savings
+                - Prepaid
+    TaxIdType:
+      type: string
+      enum:
+      - SSN
+      - EIN
+      - ITIN
+    AccountObject200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              accessTypeCode:
+                type: string
+                enum:
+                - FULL
+                - AUTHSIGNER
+                - RDONLY
+                - NONE
+              accountBalance:
+                type: number
+                format: decimal
+              accountId:
+                $ref: '#/components/schemas/HelixId'
+              accountMinimumBalance:
+                type: number
+                format: decimal
+              accountNumber:
+                type: string
+              accountNumberMasked:
+                type: string
+              availableBalance:
+                type: number
+                format: decimal
+              balanceLastModifiedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              category:
+                type: string
+                maxLength: 50
+              closedAmount:
+                type: number
+                format: decimal
+              closedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              closedReason:
+                $ref: '#/components/schemas/CloseReason'
+              closedReasonNotes:
+                $ref: '#/components/schemas/CloseReasonNotes'
+              createdDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              customField1:
+                type: string
+                maxLength: 50
+              customField2:
+                type: string
+                maxLength: 50
+              customField3:
+                type: string
+                maxLength: 50
+              customField4:
+                type: string
+                maxLength: 50
+              customField5:
+                type: string
+                maxLength: 50
+              customerId:
+                $ref: '#/components/schemas/HelixId'
+              customerPriority:
+                $ref: '#/components/schemas/HelixId'
+              externalProgramTag:
+                type: string
+              firstDepositDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              globalAccountAccessEnabled:
+                type: boolean
+              interestTransferFkId:
+                $ref: '#/components/schemas/HelixId'
+              isCloseable:
+                type: boolean
+              isJointAccount:
+                type: boolean
+              isLocked:
+                type: boolean
+              isPrimary:
+                type: boolean
+              isPrimaryCustomer:
+                type: boolean
+              lastModifiedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              legalName1:
+                $ref: '#/components/schemas/LegalName'
+              legalName2:
+                $ref: '#/components/schemas/LegalName'
+              lockReasonTypeCode:
+                $ref: '#/components/schemas/AccountLockReasonTypeCode'
+              lockTypeCode:
+                $ref: '#/components/schemas/CardObject200Response/allOf/1/properties/data/properties/lockTypeCode'
+              accountLockClassificationCode:
+                type:
+                - string
+                - 'null'
+                maxLength: 10
+                description: Program-configured classification code associated with the account lock.
+              accountLockClassificationCodeDescription:
+                type:
+                - string
+                - 'null'
+                description: Human-readable description of the accountLockClassificationCode.
+              maturityTypeCode:
+                type: string
+              name:
+                type: string
+              pendingBalance:
+                type: number
+                format: decimal
+              primaryCustomerId:
+                $ref: '#/components/schemas/HelixId'
+              productId:
+                $ref: '#/components/schemas/HelixId'
+              recurringContributionAmount:
+                type: number
+                format: decimal
+              recurringContributionEndDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              recurringContributionFromExternalAccountId:
+                $ref: '#/components/schemas/HelixId'
+              recurringContributionNextDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              recurringContributionStartDate:
+                $ref: '#/components/schemas/DateTimeProperty'
+              recurringContributionType:
+                $ref: '#/components/schemas/RecurringContributionType'
+              regDWithdrawalCount:
+                type: integer
+                format: int32
+                minimum: 0
+              routingNumber:
+                type: string
+              routingNumberMasked:
+                type: string
+              sourceLinks:
+                type: array
+                items:
+                  type: object
+                  deprecated: true
+                  properties:
+                    creditSetting:
+                      type: number
+                      format: decimal
+                    customerId:
+                      $ref: '#/components/schemas/HelixId'
+                    debitSetting:
+                      type: number
+                      format: decimal
+                    isCreditAutoTransferEnabled:
+                      type: boolean
+                    isDebitAutoTransferEnabled:
+                      type: boolean
+                    linkOptionTypeCode:
+                      type: string
+                      enum:
+                      - OVRPRTAMT
+                      - OVRPRTMLT
+                      - OVRSECPCT
+                      - OVRSECFIX
+                      description: '- `OVRPRTAMT`: Auto-transfer exact amount of withdrawal
+
+                        - `OVRPRTMLT`: Auto-transfer to the nearest multiple of `debitSetting` to cover withdrawal amount
+
+                        - `OVRSECPCT`: Allow lending up to `debitSetting` percentage of security account funds
+
+                        - `OVRSECFIX`: Allow lending up to fixed amount of `debitSetting`
+
+                        '
+                    linkTypeCode:
+                      type: string
+                      enum:
+                      - OVRPRT
+                      - OVRSEC
+                      description: '- `OVRPRT`: Overdraft protention
+
+                        - `OVRSEC`: Overdraft security
+
+                        '
+                    sourceAccountId:
+                      $ref: '#/components/schemas/HelixId'
+                    targetAccountId:
+                      $ref: '#/components/schemas/HelixId'
+                deprecated: true
+              status:
+                type: string
+                enum:
+                - Open
+                - Closed
+                - PendingOpen
+                - PendingClosed
+              subCategory:
+                type: string
+              tag:
+                $ref: '#/components/schemas/TagProperty'
+              targetAmount:
+                type: number
+                format: decimal
+              targetDate:
+                $ref: '#/components/schemas/DateTimeProperty'
+              targetLinks:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountObject200Response/allOf/1/properties/data/properties/sourceLinks/items'
+                deprecated: true
+              targetMetDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              targetMetPercent:
+                type: number
+                format: decimal
+              totalCustomers:
+                $ref: '#/components/schemas/HelixId'
+              type:
+                type: string
+                enum:
+                - Checking
+                - Savings
+                - ForBenefitOf
+                - Prepaid
+                - Time Deposit
+                - Business Checking
+                - Business Savings
+    CustomerNoBusinessFieldsArray200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              type: object
+              properties:
+                accessTypeCode:
+                  type: string
+                  enum:
+                  - FULL
+                  - ACCT
+                  - CARD
+                  - FDRY
+                accounts:
+                  type:
+                  - array
+                  - 'null'
+                  items:
+                    $ref: '#/components/schemas/AccountObject200Response/allOf/1/properties/data'
+                addresses:
+                  type:
+                  - array
+                  - 'null'
+                  items:
+                    $ref: '#/components/schemas/AddressItem'
+                birthDate:
+                  $ref: '#/components/schemas/DateTimeProperty'
+                cards:
+                  type:
+                  - array
+                  - 'null'
+                  items:
+                    $ref: '#/components/schemas/CardObject200Response/allOf/1/properties/data'
+                customerCount:
+                  $ref: '#/components/schemas/HelixId'
+                createdDate:
+                  $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                culture:
+                  $ref: '#/components/schemas/CultureProperty'
+                customField1:
+                  type: string
+                  maxLength: 100
+                customField2:
+                  type: string
+                  maxLength: 100
+                customField3:
+                  type: string
+                  maxLength: 100
+                customField4:
+                  type: string
+                  maxLength: 100
+                customField5:
+                  type: string
+                  maxLength: 100
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                deceasedDate:
+                  $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                documentsAcceptedDate:
+                  $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                driversLicenseExpireDate:
+                  $ref: '#/components/schemas/DateTimeProperty'
+                driversLicenseIssueDate:
+                  $ref: '#/components/schemas/DateTimeProperty'
+                driversLicenseNumber:
+                  $ref: '#/components/schemas/DriversLicenseNumber'
+                driversLicenseNumberMasked:
+                  type: string
+                driversLicenseState:
+                  $ref: '#/components/schemas/FormationState'
+                emailAddress:
+                  $ref: '#/components/schemas/EmailAddress'
+                externalAccounts:
+                  type:
+                  - array
+                  - 'null'
+                  items:
+                    $ref: '#/components/schemas/ExternalAccountObject200Response/allOf/1/properties/data'
+                firstName:
+                  $ref: '#/components/schemas/FirstName'
+                fraudStatus:
+                  $ref: '#/components/schemas/CustomerObject200Response/allOf/1/properties/data/properties/status'
+                gender:
+                  $ref: '#/components/schemas/GenderProperty'
+                idStatus:
+                  $ref: '#/components/schemas/CustomerObject200Response/allOf/1/properties/data/properties/status'
+                iqStatus:
+                  $ref: '#/components/schemas/CustomerObject200Response/allOf/1/properties/data/properties/status'
+                isActive:
+                  type: boolean
+                  deprecated: true
+                isDocumentsAccepted:
+                  type: boolean
+                isLocked:
+                  type: boolean
+                isOptedInToBankCommunication:
+                  type: boolean
+                isRelianceAgreement:
+                  type: boolean
+                isSubjectToBackupWithholding:
+                  type: boolean
+                kycStatus:
+                  $ref: '#/components/schemas/CustomerObject200Response/allOf/1/properties/data/properties/status'
+                lastActivityDate:
+                  $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                lastModifiedDate:
+                  $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                lastName:
+                  $ref: '#/components/schemas/CustomerLastName'
+                lockedDate:
+                  $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                lockedReason:
+                  type: string
+                middleName:
+                  $ref: '#/components/schemas/FirstName'
+                ofacStatus:
+                  $ref: '#/components/schemas/CustomerObject200Response/allOf/1/properties/data/properties/status'
+                passportCountry:
+                  type: string
+                passportExpireDate:
+                  $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                passportIssueDate:
+                  $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+                passportNumber:
+                  $ref: '#/components/schemas/PassportNumber'
+                passportNumberMasked:
+                  type: string
+                phones:
+                  type:
+                  - array
+                  - 'null'
+                  items:
+                    $ref: '#/components/schemas/PhoneItem'
+                qualiFileStatus:
+                  type: string
+                  deprecated: true
+                residencyStatusType:
+                  $ref: '#/components/schemas/ResidencyStatusType'
+                status:
+                  $ref: '#/components/schemas/CustomerObject200Response/allOf/1/properties/data/properties/status'
+                suffix:
+                  type: string
+                tag:
+                  type: string
+                taxId:
+                  $ref: '#/components/schemas/TaxId'
+                taxIdMasked:
+                  type: string
+                taxIdType:
+                  $ref: '#/components/schemas/TaxIdType'
+    CloseReason:
+      type: string
+      enum:
+      - Fraud
+      - Never funded
+      - BSA reasons
+      - Relationship ended
+      - Deceased
+      - Other
+      - Consolidating Bank Accounts
+      - re-CIP
+      - Risk-Related
+      - Member Requested
+      - Negative Balance (Reopen Eligible)
+      - Negative Balance (Reopen Ineligible)
+      - ID Theft
+      - Account Take Over
+      - Dormant
+      description: 'The following values are not enabled by default and must be enabled by Q2: `Consolidating Bank Accounts`, `re-CIP`, `Risk-Related`, `Member Requested`, `Negative Balance (Reopen Eligible)`, `Negative Balance (Reopen Ineligible)`, `ID Theft`, `Account Take Over`, `Dormant`
+
+        '
+    CultureProperty:
+      type: string
+      enum:
+      - en-US
+      - es-US
+      description: "Accepted values vary by program:\n  - `en-US`: English\n  - `es-US`: Spanish\n"
+    CardArray200Response:
+      allOf:
+      - type: object
+        properties:
+          errors:
+            type: array
+            items: {}
+            example: []
+          requestId:
+            type: string
+            example: 1249a3bf-aca1-40dd-9fba-2a3193550c39
+          status:
+            type: integer
+            enum:
+            - 200
+          throttle:
+            type: object
+            properties:
+              periodEndsAt:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              periodLengthInSeconds:
+                $ref: '#/components/schemas/HelixId'
+              periodRequestLimit:
+                $ref: '#/components/schemas/HelixId'
+              requestsRemainingInPeriod:
+                $ref: '#/components/schemas/HelixId'
+              warningThreshold:
+                type: number
+                format: decimal
+                example: 0.2
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/CardObject200Response/allOf/1/properties/data'
+    CustomerObject200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              accessTypeCode:
+                allOf:
+                - deprecated: true
+                - $ref: '#/components/schemas/CustomerNoBusinessFieldsArray200Response/allOf/1/properties/data/items/properties/accessTypeCode'
+              accounts:
+                type:
+                - array
+                - 'null'
+                items:
+                  $ref: '#/components/schemas/AccountObject200Response/allOf/1/properties/data'
+                description: An array of <a href="https://docs.helix.q2.com/docs/account">account</a> objects owned by the customer
+              addresses:
+                type:
+                - array
+                - 'null'
+                items:
+                  $ref: '#/components/schemas/AddressItem'
+              attestationDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              attesterName:
+                type: string
+                maxLength: 50
+              attesterTitle:
+                type: string
+                maxLength: 50
+                description: Title of the person attesting to the business' information
+              birthDate:
+                allOf:
+                - description: 'Format: yyyy-MM-ddT00:00:00.000+00:00
+
+                    Example: `1976-07-04T00:00:00.000+00:00`
+
+                    '
+                - $ref: '#/components/schemas/DateTimeProperty'
+              businessDescription:
+                type: string
+                maxLength: 200
+              businessLegalName:
+                type: string
+                maxLength: 300
+              businessNameOnCard:
+                type: string
+                maxLength: 26
+              businessWebsite:
+                type: string
+                maxLength: 100
+              cards:
+                type:
+                - array
+                - 'null'
+                items:
+                  $ref: '#/components/schemas/CardObject200Response/allOf/1/properties/data'
+              customerCount:
+                $ref: '#/components/schemas/HelixId'
+              createdDate:
+                allOf:
+                - description: 'Date the customer was created. **Note: a customer may have been created but is not available for use, depending on the `isLocked` or `status` properties.**
+
+                    '
+                - $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              culture:
+                $ref: '#/components/schemas/CultureProperty'
+              customField1:
+                type: string
+                maxLength: 100
+              customField2:
+                type: string
+                maxLength: 100
+              customField3:
+                type: string
+                maxLength: 100
+              customField4:
+                type: string
+                maxLength: 100
+              customField5:
+                type: string
+                maxLength: 100
+              customerId:
+                $ref: '#/components/schemas/HelixId'
+              doingBusinessAs:
+                type: string
+                maxLength: 200
+              deceasedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              documentsAcceptedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              driversLicenseExpireDate:
+                $ref: '#/components/schemas/DateTimeProperty'
+              driversLicenseIssueDate:
+                $ref: '#/components/schemas/DateTimeProperty'
+              driversLicenseNumber:
+                type: string
+              driversLicenseNumberMasked:
+                type: string
+              driversLicenseState:
+                $ref: '#/components/schemas/FormationState'
+              emailAddress:
+                type: string
+              exemptFromBeneficialOwnershipReasonType:
+                $ref: '#/components/schemas/ExemptFromBeneficialOwnershipReasonType'
+              externalAccounts:
+                type:
+                - array
+                - 'null'
+                items:
+                  $ref: '#/components/schemas/ExternalAccountObject200Response/allOf/1/properties/data'
+              firstName:
+                type: string
+              foreignDocumentCountryCode:
+                type: string
+                maxLength: 3
+              foreignDocumentExpirationDate:
+                $ref: '#/components/schemas/DateTimeProperty'
+              foreignDocumentNumber:
+                type: string
+                maxLength: 30
+              foreignDocumentNumberMasked:
+                type: string
+              foreignDocumentType:
+                $ref: '#/components/schemas/ForeignDocumentType'
+              formationDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              formationState:
+                $ref: '#/components/schemas/FormationState'
+              fraudStatus:
+                type: string
+                description: 'Customer''s status in regards to the ''fraud'' customer verification module.
+
+                  '
+                enum:
+                - ''
+                - Verified
+                - Denied
+                - Automated Review
+                - Manual Review
+                - Resubmit
+              gender:
+                $ref: '#/components/schemas/GenderProperty'
+              idStatus:
+                $ref: '#/components/schemas/CustomerObject200Response/allOf/1/properties/data/properties/status'
+              industryClassificationCodeId:
+                $ref: '#/components/schemas/HelixId'
+              iqStatus:
+                type: string
+                enum:
+                - ''
+                - Verified
+                - Denied
+                - Automated Review
+                - Manual Review
+                - Resubmit
+              isActive:
+                type: boolean
+                description: Use `status` instead.
+                deprecated: true
+              isBusiness:
+                type: boolean
+              isDocumentsAccepted:
+                type: boolean
+              isExemptFromBeneficialOwnership:
+                type: boolean
+              isLocked:
+                type: boolean
+              isMinor:
+                type: boolean
+              isOptedInToBankCommunication:
+                type: boolean
+              isRelianceAgreement:
+                type: boolean
+              isSubjectToBackupWithholding:
+                type: boolean
+              isTaxExempt:
+                type: boolean
+              kybStatus:
+                type: string
+                enum:
+                - Initiated
+                - Manual Review
+                - Verified
+                - Denied
+                - Expired
+                - Deceased
+                - Archived
+                - Automated Review
+              kybStatusDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              kycStatus:
+                type: string
+                enum:
+                - ''
+                - Verified
+                - Denied
+                - Automated Review
+                - Manual Review
+                - Resubmit
+              lastContactDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              lastContactType:
+                $ref: '#/components/schemas/LastContactType'
+              lastModifiedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              lastName:
+                type: string
+              legalEntityType:
+                type: string
+                enum:
+                - Individual
+                - SingleMemberLLC
+                - SCorporation
+                - CCorporation
+                - SoleProprietorship
+                - NonProfit
+                - Association
+                - Partnership
+                - LimitedLiabilityCompany
+                - LimitedLiabilityPartnership
+                - RevocableTrust
+                - IrrevocableTrust
+                - FinancialInstitutionOther
+                - Estate
+                - Trust
+                - Church
+                - Conservator
+                - Guardianship
+                - Government
+                - Cooperative
+                - BCorporation
+                - TottenTrustPOD
+                - LimitedPartnership
+                - GeneralPartnership
+                - GovernmentDepartment
+                - GovernmentAgency
+                - GovernmentAuthority
+                - GovernmentNonCommercialNonUSDepartmentOrAgency
+                - GovernmentOther
+                - RegulatedFinancialInstitution
+                - RegulatedBankLoanHoldingsCompany
+                - RegulatedSavingsAndLoanHoldingCompany
+                - ForeignFinancialInstitutionRegulatorKeepsUBOInfo
+              lockedDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              lockedReason:
+                type: string
+              middleName:
+                type: string
+              ofacStatus:
+                type: string
+                enum:
+                - ''
+                - Verified
+                - Denied
+                - Automated Review
+                - Manual Review
+                - Resubmit
+              passportCountry:
+                type: string
+              passportExpireDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              passportIssueDate:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              passportNumber:
+                type: string
+              passportNumberMasked:
+                type: string
+              phones:
+                type:
+                - array
+                - 'null'
+                items:
+                  $ref: '#/components/schemas/PhoneItem'
+              preferredName:
+                type: string
+                maxLength: 21
+              qualiFileStatus:
+                type: string
+                deprecated: true
+              residencyStatusType:
+                $ref: '#/components/schemas/ResidencyStatusType'
+              status:
+                type: string
+                enum:
+                - Active
+                - Initiated
+                - Manual Review
+                - Verified
+                - Denied
+                - Expired
+                - Archived
+                - Deceased
+                - Automated Review
+                - Resubmit
+              suffix:
+                type: string
+              tag:
+                type: string
+              taxId:
+                $ref: '#/components/schemas/TaxId'
+              taxIdMasked:
+                type: string
+              taxIdType:
+                $ref: '#/components/schemas/TaxIdType'
+              usePreferredNameOnCard:
+                type: boolean
+                default: false
+    CustomerSetLastContact200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              type: object
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                dormancyStatus:
+                  type: string
+                  enum:
+                  - Active
+                  - Inactive
+                  - Dormant
+                lastContactDate:
+                  type: string
+                  format: date-time
+                  example: '2021-01-07T19:00:59.761-06:00'
+                lastContactType:
+                  $ref: '#/components/schemas/LastContactType'
+    CardVendorTypeCode:
+      type: string
+    AccountLockReasonTypeCode:
+      type: string
+      enum:
+      - UNK
+      - FRD
+      - ADM
+      - TMP
+      - FRZ
+      - SUS
+      - CO
+      - RTN
+      - REC
+      - DED
+      - DOR
+      description: '- `UNK`: Unknown
+
+        - `FRD`: Fraud investigation
+
+        - `ADM`: Administrative
+
+        - `TMP`: Temporary
+
+        - `FRZ`: Freeze
+
+        - `SUS`: Suspected fraud
+
+        - `CO`: Credits only
+
+        - `RTN`: Return risk
+
+        - `REC`: Recovery
+
+        - `DED`: Deceased
+
+        - `DOR`: Dormant
+
+        '
+    MonthProperty:
+      type: integer
+      minimum: 1
+      maximum: 12
+    CloseReasonNotes:
+      type: string
+      maxLength: 255
+      description: Required if `closeReason` is `Other`
+    TagProperty:
+      type: string
+      maxLength: 50
+    PostalCode:
+      type: string
+      maxLength: 9
+    HelixId:
+      type: integer
+      format: int32
+      minimum: 1
+    AccountClose200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              customerId:
+                $ref: '#/components/schemas/HelixId'
+              accountId:
+                $ref: '#/components/schemas/HelixId'
+              closeToAccountId:
+                $ref: '#/components/schemas/HelixId'
+              transactionId:
+                type: integer
+                format: int64
+                minimum: 1
+              transactionTag:
+                $ref: '#/components/schemas/TagProperty'
+              closingBalanceAmount:
+                type: number
+                format: decimal
+              interestPaidAmount:
+                type: number
+                format: decimal
+              totalClosingAmount:
+                type: number
+                format: decimal
+              isClosedToExternalAccount:
+                type: boolean
+    RenewalOverride:
+      type: string
+    PhoneItem:
+      type: object
+      required:
+      - number
+      - phoneType
+      properties:
+        isActive:
+          type: boolean
+          readOnly: true
+        number:
+          type: string
+        phoneType:
+          type: string
+          enum:
+          - Home
+          - Mobile
+          - Office
+    FormationState:
+      type: string
+      maxLength: 2
+    TaxId:
+      type: string
+      maxLength: 30
+      description: No formatting (no dashes, spaces, etc).
+    CardPriority:
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 4
+    GenderProperty:
+      type: string
+      enum:
+      - M
+      - F
+      - U
+    RecurringContributionType:
+      type: string
+      enum:
+      - None
+      - BiWeekly
+      - Monthly
+    DateTimeProperty:
+      type: string
+      format: date-time
+      example: '2000-07-04T00:00:00.000+00:00'
+    CardQualifierCode:
+      type: string
+    AddressLine:
+      type: string
+      maxLength: 100
+    ForeignDocumentType:
+      type: string
+      enum:
+      - DriversLicense
+      - ConsularIdCard
+      - Passport
+      - PermanentResidentCard
+      - EmploymentAuthorizationCard
+      - VoterRegistrationCard
+      - IdentificationCard
+    ResidencyStatusType:
+      type: string
+      enum:
+      - UsCitizen
+      - ResidentAlien
+      - NonResidentAlien
+    YearProperty:
+      type: integer
+      minimum: 1900
+      maximum: 9999
+    CountryProperty:
+      type: string
+      maxLength: 50
+    LastContactType:
+      type: string
+      enum:
+      - Log In
+      - Phone
+      - Email
+      - Chat
+    AddressItem:
+      type: object
+      required:
+      - addressLine1
+      - addressType
+      - city
+      - country
+      - postalCode
+      - state
+      properties:
+        addressLine1:
+          $ref: '#/components/schemas/AddressLine'
+        addressLine2:
+          $ref: '#/components/schemas/AddressLine'
+        addressLine3:
+          $ref: '#/components/schemas/AddressLine'
+        addressLine4:
+          $ref: '#/components/schemas/AddressLine'
+        addressType:
+          type: string
+          enum:
+          - Individual
+          - Mailing
+          - PrimaryBusiness
+          - Business
+          - Registered
+          - TaxFormMailing
+        city:
+          $ref: '#/components/schemas/CityProperty'
+        country:
+          $ref: '#/components/schemas/CountryProperty'
+        isActive:
+          type: boolean
+          readOnly: true
+        postalCode:
+          $ref: '#/components/schemas/PostalCode'
+        state:
+          $ref: '#/components/schemas/FormationState'
+  parameters:
+    CustomerIdPath:
+      name: customerId
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/HelixId'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+x-samples-languages:
+- curl
+- node
+- python
+- csharp
+- ruby
+- go
+- java
+- kotlin
+- php
+x-provenance:
+  method: searched
+  source: https://docs.helix.q2.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.helix.q2.com/reference/accountaddentitlement.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryadd.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryedit.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryget.md
+  - https://docs.helix.q2.com/reference/accountbeneficiarylist.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryremove.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryreplace.md
+  - https://docs.helix.q2.com/reference/accountclose.md
+  - https://docs.helix.q2.com/reference/accountcreate.md
+  - https://docs.helix.q2.com/reference/accounteditentitlement.md
+  - https://docs.helix.q2.com/reference/accountget.md
+  - https://docs.helix.q2.com/reference/accountgetbytag.md
+  - https://docs.helix.q2.com/reference/accountlimitdelete.md
+  - https://docs.helix.q2.com/reference/accountlimitlist.md
+  - https://docs.helix.q2.com/reference/accountlimitset.md
+  - https://docs.helix.q2.com/reference/accountlist.md
+  - https://docs.helix.q2.com/reference/accountlistentitlements.md
+  - https://docs.helix.q2.com/reference/accountlock.md
+  - https://docs.helix.q2.com/reference/accountplacehold.md
+  - https://docs.helix.q2.com/reference/accountreleasehold.md
+  - https://docs.helix.q2.com/reference/accountremoveentitlement.md
+  - https://docs.helix.q2.com/reference/accountstoppaycreatecheckstoppay.md
+  - https://docs.helix.q2.com/reference/accountstoppayexpire.md
+  - https://docs.helix.q2.com/reference/accountstoppaylist.md
+  - https://docs.helix.q2.com/reference/accountunlock.md
+  - https://docs.helix.q2.com/reference/accountupdate.md
+  - https://docs.helix.q2.com/reference/bankdocumentdownload.md
+  - https://docs.helix.q2.com/reference/bankdocumentlist.md
+  - https://docs.helix.q2.com/reference/cardaddaccount.md
+  - https://docs.helix.q2.com/reference/cardarchive.md
+  - https://docs.helix.q2.com/reference/cardcontrolarchive.md
+  - https://docs.helix.q2.com/reference/cardcontrolarchivebytag.md
+  - https://docs.helix.q2.com/reference/cardcontrolcreate.md
+  - https://docs.helix.q2.com/reference/cardcontrolget.md
+  - https://docs.helix.q2.com/reference/cardcontrolgetbytag.md
+  - https://docs.helix.q2.com/reference/cardcreatedigital.md
+  - https://docs.helix.q2.com/reference/cardfraudtextalertget.md
+  - https://docs.helix.q2.com/reference/cardfraudtextalertoptout.md
+  - https://docs.helix.q2.com/reference/cardget.md
+  - https://docs.helix.q2.com/reference/cardgetbytag.md
+  - https://docs.helix.q2.com/reference/cardhotlist.md
+  - https://docs.helix.q2.com/reference/cardinitiate.md
+  - https://docs.helix.q2.com/reference/cardlimitget.md
+  - https://docs.helix.q2.com/reference/cardlimitoverride.md
+  - https://docs.helix.q2.com/reference/cardlimitreset.md
+  - https://docs.helix.q2.com/reference/cardlimittemporaryoverride.md
+  - https://docs.helix.q2.com/reference/cardlist.md
+  - https://docs.helix.q2.com/reference/cardlock.md
+  - https://docs.helix.q2.com/reference/cardmockadminfalconfraud.md
+  - https://docs.helix.q2.com/reference/cardmockdeclinepurchaseauthorize.md
+  - https://docs.helix.q2.com/reference/cardmockdepositpurchasereturn.md
+  - https://docs.helix.q2.com/reference/cardmockdepositpurchasereturnreversal.md
+  - https://docs.helix.q2.com/reference/cardmockwithdrawalcardcash.md
+  - https://docs.helix.q2.com/reference/cardmockwithdrawalpurchaseauthorize.md
+  - https://docs.helix.q2.com/reference/cardmockwithdrawalpurchasecomplete.md
+  - https://docs.helix.q2.com/reference/cardorderphysical.md
+  - https://docs.helix.q2.com/reference/cardprovisionapplepay.md
+  - https://docs.helix.q2.com/reference/cardprovisioncarddetail.md
+  - https://docs.helix.q2.com/reference/cardprovisiongooglepay.md
+  - https://docs.helix.q2.com/reference/cardreissue.md
+  - https://docs.helix.q2.com/reference/cardremoveaccount.md
+  - https://docs.helix.q2.com/reference/cardrenewaloverride.md
+  - https://docs.helix.q2.com/reference/cardreprioritizeaccount.md
+  - https://docs.helix.q2.com/reference/cardresetpin.md
+  - https://docs.helix.q2.com/reference/cardriskfactorget.md
+  - https://docs.helix.q2.com/reference/cardriskfactorset.md
+  - https://docs.helix.q2.com/reference/cardunlock.md
+  - https://docs.helix.q2.com/reference/cardupdate.md
+  - https://docs.helix.q2.com/reference/cardverify.md
+  - https://docs.helix.q2.com/reference/cardverifybycvv.md
+  - https://docs.helix.q2.com/reference/customeranswerlist.md
+  - https://docs.helix.q2.com/reference/customeranswerpost.md
+  - https://docs.helix.q2.com/reference/customerarchive.md
+  - https://docs.helix.q2.com/reference/customerbeneficiaryaccountassignmentlist.md
+  - https://docs.helix.q2.com/reference/customerbeneficiarycreate.md
+  - https://docs.helix.q2.com/reference/customerbeneficiarydeactivate.md
+  - https://docs.helix.q2.com/reference/customerbeneficiaryget.md
+  - https://docs.helix.q2.com/reference/customerbeneficiarylist.md
+  - https://docs.helix.q2.com/reference/customerbeneficiaryupdate.md
+  - https://docs.helix.q2.com/reference/customercreate.md
+  - https://docs.helix.q2.com/reference/customercreatebusiness.md
+  - https://docs.helix.q2.com/reference/customercreatebusinessapplication.md
+  - https://docs.helix.q2.com/reference/customerdocumentget.md
+  - https://docs.helix.q2.com/reference/customerdocumentlist.md
+  - https://docs.helix.q2.com/reference/customerdocumentupdatestatus.md
+  - https://docs.helix.q2.com/reference/customerdocumentupload.md
+  - https://docs.helix.q2.com/reference/customergeneratetoken.md
+  - https://docs.helix.q2.com/reference/customerget.md
+  - https://docs.helix.q2.com/reference/customergetbyemail.md
+  - https://docs.helix.q2.com/reference/customergetbytag.md
+  - https://docs.helix.q2.com/reference/customerlist.md
+  - https://docs.helix.q2.com/reference/customernote.md
+  - https://docs.helix.q2.com/reference/customernoteslist.md
+  - https://docs.helix.q2.com/reference/customerrelationshiparchive.md
+  - https://docs.helix.q2.com/reference/customerrelationshipcreate.md
+  - https://docs.helix.q2.com/reference/customerrelationshiplist.md
+  - https://docs.helix.q2.com/reference/customerrelationshipupdate.md
+  - https://docs.helix.q2.com/reference/customerrelationshipupdateprimarycontact.md
+  - https://docs.helix.q2.com/reference/customersearch.md
+  - https://docs.helix.q2.com/reference/customersecurityanswerslist.md
+  - https://docs.helix.q2.com/reference/customersetlastcontact.md
+  - https://docs.helix.q2.com/reference/customerupdate.md
+  - https://docs.helix.q2.com/reference/customerupdateaddress-2.md
+  - https://docs.helix.q2.com/reference/externalaccountarchive.md
+  - https://docs.helix.q2.com/reference/externalaccountcreate.md
+  - https://docs.helix.q2.com/reference/externalaccountdocumentupload.md
+  - https://docs.helix.q2.com/reference/externalaccountget.md
+  - https://docs.helix.q2.com/reference/externalaccountgetbytag.md
+  - https://docs.helix.q2.com/reference/externalaccountinitiate.md
+  - https://docs.helix.q2.com/reference/externalaccountlist.md
+  - https://docs.helix.q2.com/reference/externalaccountlock.md
+  - https://docs.helix.q2.com/reference/externalaccountresendverification.md
+  - https://docs.helix.q2.com/reference/externalaccountunlock.md
+  - https://docs.helix.q2.com/reference/externalaccountupdate.md
+  - https://docs.helix.q2.com/reference/externalaccountverify.md
+  - https://docs.helix.q2.com/reference/feeconfiglist.md
+  - https://docs.helix.q2.com/reference/feeget.md
+  - https://docs.helix.q2.com/reference/feegetbycustomertag.md
+  - https://docs.helix.q2.com/reference/programget.md
+  - https://docs.helix.q2.com/reference/programlistaccountholds.md
+  - https://docs.helix.q2.com/reference/programlistindustryclassificationcodes.md
+  - https://docs.helix.q2.com/reference/programquestionslist.md
+  - https://docs.helix.q2.com/reference/statementdownload.md
+  - https://docs.helix.q2.com/reference/statementget.md
+  - https://docs.helix.q2.com/reference/statementlist.md
+  - https://docs.helix.q2.com/reference/statementsearch.md
+  - https://docs.helix.q2.com/reference/transactioncreatefee.md
+  - https://docs.helix.q2.com/reference/transactionget.md
+  - https://docs.helix.q2.com/reference/transactiongetbytag.md
+  - https://docs.helix.q2.com/reference/transactionlist.md
+  - https://docs.helix.q2.com/reference/transactionsetavailabledate.md
+  - https://docs.helix.q2.com/reference/transactionsetstatus.md
+  - https://docs.helix.q2.com/reference/transactionwireget.md
+  - https://docs.helix.q2.com/reference/transferachoriginationcreate.md
+  - https://docs.helix.q2.com/reference/transfercreate.md
+  - https://docs.helix.q2.com/reference/transfervoid.md
+  - https://docs.helix.q2.com/reference/transferwirecreate-2.md
+  merge:
+    pages: 137
+    deduped: 1427
+    conflicts_kept_first: 0

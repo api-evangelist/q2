@@ -1,0 +1,555 @@
+openapi: 3.2.0
+info:
+  title: Helix Card - Mock API
+  version: 3.0.0
+  description: Helix Public API (no customer KYC/IDV). **This spec covers all of Helix 3.x and is subject to change at any time.**
+servers:
+- url: https://sandbox-api.helix.q2.com
+  description: Sandbox server
+- url: https://api.helix.q2.com
+  description: Production server
+security:
+- basicAuth: []
+tags:
+- name: Card - Mock
+  description: Endpoints related to simulating card workflows
+paths:
+  /card/mock/admin/falconFraud:
+    post:
+      summary: Simulate Falcon Fraud Message in sandbox environment
+      description: Generate a mock Falcon messsage in sandbox. This endpoint will generate a Falcon Message real-time event with a `userEventTypeId` between `10024` and `10026` (inclusive).
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/cardmockadminfalconfraud
+      tags:
+      - Card - Mock
+      operationId: cardMockAdminFalconFraud
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customerId
+              - cardId
+              - caseStatus
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                cardId:
+                  $ref: '#/components/schemas/HelixId'
+                caseStatus:
+                  type: integer
+                  minimum: 0
+                  maximum: 3
+                  description: 'Possible values:
+
+                    - `0`: Generates a real-time event with `userEventTypeId=10026` and `falconCaseStatus=ACTIVEACTIVE_CASE_SUBSTATUS_DLR_ACTIVENO_BLOCK_SERVICE|`
+
+                    - `1`: Generates a real-time event with `userEventTypeId=10025` and `falconCaseStatus=CLOSEDNOT_FRAUDNO_BLOCK_SERVICE|`
+
+                    - `2`: Generates a real-time event with `userEventTypeId=10025` and `falconCaseStatus=CLOSEDNOT_FRAUDREMOVE_BLOCK_SERVICE|`
+
+                    - `3`: Generates a real-time event with `userEventTypeId=10024` and `falconCaseStatus=CLOSEDUNABLE_CONFIRMED_FRAUDFRAUD_BLOCK_SERVICE|CASE_FRAUD_TYPE_OTHER|`
+
+                    '
+      responses:
+        '200':
+          description: A 200 status with no `data` property present
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardArray200Response/allOf/0'
+  /card/mock/decline/purchase/authorize:
+    post:
+      summary: Simulate declined purchase authorization in sandbox environment
+      description: Generate a mock declined purchase authorization in sandbox. This endpoint will generate a Debit Card Declined real-time event with `userEventTypeId=3060640`.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/cardmockdeclinepurchaseauthorize
+      tags:
+      - Card - Mock
+      operationId: cardMockDeclinePurchaseAuthorize
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customerId
+              - cardId
+              - merchantDescription
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                cardId:
+                  $ref: '#/components/schemas/HelixId'
+                merchantDescription:
+                  type: string
+                  maxLength: 25
+      responses:
+        '200':
+          description: A 200 status with no `data` property present
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardArray200Response/allOf/0'
+  /card/mock/deposit/purchase/return:
+    post:
+      summary: Simulate purchase return in sandbox environment
+      description: Generate a mock debit card purchase return transaction in sandbox. This endpoint will generate a transaction with `typeCode=CRDRTN` and a Debit Card Deposit real-time event with `userEventTypeId=3060351`.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/cardmockdepositpurchasereturn
+      tags:
+      - Card - Mock
+      operationId: cardMockDepositPurchaseReturn
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customerId
+              - cardId
+              - transactionAmount
+              - merchantDescription
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                cardId:
+                  $ref: '#/components/schemas/HelixId'
+                transactionAmount:
+                  type: number
+                  format: decimal
+                  minimum: 0.01
+                  maximum: 999.99
+                merchantDescription:
+                  type: string
+                  maxLength: 25
+      responses:
+        '200':
+          description: A 200 status with no `data` property present
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardArray200Response/allOf/0'
+  /card/mock/deposit/purchase/return/reversal:
+    post:
+      summary: Simulate purchase return reversal in sandbox environment
+      description: Generate a mock debit card merchandise return reversal transaction in sandbox. This endpoint will generate a transaction with `typeCode=REVRTN` and a Debit Card Deposit Reversal real-time event with `userEventTypeId=3060481`.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/cardmockdepositpurchasereturnreversal
+      tags:
+      - Card - Mock
+      operationId: cardMockDepositPurchaseReturnReversal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customerId
+              - cardId
+              - transactionId
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                cardId:
+                  $ref: '#/components/schemas/HelixId'
+                transactionId:
+                  allOf:
+                  - description: The `transactionId` of a merchandise return transaction generated via [/card/mock/deposit/purchase/return](https://docs.helix.q2.com/reference/cardmockdepositpurchasereturn)
+                  - $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+      responses:
+        '200':
+          description: A 200 status with no `data` property present
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardArray200Response/allOf/0'
+  /card/mock/withdrawal/cardCash:
+    post:
+      summary: Simulate ATM withdrawal in sandbox environment
+      description: Generate a mock debit card ATM withdrawal transaction in sandbox. This endpoint will generate a transaction with `typeCode=CRDCSH` and a Debit Card Withdrawal real-time event with `userEventTypeId=3060343`.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/cardmockwithdrawalcardcash
+      tags:
+      - Card - Mock
+      operationId: cardMockWithdrawalCardCash
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customerId
+              - cardId
+              - transactionAmount
+              - merchantDescription
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                cardId:
+                  $ref: '#/components/schemas/HelixId'
+                transactionAmount:
+                  type: number
+                  format: decimal
+                  minimum: 0.01
+                  maximum: 999.99
+                merchantDescription:
+                  type: string
+                  maxLength: 25
+      responses:
+        '200':
+          description: A 200 status with no `data` property present. Use the <a href="https://docs.helix.q2.com/reference/transactionlist" target="_blank">/transaction/list</a> endpoint to fetch transaction details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardArray200Response/allOf/0'
+  /card/mock/withdrawal/purchase/authorize:
+    post:
+      summary: Simulate withdrawal authorization in sandbox environment
+      description: Generate a mock debit card withdrawal authorization transaction in sandbox. This endpoint will generate a transaction with `typeCode=ATHPCH` and a Debit Card Withdrawal Authorization real-time event with `userEventTypeId=3060240`.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/cardmockwithdrawalpurchaseauthorize
+      tags:
+      - Card - Mock
+      operationId: cardMockWithdrawalPurchaseAuthorize
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customerId
+              - cardId
+              - transactionAmount
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                cardId:
+                  $ref: '#/components/schemas/HelixId'
+                transactionAmount:
+                  type: number
+                  format: decimal
+                  minimum: 0.01
+                  maximum: 999.99
+                merchantDescription:
+                  type: string
+                  maxLength: 25
+                settlementDate:
+                  allOf:
+                  - description: Must occur in the future
+                  - $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+      responses:
+        '200':
+          description: A 200 status with no `data` property present. Use the <a href="https://docs.helix.q2.com/reference/transactionlist" target="_blank">/transaction/list</a> endpoint to fetch transaction details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardArray200Response/allOf/0'
+  /card/mock/withdrawal/purchase/complete:
+    post:
+      summary: Simulate withdrawal settlement in sandbox environment
+      description: Generate a mock debit card withdrawal settlement transaction in sandbox. This endpoint will generate a transaction with `typeCode=CRDPCH` and a Debit Card Withdrawal real-time event with `userEventTypeId=3060341`.
+      externalDocs:
+        url: https://docs.helix.q2.com/reference/cardmockwithdrawalpurchasecomplete
+      tags:
+      - Card - Mock
+      operationId: cardMockWithdrawalPurchaseComplete
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customerId
+              - cardId
+              - transactionId
+              - transactionAmount
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                cardId:
+                  $ref: '#/components/schemas/HelixId'
+                transactionId:
+                  allOf:
+                  - description: The `transactionId` from a pending withdrawal authorization transaction generated via [/card/mock/withdrawal/purchase/authorize](https://docs.helix.q2.com/reference/cardmockwithdrawalpurchaseauthorize)
+                  - $ref: '#/components/schemas/AccountClose200Response/allOf/1/properties/data/properties/transactionId'
+                transactionAmount:
+                  type: number
+                  format: decimal
+                  minimum: 0.01
+                  maximum: 999.99
+                  description: The total amount to settle on the transaction (can be different from the original authorization amount)
+      responses:
+        '200':
+          description: A 200 status with no `data` property present. Use the <a href="https://docs.helix.q2.com/reference/transactionlist" target="_blank">/transaction/list</a> endpoint to fetch transaction details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardArray200Response/allOf/0'
+components:
+  schemas:
+    CardArray200Response:
+      allOf:
+      - type: object
+        properties:
+          errors:
+            type: array
+            items: {}
+            example: []
+          requestId:
+            type: string
+            example: 1249a3bf-aca1-40dd-9fba-2a3193550c39
+          status:
+            type: integer
+            enum:
+            - 200
+          throttle:
+            type: object
+            properties:
+              periodEndsAt:
+                $ref: '#/components/schemas/CustomerSetLastContact200Response/allOf/1/properties/data/items/properties/lastContactDate'
+              periodLengthInSeconds:
+                $ref: '#/components/schemas/HelixId'
+              periodRequestLimit:
+                $ref: '#/components/schemas/HelixId'
+              requestsRemainingInPeriod:
+                $ref: '#/components/schemas/HelixId'
+              warningThreshold:
+                type: number
+                format: decimal
+                example: 0.2
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: '#/components/schemas/CardObject200Response/allOf/1/properties/data'
+    CustomerSetLastContact200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              type: object
+              properties:
+                customerId:
+                  $ref: '#/components/schemas/HelixId'
+                dormancyStatus:
+                  type: string
+                  enum:
+                  - Active
+                  - Inactive
+                  - Dormant
+                lastContactDate:
+                  type: string
+                  format: date-time
+                  example: '2021-01-07T19:00:59.761-06:00'
+                lastContactType:
+                  $ref: '#/components/schemas/LastContactType'
+    AccountClose200Response:
+      allOf:
+      - $ref: '#/components/schemas/CardArray200Response/allOf/0'
+      - type: object
+        properties:
+          data:
+            type: object
+            properties:
+              customerId:
+                $ref: '#/components/schemas/HelixId'
+              accountId:
+                $ref: '#/components/schemas/HelixId'
+              closeToAccountId:
+                $ref: '#/components/schemas/HelixId'
+              transactionId:
+                type: integer
+                format: int64
+                minimum: 1
+              transactionTag:
+                $ref: '#/components/schemas/TagProperty'
+              closingBalanceAmount:
+                type: number
+                format: decimal
+              interestPaidAmount:
+                type: number
+                format: decimal
+              totalClosingAmount:
+                type: number
+                format: decimal
+              isClosedToExternalAccount:
+                type: boolean
+    HelixId:
+      type: integer
+      format: int32
+      minimum: 1
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+x-samples-languages:
+- curl
+- node
+- python
+- csharp
+- ruby
+- go
+- java
+- kotlin
+- php
+x-provenance:
+  method: searched
+  source: https://docs.helix.q2.com/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.helix.q2.com/reference/accountaddentitlement.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryadd.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryedit.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryget.md
+  - https://docs.helix.q2.com/reference/accountbeneficiarylist.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryremove.md
+  - https://docs.helix.q2.com/reference/accountbeneficiaryreplace.md
+  - https://docs.helix.q2.com/reference/accountclose.md
+  - https://docs.helix.q2.com/reference/accountcreate.md
+  - https://docs.helix.q2.com/reference/accounteditentitlement.md
+  - https://docs.helix.q2.com/reference/accountget.md
+  - https://docs.helix.q2.com/reference/accountgetbytag.md
+  - https://docs.helix.q2.com/reference/accountlimitdelete.md
+  - https://docs.helix.q2.com/reference/accountlimitlist.md
+  - https://docs.helix.q2.com/reference/accountlimitset.md
+  - https://docs.helix.q2.com/reference/accountlist.md
+  - https://docs.helix.q2.com/reference/accountlistentitlements.md
+  - https://docs.helix.q2.com/reference/accountlock.md
+  - https://docs.helix.q2.com/reference/accountplacehold.md
+  - https://docs.helix.q2.com/reference/accountreleasehold.md
+  - https://docs.helix.q2.com/reference/accountremoveentitlement.md
+  - https://docs.helix.q2.com/reference/accountstoppaycreatecheckstoppay.md
+  - https://docs.helix.q2.com/reference/accountstoppayexpire.md
+  - https://docs.helix.q2.com/reference/accountstoppaylist.md
+  - https://docs.helix.q2.com/reference/accountunlock.md
+  - https://docs.helix.q2.com/reference/accountupdate.md
+  - https://docs.helix.q2.com/reference/bankdocumentdownload.md
+  - https://docs.helix.q2.com/reference/bankdocumentlist.md
+  - https://docs.helix.q2.com/reference/cardaddaccount.md
+  - https://docs.helix.q2.com/reference/cardarchive.md
+  - https://docs.helix.q2.com/reference/cardcontrolarchive.md
+  - https://docs.helix.q2.com/reference/cardcontrolarchivebytag.md
+  - https://docs.helix.q2.com/reference/cardcontrolcreate.md
+  - https://docs.helix.q2.com/reference/cardcontrolget.md
+  - https://docs.helix.q2.com/reference/cardcontrolgetbytag.md
+  - https://docs.helix.q2.com/reference/cardcreatedigital.md
+  - https://docs.helix.q2.com/reference/cardfraudtextalertget.md
+  - https://docs.helix.q2.com/reference/cardfraudtextalertoptout.md
+  - https://docs.helix.q2.com/reference/cardget.md
+  - https://docs.helix.q2.com/reference/cardgetbytag.md
+  - https://docs.helix.q2.com/reference/cardhotlist.md
+  - https://docs.helix.q2.com/reference/cardinitiate.md
+  - https://docs.helix.q2.com/reference/cardlimitget.md
+  - https://docs.helix.q2.com/reference/cardlimitoverride.md
+  - https://docs.helix.q2.com/reference/cardlimitreset.md
+  - https://docs.helix.q2.com/reference/cardlimittemporaryoverride.md
+  - https://docs.helix.q2.com/reference/cardlist.md
+  - https://docs.helix.q2.com/reference/cardlock.md
+  - https://docs.helix.q2.com/reference/cardmockadminfalconfraud.md
+  - https://docs.helix.q2.com/reference/cardmockdeclinepurchaseauthorize.md
+  - https://docs.helix.q2.com/reference/cardmockdepositpurchasereturn.md
+  - https://docs.helix.q2.com/reference/cardmockdepositpurchasereturnreversal.md
+  - https://docs.helix.q2.com/reference/cardmockwithdrawalcardcash.md
+  - https://docs.helix.q2.com/reference/cardmockwithdrawalpurchaseauthorize.md
+  - https://docs.helix.q2.com/reference/cardmockwithdrawalpurchasecomplete.md
+  - https://docs.helix.q2.com/reference/cardorderphysical.md
+  - https://docs.helix.q2.com/reference/cardprovisionapplepay.md
+  - https://docs.helix.q2.com/reference/cardprovisioncarddetail.md
+  - https://docs.helix.q2.com/reference/cardprovisiongooglepay.md
+  - https://docs.helix.q2.com/reference/cardreissue.md
+  - https://docs.helix.q2.com/reference/cardremoveaccount.md
+  - https://docs.helix.q2.com/reference/cardrenewaloverride.md
+  - https://docs.helix.q2.com/reference/cardreprioritizeaccount.md
+  - https://docs.helix.q2.com/reference/cardresetpin.md
+  - https://docs.helix.q2.com/reference/cardriskfactorget.md
+  - https://docs.helix.q2.com/reference/cardriskfactorset.md
+  - https://docs.helix.q2.com/reference/cardunlock.md
+  - https://docs.helix.q2.com/reference/cardupdate.md
+  - https://docs.helix.q2.com/reference/cardverify.md
+  - https://docs.helix.q2.com/reference/cardverifybycvv.md
+  - https://docs.helix.q2.com/reference/customeranswerlist.md
+  - https://docs.helix.q2.com/reference/customeranswerpost.md
+  - https://docs.helix.q2.com/reference/customerarchive.md
+  - https://docs.helix.q2.com/reference/customerbeneficiaryaccountassignmentlist.md
+  - https://docs.helix.q2.com/reference/customerbeneficiarycreate.md
+  - https://docs.helix.q2.com/reference/customerbeneficiarydeactivate.md
+  - https://docs.helix.q2.com/reference/customerbeneficiaryget.md
+  - https://docs.helix.q2.com/reference/customerbeneficiarylist.md
+  - https://docs.helix.q2.com/reference/customerbeneficiaryupdate.md
+  - https://docs.helix.q2.com/reference/customercreate.md
+  - https://docs.helix.q2.com/reference/customercreatebusiness.md
+  - https://docs.helix.q2.com/reference/customercreatebusinessapplication.md
+  - https://docs.helix.q2.com/reference/customerdocumentget.md
+  - https://docs.helix.q2.com/reference/customerdocumentlist.md
+  - https://docs.helix.q2.com/reference/customerdocumentupdatestatus.md
+  - https://docs.helix.q2.com/reference/customerdocumentupload.md
+  - https://docs.helix.q2.com/reference/customergeneratetoken.md
+  - https://docs.helix.q2.com/reference/customerget.md
+  - https://docs.helix.q2.com/reference/customergetbyemail.md
+  - https://docs.helix.q2.com/reference/customergetbytag.md
+  - https://docs.helix.q2.com/reference/customerlist.md
+  - https://docs.helix.q2.com/reference/customernote.md
+  - https://docs.helix.q2.com/reference/customernoteslist.md
+  - https://docs.helix.q2.com/reference/customerrelationshiparchive.md
+  - https://docs.helix.q2.com/reference/customerrelationshipcreate.md
+  - https://docs.helix.q2.com/reference/customerrelationshiplist.md
+  - https://docs.helix.q2.com/reference/customerrelationshipupdate.md
+  - https://docs.helix.q2.com/reference/customerrelationshipupdateprimarycontact.md
+  - https://docs.helix.q2.com/reference/customersearch.md
+  - https://docs.helix.q2.com/reference/customersecurityanswerslist.md
+  - https://docs.helix.q2.com/reference/customersetlastcontact.md
+  - https://docs.helix.q2.com/reference/customerupdate.md
+  - https://docs.helix.q2.com/reference/customerupdateaddress-2.md
+  - https://docs.helix.q2.com/reference/externalaccountarchive.md
+  - https://docs.helix.q2.com/reference/externalaccountcreate.md
+  - https://docs.helix.q2.com/reference/externalaccountdocumentupload.md
+  - https://docs.helix.q2.com/reference/externalaccountget.md
+  - https://docs.helix.q2.com/reference/externalaccountgetbytag.md
+  - https://docs.helix.q2.com/reference/externalaccountinitiate.md
+  - https://docs.helix.q2.com/reference/externalaccountlist.md
+  - https://docs.helix.q2.com/reference/externalaccountlock.md
+  - https://docs.helix.q2.com/reference/externalaccountresendverification.md
+  - https://docs.helix.q2.com/reference/externalaccountunlock.md
+  - https://docs.helix.q2.com/reference/externalaccountupdate.md
+  - https://docs.helix.q2.com/reference/externalaccountverify.md
+  - https://docs.helix.q2.com/reference/feeconfiglist.md
+  - https://docs.helix.q2.com/reference/feeget.md
+  - https://docs.helix.q2.com/reference/feegetbycustomertag.md
+  - https://docs.helix.q2.com/reference/programget.md
+  - https://docs.helix.q2.com/reference/programlistaccountholds.md
+  - https://docs.helix.q2.com/reference/programlistindustryclassificationcodes.md
+  - https://docs.helix.q2.com/reference/programquestionslist.md
+  - https://docs.helix.q2.com/reference/statementdownload.md
+  - https://docs.helix.q2.com/reference/statementget.md
+  - https://docs.helix.q2.com/reference/statementlist.md
+  - https://docs.helix.q2.com/reference/statementsearch.md
+  - https://docs.helix.q2.com/reference/transactioncreatefee.md
+  - https://docs.helix.q2.com/reference/transactionget.md
+  - https://docs.helix.q2.com/reference/transactiongetbytag.md
+  - https://docs.helix.q2.com/reference/transactionlist.md
+  - https://docs.helix.q2.com/reference/transactionsetavailabledate.md
+  - https://docs.helix.q2.com/reference/transactionsetstatus.md
+  - https://docs.helix.q2.com/reference/transactionwireget.md
+  - https://docs.helix.q2.com/reference/transferachoriginationcreate.md
+  - https://docs.helix.q2.com/reference/transfercreate.md
+  - https://docs.helix.q2.com/reference/transfervoid.md
+  - https://docs.helix.q2.com/reference/transferwirecreate-2.md
+  merge:
+    pages: 137
+    deduped: 1427
+    conflicts_kept_first: 0

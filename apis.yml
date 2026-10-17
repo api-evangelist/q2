@@ -153,30 +153,16 @@ common:
     the artifact-type surfaces with a server that does not exist.'
 
 apis:
-- name: Helix by Q2 API
-  description: The Helix by Q2 REST API lets developers incorporate real FDIC-insured savings and/or checking accounts into their applications,
-    including accounts, customers (individual and business), cards, card controls, external accounts, transfers, ACH, wires, transactions, statements,
-    fees, and programs. Authentication is HTTP Basic (API Key + Secret). A real-time Events Bus delivers account, card, check, and fraud events.
-    JSON only.
+- aid: q2:q2-account-api
+  name: Q2 Account API
+  description: Endpoints for the account object
   humanURL: https://docs.helix.q2.com
   baseURL: https://api.helix.q2.com
   tags:
-  - Banking
-  - Embedded Finance
   - Account
-  - Cards
-  - ACH
-  - Transfers
-  tags_raw:
-  - Banking
-  - Embedded Finance
-  - Accounts
-  - Cards
-  - ACH
-  - Transfers
   properties:
-  - url: openapi/q2-helix-api-openapi.yml
-    type: OpenAPI
+  - type: OpenAPI
+    url: openapi/q2-account-api-openapi.yml
   - type: Documentation
     url: https://docs.helix.q2.com
   - type: APIReference
@@ -203,9 +189,6 @@ apis:
     url: asyncapi/q2-events-webhooks.yml
   - type: X-MCPServerCandidate
     url: mcp/q2-mcp.yml
-    note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published
-      API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting
-      the artifact-type surfaces with a server that does not exist.'
   - type: LLMsTxt
     url: llms/q2-llms.txt
   - type: JSONSchema
@@ -220,8 +203,1356 @@ apis:
     url: json-schema/q2-transaction-object200-response-schema.json
   - type: JSONSchema
     url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
-  aid: q2:helix-by-q2-api
-
+- aid: q2:q2-account-beneficiary-api
+  name: Q2 Account Beneficiary API
+  description: Endpoints for the accountBeneficiary object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Account Beneficiary
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-account-beneficiary-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-account-entitlement-api
+  name: Q2 Account - Entitlement API
+  description: Endpoints related to account entitlements
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Account - Entitlement
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-account-entitlement-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-account-hold-api
+  name: Q2 Account - Hold API
+  description: Endpoints related to account holds
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Account - Hold
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-account-hold-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-account-limit-api
+  name: Q2 Account - Limit API
+  description: Endpoints related to account limits
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Account - Limit
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-account-limit-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-account-stop-pay-api
+  name: Q2 Account - Stop Pay API
+  description: Endpoints related to account stop payments
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Account - Stop Pay
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-account-stop-pay-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-bank-document-api
+  name: Q2 Bank Document API
+  description: Endpoints for the bankDocument object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Bank Document
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-bank-document-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-card-api
+  name: Q2 Card API
+  description: Endpoints for the card object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Card
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-card-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-card-control-api
+  name: Q2 Card Control API
+  description: Endpoints for the cardControl object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Card Control
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-card-control-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-card-fraud-text-alert-api
+  name: Q2 Card - Fraud Text Alert API
+  description: Endpoints related to fraud text alerts
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Card - Fraud Text Alert
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-card-fraud-text-alert-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-card-limit-api
+  name: Q2 Card - Limit API
+  description: Endpoints related to card limits
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Card - Limit
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-card-limit-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-card-mock-api
+  name: Q2 Card - Mock API
+  description: Endpoints related to simulating card workflows
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Card - Mock
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-card-mock-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-card-provision-api
+  name: Q2 Card - Provision API
+  description: Endpoints related to card provisioning
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Card - Provision
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-card-provision-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-card-risk-factor-api
+  name: Q2 Card - Risk Factor API
+  description: Endpoints related to card risk factors
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Card - Risk Factor
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-card-risk-factor-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-customer-api
+  name: Q2 Customer API
+  description: Endpoints for the customer object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Customer
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-customer-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-customer-beneficiary-api
+  name: Q2 Customer Beneficiary API
+  description: Endpoints for the customerBeneficiary object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Customer Beneficiary
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-customer-beneficiary-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-customer-document-api
+  name: Q2 Customer Document API
+  description: Endpoints for the customerDocument object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Customer Document
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-customer-document-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-customer-due-diligence-api
+  name: Q2 Customer - Due Diligence API
+  description: Endpoints related to customer due diligence
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Customer - Due Diligence
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-customer-due-diligence-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-customer-relationship-api
+  name: Q2 Customer Relationship API
+  description: Endpoints for the customerRelationship object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Customer Relationship
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-customer-relationship-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-external-account-api
+  name: Q2 External Account API
+  description: Endpoints for the externalAccount object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - External Account
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-external-account-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-external-account-document-api
+  name: Q2 External Account Document API
+  description: Endpoints for the externalAccountDocument object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - External Account Document
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-external-account-document-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-fee-api
+  name: Q2 Fee API
+  description: Endpoints for the fee object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Fee
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-fee-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-program-api
+  name: Q2 Program API
+  description: Endpoints for the program object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Program
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-program-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-statement-api
+  name: Q2 Statement API
+  description: Endpoints for the statement object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Statement
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-statement-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-transaction-api
+  name: Q2 Transaction API
+  description: Endpoints for the transaction object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Transaction
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-transaction-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-transaction-wire-api
+  name: Q2 Transaction - Wire API
+  description: Endpoints related to wire transactions
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Transaction - Wire
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-transaction-wire-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-transfer-api
+  name: Q2 Transfer API
+  description: Endpoints for the transfer object
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Transfer
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-transfer-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
+- aid: q2:q2-transfer-wire-api
+  name: Q2 Transfer - Wire API
+  description: Endpoints related to wire transfer objects
+  humanURL: https://docs.helix.q2.com
+  baseURL: https://api.helix.q2.com
+  tags:
+  - Transfer - Wire
+  properties:
+  - type: OpenAPI
+    url: openapi/q2-transfer-wire-api-openapi.yml
+  - type: Documentation
+    url: https://docs.helix.q2.com
+  - type: APIReference
+    url: https://docs.helix.q2.com/reference
+  - type: Quickstart
+    url: https://docs.helix.q2.com/reference/quickstart
+  - type: Authentication
+    url: authentication/q2-authentication.yml
+  - type: RateLimits
+    url: rate-limits/q2-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/q2-error-codes.yml
+  - type: Sandbox
+    url: sandbox/q2-sandbox.yml
+  - type: Conventions
+    url: conventions/q2-conventions.yml
+  - type: Lifecycle
+    url: lifecycle/q2-lifecycle.yml
+  - type: DataModel
+    url: data-model/q2-data-model.yml
+  - type: Conformance
+    url: conformance/q2-conformance.yml
+  - type: Webhooks
+    url: asyncapi/q2-events-webhooks.yml
+  - type: X-MCPServerCandidate
+    url: mcp/q2-mcp.yml
+  - type: LLMsTxt
+    url: llms/q2-llms.txt
+  - type: JSONSchema
+    url: json-schema/q2-customer-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-program-get200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-card-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-account-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-transaction-object200-response-schema.json
+  - type: JSONSchema
+    url: json-schema/q2-customer-no-business-fields-array200-response-schema.json
 x-enrichment:
   date: '2026-07-20'
   status: enriched
