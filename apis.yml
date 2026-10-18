@@ -509,6 +509,8 @@ apis:
   humanURL: https://docs.helix.q2.com
   baseURL: https://api.helix.q2.com
   tags:
+  - Cards
+  tags_raw:
   - Card
   properties:
   - type: OpenAPI
@@ -859,6 +861,8 @@ apis:
   humanURL: https://docs.helix.q2.com
   baseURL: https://api.helix.q2.com
   tags:
+  - Customers
+  tags_raw:
   - Customer
   properties:
   - type: OpenAPI
@@ -1009,6 +1013,8 @@ apis:
   humanURL: https://docs.helix.q2.com
   baseURL: https://api.helix.q2.com
   tags:
+  - Customer Due Diligence
+  tags_raw:
   - Customer - Due Diligence
   properties:
   - type: OpenAPI
